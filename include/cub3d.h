@@ -2,5 +2,6 @@
 #define CUB3D_H
 
 # include "../libft/libft.h"
+# include "structs.h"
 
 #endif
