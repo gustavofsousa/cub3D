@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/05/23 10:56:19 by gusousa          ###   ########.fr        #
+#    Updated: 2023/05/23 18:18:58 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 
-MAIN			:=	main.c
+MAIN			:=	main
 ##MAP_CHECK		:=	
 ##RENDER		:=	
 
@@ -33,10 +33,17 @@ SRC		:=	$(MAIN)
 			##$(addprefix map_check/, $(MAP_CHECK))			\
 			##$(addprefix render/, $(RENDER))			\
 
+SRCS	:=	$(addsuffix .c, $(SRC))
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 ####	Libft		####
 LIBLIB		:=	$(LIBDIR)libft.a
+
+############## mlx library ##############
+MLX		:= ./miniLibX/
+MLX_LIB	:= $(addprefix $(MLX), mlx.a)
+NAMEMLX		= libmlx.a
+
 
 ##LISTDIR 	:=	map_check render
 
