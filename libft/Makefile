@@ -1,4 +1,5 @@
 NAME = libft.a
+MAKEFLAGS	:= --silent
 
 ##################	Compiler	##################
 CC = cc
