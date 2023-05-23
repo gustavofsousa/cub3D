@@ -37,4 +37,6 @@ int	main(int argc, char **argv)
 	t_img	img;
 
 	setup(&game, &img);
+	//interpretate_map(&game);
+	//render_game(&game);
 }
