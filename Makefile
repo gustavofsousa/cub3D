@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/05/23 18:18:58 by gusousa          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME		:=	cub3D	
 ##MAKEFLAGS	:= --silent
 
@@ -39,11 +27,17 @@ OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 ####	Libft		####
 LIBLIB		:=	$(LIBDIR)libft.a
 
-############## mlx library ##############
-MLX		:= ./miniLibX/
-MLX_LIB	:= $(addprefix $(MLX), mlx.a)
-NAMEMLX		= libmlx.a
+############## mlx library  for mac ##############
+##MLX		:= ./miniLibX/
+##MLX_LIB	:= $(addprefix $(MLX), mlx.a)
+##MLX_INC	:= -I ./miniLibX
+##MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 
+############## mlx library  for mac ##############
+MLX		:= ./mlx_linux
+MLX_LIB	:= $(addprefix $(MLX), mlx.a)
+MLX_INC	:= -Imlx_linux -O3
+MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 ##LISTDIR 	:=	map_check render
 
@@ -67,23 +61,26 @@ YELLOW	=	\033[0;33m
 
 ######	Commands	######
 
-all:	$(OBJDIR) $(LIBLIB) $(NAME)
+all:	$(OBJDIR) $(LIBLIB) $(MLX_LIB) $(NAME)
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	##@mkdir -p $(addprefix $(OBJDIR), $(LISTDIR))
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
 	@echo "Take a look in the objects you conceived😉 ->$(MAGENTA) $@$(WHITE)"
 
 $(NAME): $(OBJ)
-	@$(CC) $(OBJ) $(LIBLIB) $(LINK) -o $@
+	@$(CC) $(OBJ) $(MLX_LNK) $(LIBLIB) $(LINK) -o $@
 	@echo "Let's play it! piupiu 🤪"
 
 $(LIBLIB):
 	@make -C $(LIBDIR) all
 	@echo "libf lib created🙃"
+
+$(MLX_LIB):
+	make -C $(MLX)
 
 clean:
 	@rm -rf $(OBJDIR)

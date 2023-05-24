@@ -1,11 +1,11 @@
 #include "../include/cub3d.h"
 
-void	init_game(t_game *game)
+void	init_game(t_game *game, t_img img)
 {
-	game->canvas = mlx.addr;
+	game->canvas = img.addr;
 }
 
-int	init_mlx(t_mlx *mlx)
+int	init_mlx(t_img *img)
 {
 	img->ptr = mlx_init();
 	if (img->ptr == NULL)
@@ -16,7 +16,7 @@ int	init_mlx(t_mlx *mlx)
 	img->img = mlx_new_image(img->ptr, LENGHT, HEIGHT);
 	if (img->img == NULL)
 		return (-1);
-	img->addr = (int *)mlx_get_data_addr(img->img, img.bpp, img.line_len, img.endian);
+	img->addr = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
 	img->line_len /= 4;
 	//add_mlx_hook(fdf);
 	//draw_win(fdf);
@@ -24,19 +24,22 @@ int	init_mlx(t_mlx *mlx)
 	return (0);
 }
 
-void	setup(t_game game, t_mlx mlx)
+void	setup(t_game game, t_img img)
 {
-	init_mlx(&mlx);
-	init_game(&game);
+	init_mlx(&img);
+	init_game(&game, img);
 
 }
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
-	t_img	img;
+//	t_game	game;
+//	t_img	img;
 
-	setup(&game, &img);
+(void)argc;
+(void)argv;
+//	setup(&game, &img);
 	//interpretate_map(&game);
 	//render_game(&game);
+	ft_putstr_fd("Guten morgen", 1);
 }

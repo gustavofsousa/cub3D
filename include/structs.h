@@ -17,6 +17,6 @@ typedef struct s_img
 typedef struct	s_game
 {
 	int		*canvas;
-}			t_game
+}			t_game;
 
 #endif
