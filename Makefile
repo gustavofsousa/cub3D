@@ -22,7 +22,7 @@ SRC		:=	$(MAIN)
 			##$(addprefix render/, $(RENDER))			\
 
 SRCS	:=	$(addsuffix .c, $(SRC))
-OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
+OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
 ####	Libft		####
 LIBLIB		:=	$(LIBDIR)libft.a
@@ -61,9 +61,9 @@ YELLOW	=	\033[0;33m
 
 ######	Commands	######
 
-all:	$(OBJDIR) $(LIBLIB) $(MLX_LIB) $(NAME)
+all:	obj $(LIBLIB) $(MLX_LIB) $(NAME)
 
-$(OBJDIR):
+obj:
 	@mkdir -p $(OBJDIR)
 	##@mkdir -p $(addprefix $(OBJDIR), $(LISTDIR))
 
