@@ -9,7 +9,17 @@ int	init_mlx(t_game *game)
 	return (0);
 }
 
+void    init_variables(t_game *game)
+{
+    game->mlx.height = 600;
+    game->mlx.width = 600;
+
+    game->map.height = 0;
+    game->map.width = 0;
+}
+
 void	setup(t_game *game)
 {
+    init_variables(game);
 	init_mlx(game);
 }

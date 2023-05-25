@@ -14,10 +14,18 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
+typedef struct s_map
+{
+	int		height;
+	int		width;
+	char	**mtx;
+}			t_map;
+
 typedef struct	s_game
 {
 	int		*canvas;
 	t_img	mlx;
+	t_map	map;
 }			t_game;
 
 #endif

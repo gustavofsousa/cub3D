@@ -3,11 +3,9 @@
 
 # include "../libft/libft.h"
 # include "structs.h"
-# include "../mlx_linux/mlx.h"
-//# include "../miniLibX/mlx.h"
-
-#define LENGHT 200
-#define HEIGHT 200
+# include "constants.h"
+//# include "../mlx_linux/mlx.h"
+# include "../miniLibX/mlx.h"
 
 void    setup(t_game *game);
 void    interpretate_map(t_game *game);
