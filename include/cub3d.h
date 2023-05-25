@@ -6,9 +6,11 @@
 # include "constants.h"
 //# include "../mlx_linux/mlx.h"
 # include "../miniLibX/mlx.h"
+# include <fcntl.h> //open().
+# include <stdio.h> //printf
 
 void    setup(t_game *game);
-void    interpretate_map(t_game *game);
+void    interpretate_map(t_game *game, char *path_name);
 void    validate_map(t_game *game);
 void    render_game(t_game *game);
 

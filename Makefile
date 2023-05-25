@@ -13,7 +13,7 @@ LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 
-MAIN				:=	main render_game setup validate_map
+MAIN				:=	main render_game setup validate_map interpretate_map
 ##INTERPRETATION	:=	
 ##GAME				:=	
 
@@ -85,12 +85,12 @@ $(MLX_LIB):
 clean:
 	@rm -rf $(OBJDIR)
 	@make -C $(LIBDIR) clean
-	@echo "I deleted everything, sir 🪖"
+	@echo "I deleted everything, sir 🪖👮🏻‍♂️"
 
 fclean:	clean
 	@rm -rf $(NAME)
 	@make -C $(LIBDIR) fclean
-	@echo "I deleted even the deletion, sir 🪖"
+	@echo "I deleted even the deletion, sir 🪖👮🏻‍♂️"
 
 re: fclean all
 
