@@ -29,7 +29,7 @@ LIBLIB		:=	$(LIBDIR)libft.a
 
 ############## mlx library  for mac ##############
 MLX		:= ./miniLibX/
-MLX_LIB	:= $(addprefix $(MLX), mlx.a)
+MLX_LIB	:= $(addprefix $(MLX), libmlx.a)
 MLX_INC	:= -I ./miniLibX
 MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 
@@ -61,7 +61,7 @@ YELLOW	=	\033[0;33m
 
 ######	Commands	######
 
-all:	obj $(LIBLIB) $(MLX_LIB) $(NAME)
+all:	obj $(MLX_LIB) $(LIBLIB) $(NAME)
 
 obj:
 	@mkdir -p $(OBJDIR)
