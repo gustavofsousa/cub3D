@@ -33,7 +33,12 @@ typedef struct	s_player
 
 typedef struct	s_texture
 {
-
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		floor;
+	int		ceiling;
 }				t_texture;
 
 typedef struct	s_game
