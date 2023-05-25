@@ -21,11 +21,29 @@ typedef struct s_map
 	char	**mtx;
 }			t_map;
 
+typedef struct	s_ray
+{
+
+}				t_ray;
+
+typedef struct	s_player
+{
+
+}				t_player;
+
+typedef struct	s_texture
+{
+
+}				t_texture;
+
 typedef struct	s_game
 {
-	int		*canvas;
-	t_img	mlx;
-	t_map	map;
-}			t_game;
+	int			*canvas;
+	t_img		mlx;
+	t_map		map;
+	t_ray		ray;
+	t_player	player;
+	t_texture	texture;
+}				t_game;
 
 #endif
