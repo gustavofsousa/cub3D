@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 (void)argc;
 (void)argv;
 	setup(&game);
-	//interpretate_map(&game);
+	interpretate_map(&game);
 	//validate_map(game);
 	render_game(&game);
 	ft_putstr_fd("Guten morgen", 1);
