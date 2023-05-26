@@ -5,8 +5,10 @@ void	free_map(t_game *game)
 	free_matrix(game->map.mtx);
 }
 
-void	exit_game(t_game *game)
+void	exit_game(char *message, t_game *game)
 {
+	if (message)
+		ft_putendl_fd(message, 2);
 	free_map(game);
 	// free_texture(game);
 	// free_mlx(game);

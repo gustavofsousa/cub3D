@@ -46,20 +46,19 @@ void    update_matrix(char ***matrix, char *new_line)
     }
 }
 
-static size_t	ft_count_words(char const *s, char sep)
+/*
+** Split the string s using the char sep as separator.
+** Count the number of words.
+*/
+int	ft_count_words(char const *s, char sep)
 {
-	size_t	i;
-	size_t	qtd_word;
-	size_t	next;
+    char    **mtx;
+    int     count;
 
-	i = 0;
-	qtd_word = 0;
-	while (s[i])
-	{
-		next = i + 1;
-		if (s[i] != sep && (s[next] == sep || s[next] == '\0'))
-			qtd_word++;
-		i++;
-	}
-	return (qtd_word);
+    count = 0;
+    mtx = ft_split(s, sep);
+    while (mtx[count])
+        count++;
+    free_matrix(mtx);
+    return (count);
 }

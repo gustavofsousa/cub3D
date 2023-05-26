@@ -13,11 +13,12 @@ void    setup(t_game *game);
 void    interpretate_map(t_game *game, char *path_name);
 void    validate_map(t_game *game);
 void    render_game(t_game *game);
-void	exit_game(t_game *game);
+void	exit_game(char *message, t_game *game);
 
 // Common libft
 void    free_matrix(char **matrix);
 void    update_matrix(char ***matrix, char *new_line);
+int     ft_count_words(char const *s, char c);
 
 
 #endif
