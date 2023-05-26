@@ -48,21 +48,17 @@ void    interpretate_map(t_game *game, char *file_path)
     char    *line;
     int     fd;
 
-    i = 0;
     fd = open(file_path, O_RDONLY);
-    printf("fd: %d\n", fd);
     if (fd == -1)
         exit_game("File non-existed or non-permission granted", game);
     line = get_nl(fd);
+    i = 0;
     while (line)
     {
-        if (line[0] != '\n')
-        {
+        if (line[0] != '\n' && i++)//empty line()
             interpretate_line(game, line);
-            i++;
-        }
         // When I already have a map, but appear some empty line inside or after it;
-        else if (game->map.mtx)
+        else if (game->map.mtx)//exit_map();
            exit_game("Incorect empty line or false information", game);
         free(line);
         line = get_nl(fd);
