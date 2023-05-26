@@ -4,10 +4,13 @@ void	free_matrix(char **matrix)
 {
 	int	i;
 
-	i = -1;
-	while (matrix[++i])
-		free(matrix[i]);
-	free(matrix);
+    if (matrix)
+    {
+        i = -1;
+        while (matrix[++i])
+            free(matrix[i]);
+        free(matrix);
+    }
 }
 
 
@@ -41,4 +44,22 @@ void    update_matrix(char ***matrix, char *new_line)
         free_matrix(*matrix);
         *matrix = new_matrix;
     }
+}
+
+static size_t	ft_count_words(char const *s, char sep)
+{
+	size_t	i;
+	size_t	qtd_word;
+	size_t	next;
+
+	i = 0;
+	qtd_word = 0;
+	while (s[i])
+	{
+		next = i + 1;
+		if (s[i] != sep && (s[next] == sep || s[next] == '\0'))
+			qtd_word++;
+		i++;
+	}
+	return (qtd_word);
 }
