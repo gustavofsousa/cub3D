@@ -20,7 +20,7 @@ char    *get_path_texture(char *line)
 /*
 *   Fazer nao ficar voltando, nem olhar de forma tao bruta, mais clean.
 */
-void    interpretate_line(t_game *game, char *line, int count)
+void    interpretate_line(t_game *game, char *line)
 {
     if (!ft_strncmp("NO", line, 2) && !game->texture.north)
         game->texture.north = get_path_texture(line);
@@ -52,12 +52,12 @@ void    interpretate_map(t_game *game, char *file_path)
     {
         if (line[0] != '\n')
         {
-            interpretate_line(game, line, i);
+            interpretate_line(game, line);
             i++;
         }
         // When I already have a map, but appear some empty line inside or after it;
-       //else if (game->map.mtx)
-         //   exit_game(game);
+        else if (game->map.mtx)
+           exit_game(game);
         free(line);
         line = get_nl(fd);
     }

@@ -10,6 +10,7 @@ void	exit_game(t_game *game)
 	free_map(game);
 	// free_texture(game);
 	// free_mlx(game);
+	ft_putendl_fd("I exit by some error", 2);
 	exit(0);
 }
 
@@ -25,7 +26,7 @@ int	main(int argc, char **argv)
 		interpretate_map(&game, argv[1]);
 		//validate_map(game);
 		//render_game(&game);
-		ft_putstr_fd("Guten morgen", 1);
+		ft_putendl_fd("Guten morgen", 1);
 		return (0);
 	}
 	ft_putendl_fd("Usage: ./cub3D <map.cub>", 1);
