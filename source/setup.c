@@ -20,6 +20,9 @@ void    init_variables(t_game *game)
     game->map.mtx = NULL;
 // texture
     game->texture.north = NULL;
+    game->texture.south = NULL;
+    game->texture.west = NULL;
+    game->texture.east = NULL;
 
 
     

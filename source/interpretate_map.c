@@ -15,11 +15,14 @@ char    *get_path_texture(char *line)
     return (path_text);
 }
 
+
+
 /*
 *   Fazer nao ficar voltando, nem olhar de forma tao bruta, mais clean.
 */
 void    interpretate_line(t_game *game, char *line, int count)
 {
+    printf("Meu i: %d\t e minha line %s\n", count, line);
     if (!ft_strncmp("NO", line, 2) && !game->texture.north)
         game->texture.north = get_path_texture(line);
     else if (!ft_strncmp("SO", line, 2) && !game->texture.south)
@@ -30,7 +33,7 @@ void    interpretate_line(t_game *game, char *line, int count)
         game->texture.east = get_path_texture(line);
     else
     {
-        game->map.mtx[count] = ft_strdup(line);
+        update_matrix(&game->map.mtx, line);
         // game->map.width = max(atual or strlen(line));
     }
 }
@@ -51,11 +54,13 @@ void    interpretate_map(t_game *game, char *file_path)
         if (line[0] != '\n')
         {
             interpretate_line(game, line, i);
+            printf("AFTER->Meu i: %d\t e minha line %s\n", i, line);
+
             i++;
         }
         // When I already have a map, but appear some empty line inside or after it;
-       else if (game->map.mtx)
-            exit_game(game);
+       //else if (game->map.mtx)
+         //   exit_game(game);
         free(line);
         line = get_nl(fd);
     }

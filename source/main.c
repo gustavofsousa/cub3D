@@ -1,16 +1,10 @@
 #include "../include/cub3d.h"
 
+
+
 void	free_map(t_game *game)
 {
-	int	i;
-
-	if (game->map.mtx)
-	{
-		i = -1;
-		while (game->map.mtx[++i])
-			free(game->map.mtx[i]);
-		free(game->map.mtx);
-	}
+	free_matrix(game->map.mtx);
 }
 
 void	exit_game(t_game *game)
