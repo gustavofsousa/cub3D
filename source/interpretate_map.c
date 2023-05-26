@@ -53,9 +53,9 @@ void    interpretate_map(t_game *game, char *file_path)
             interpretate_line(game, line, i);
             i++;
         }
-        // When I already have a map, but appear some empty line inside it;
-       // else if (game->map.mtx)
-       //     exit_app(game);
+        // When I already have a map, but appear some empty line inside or after it;
+       else if (game->map.mtx)
+            exit_game(game);
         free(line);
         line = get_nl(fd);
     }

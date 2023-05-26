@@ -18,8 +18,6 @@ MAIN				:=	main render_game setup validate_map interpretate_map
 ##GAME				:=	
 
 SRC		:=	$(MAIN)
-			##$(addprefix map_check/, $(MAP_CHECK))			\
-			##$(addprefix render/, $(RENDER))			\
 
 SRCS	:=	$(addsuffix .c, $(SRC))
 OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
@@ -28,16 +26,16 @@ OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 LIBLIB		:=	$(LIBDIR)libft.a
 
 ############## mlx library  for mac ##############
-MLX		:= ./miniLibX/
-MLX_LIB	:= $(addprefix $(MLX), libmlx.a)
-MLX_INC	:= -I ./miniLibX
-MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
+##MLX		:= ./miniLibX/
+##MLX_LIB	:= $(addprefix $(MLX), libmlx.a)
+##MLX_INC	:= -I ./miniLibX
+##MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 
 ############## mlx library  for mac ##############
-##MLX		:= ./mlx_linux
-##MLX_LIB	:= $(addprefix $(MLX), mlx.a)
-##MLX_INC	:= -Imlx_linux -O3
-##MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX		:= ./mlx_linux
+MLX_LIB	:= $(addprefix $(MLX), mlx.a)
+MLX_INC	:= -Imlx_linux -O3
+MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 ##LISTDIR 	:=	map_check render
 

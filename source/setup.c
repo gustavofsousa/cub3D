@@ -17,6 +17,7 @@ void    init_variables(t_game *game)
 // Map
     game->map.height = 0;
     game->map.width = 0;
+    game->map.mtx = NULL;
 // texture
     game->texture.north = NULL;
 
