@@ -1,7 +1,5 @@
 #include "../include/cub3d.h"
 
-
-
 void	free_map(t_game *game)
 {
 	free_matrix(game->map.mtx);
@@ -26,7 +24,7 @@ int	main(int argc, char **argv)
 		setup(&game);
 		interpretate_map(&game, argv[1]);
 		//validate_map(game);
-		render_game(&game);
+		//render_game(&game);
 		ft_putstr_fd("Guten morgen", 1);
 		return (0);
 	}
