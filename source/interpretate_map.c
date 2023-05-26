@@ -38,6 +38,7 @@ void    interpretate_line(t_game *game, char *line)
         update_matrix(&game->map.mtx, line);
         // game->map.width = max(atual or strlen(line));
     }
+
 }
 
 // Leio a linha
@@ -55,6 +56,7 @@ void    interpretate_map(t_game *game, char *file_path)
     i = 0;
     while (line)
     {
+
         if (line[0] != '\n' && i++)//empty line()
             interpretate_line(game, line);
         // When I already have a map, but appear some empty line inside or after it;
@@ -63,7 +65,10 @@ void    interpretate_map(t_game *game, char *file_path)
         free(line);
         line = get_nl(fd);
     }
-    game->map.mtx[i] = NULL;
+    if (game->map.mtx == NULL)
+        exit_game("Map non-existed", game);
+    else
+        game->map.mtx[i] = NULL;
     game->map.height = i;
     close(fd);
 }
