@@ -29,8 +29,8 @@ int	main(int argc, char **argv)
 		//validate_map(game);
 		//render_game(&game);
 		ft_putendl_fd("Guten morgen", 1);
-		return (0);
-	}
+		exit_game(NULL, &game);
+		}
 	ft_putendl_fd("Usage: ./cub3D <map.cub>", 1);
 	return (1);
 
