@@ -33,10 +33,10 @@ typedef struct	s_player
 
 typedef struct	s_texture
 {
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
+	t_img	north;
+	t_img	south;
+	t_img	east;
+	t_img	west;
 	int		floor;
 	int		ceiling;
 }				t_texture;

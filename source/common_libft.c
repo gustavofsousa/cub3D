@@ -62,3 +62,12 @@ int	ft_count_words(char const *s, char sep)
     free_matrix(mtx);
     return (count);
 }
+
+void    trim_new_line(char **line)
+{
+    char    *trimmed;
+
+    trimmed = ft_strtrim(*line, "\n");
+    free(*line);
+    *line = trimmed;
+}
