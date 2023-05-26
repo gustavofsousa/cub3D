@@ -12,7 +12,6 @@ void	exit_game(char *message, t_game *game)
 	free_map(game);
 	// free_texture(game);
 	// free_mlx(game);
-	ft_putendl_fd("I exit by some error", 2);
 	exit(0);
 }
 
