@@ -13,7 +13,7 @@ LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 
-MAIN				:=	main render_game setup validate_map	interpretate_map	common_libft	get_texture
+MAIN				:=	main render_game setup validate_map	interpretate_map	common_libft	get_texture	get_color
 ##INTERPRETATION	:=	
 ##GAME				:=	
 

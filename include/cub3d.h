@@ -26,6 +26,9 @@ int     ft_count_words(char const *s, char c);
 void    trim_new_line(char **line);
 int     is_empty_line(char *line);
 
+// Color
+int     get_color(char *line, t_game *game);
+
 
 #endif
 
