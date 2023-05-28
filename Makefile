@@ -10,9 +10,9 @@ SRCDIR	:=	source/
 OBJDIR	:=	obj/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
+LISTDIR 	:=	color texture game interpretate_map validate_map
 
 ####	Sources & objects	####
-
 MAIN				:=	main	setup	common_libft			
 INTERPRETATE_MAP	:=	interpretate_map	cardinal_points
 COLOR				:=	get_color
@@ -44,14 +44,6 @@ MLX		:= ./mlx_linux
 MLX_LIB	:= $(addprefix $(MLX), mlx.a)
 MLX_INC	:= -Imlx_linux -O3
 MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-
-LISTDIR 	:=	color texture game interpretate_map validate_map
-
-#$(shell echo '$@ <- Nome da regra.')
-#$(shell echo '$< <- Nome da primeira dependência.')
-#$(shell echo '$^ <- Lista de dependências.')
-#$(shell echo '$? <- Lista de dependências mais recentes que a regra.')
-#$(shell echo '$* <- Nome do arquivo sem sufixo.')
 
 # Colors
 BLACK	=	\033[0;30m
@@ -104,3 +96,9 @@ val:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./minishell
 
 .PHONY: re, fclean, clean, all
+
+#$(shell echo '$@ <- Nome da regra.')
+#$(shell echo '$< <- Nome da primeira dependência.')
+#$(shell echo '$^ <- Lista de dependências.')
+#$(shell echo '$? <- Lista de dependências mais recentes que a regra.')
+#$(shell echo '$* <- Nome do arquivo sem sufixo.')
