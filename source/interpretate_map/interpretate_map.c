@@ -1,8 +1,10 @@
 #include "../../include/cub3d.h"
 
-void    interpretate_line(t_game *game, char *line)
+void    interpretate_line(t_game *game, char *line_pre)
 {
-    //trim_new_line(&line);
+    char    *line;
+
+    line = ft_strtrim(line_pre, "\n");
     if (is_xpm(line))
         get_texture(game, line);
     else if (is_color(line))
@@ -13,6 +15,7 @@ void    interpretate_line(t_game *game, char *line)
         game->map.height++;
         //game->map.width = max(atual or strlen(line));
     }
+    free(line);
 }
 
 // Leio a linha

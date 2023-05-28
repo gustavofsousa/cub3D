@@ -15,29 +15,31 @@ void    validate_map(t_game *game);
 void    render_game(t_game *game);
 void	exit_game(char *message, t_game *game);
 
+// interpretate_map
+int     has_all_information(t_game *game);
+int     open_file(char *file_path);
+
 //Texture
-int is_xpm(char *line);
-int get_texture(t_game *game, char *line);
+int     is_xpm(char *line);
+int     get_texture(t_game *game, char *line);
+int     is_north(char *cardinal, t_game *game);
+int     is_south(char *cardinal, t_game *game);
+int     is_west(char *cardinal, t_game *game);
+int     is_east(char *cardinal, t_game *game);
+
+// Color
+int     is_color(char *line);
+void    get_color(t_game *game, char *line);
+int     is_ceiling(char *cardinal, t_game *game);
+int     is_floor(char *cardinal, t_game *game);
 
 // Common libft
 void    free_matrix(char **matrix);
 void    update_matrix(char ***matrix, char *new_line);
 int     ft_count_words(char const *s, char c);
-void    trim_new_line(char **line);
 int     is_empty_line(char *line);
 
-// Color
-int     is_color(char *line);
-void    get_color(t_game *game, char *line);
 
-
-// cardinal_points
-int     is_north(char *cardinal, t_game *game);
-int     is_south(char *cardinal, t_game *game);
-int     is_west(char *cardinal, t_game *game);
-int     is_east(char *cardinal, t_game *game);
-int     is_ceiling(char *cardinal, t_game *game);
-int     is_floor(char *cardinal, t_game *game);
 
 #endif
 

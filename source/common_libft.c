@@ -63,16 +63,6 @@ int	ft_count_words(char const *s, char sep)
     return (count);
 }
 
-void    trim_new_line(char **line)
-{
-    char    *trimmed;
-
-    trimmed = ft_strtrim(*line, "\n");
-    free(*line);
-    *line = ft_strdup(trimmed);
-    free (trimmed);
-}
-
 int is_empty_line(char *line)
 {
     int i;
