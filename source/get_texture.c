@@ -1,7 +1,7 @@
 #include "../include/cub3d.h"
 
 // make img to texture
-t_img   get_path_texture(char *path, t_game *game)
+t_img   get_argure(char *path, t_game *game)
 {
     t_img   texture;
 
@@ -14,30 +14,25 @@ t_img   get_path_texture(char *path, t_game *game)
     return (texture);
 }
 
-// Functions for the strncmp
 int get_texture(t_game *game, char *line)
 {
     char    *cardinal;
     char    **line_mtx;
-    char    *path_text;
+    char    *arg;
 
     if (ft_count_words(line, ' ') != 2)
         exit_game("Incorrect number of information", game);
     line_mtx  = ft_split(line, ' ');
     cardinal = line_mtx[0];
-    path_text = line_mtx[1];
+    arg = line_mtx[1];
     if (is_north(cardinal, game))
-        game->texture.north = get_path_texture(path_text, game);
+        game->texture.north = get_argure(arg, game);
     else if (is_south(cardinal, game))
-        game->texture.south = get_path_texture(path_text, game);
+        game->texture.south = get_argure(arg, game);
     else if (is_west(cardinal, game))
-        game->texture.west = get_path_texture(path_text, game);
+        game->texture.west = get_argure(arg, game);
     else if (is_east(cardinal, game))
-        game->texture.east = get_path_texture(path_text, game);
-    else if (is_ceiling(cardinal, game))
-        game->texture.ceiling = get_color(path_text, game);
-    else if (is_floor(cardinal, game))
-        game->texture.floor = get_color(path_text, game);
+        game->texture.east = get_argure(arg, game);
     else
     {
         free_matrix(line_mtx);

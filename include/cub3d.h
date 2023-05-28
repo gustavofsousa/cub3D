@@ -27,7 +27,9 @@ void    trim_new_line(char **line);
 int     is_empty_line(char *line);
 
 // Color
-int     get_color(char *line, t_game *game);
+int     is_color(char *line);
+void    get_color(t_game *game, char *line);
+
 
 // cardinal_points
 int     is_north(char *cardinal, t_game *game);
