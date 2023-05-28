@@ -2,7 +2,7 @@
 
 void    interpretate_line(t_game *game, char *line)
 {
-    trim_new_line(&line);
+    //trim_new_line(&line);
     if (is_xpm(line))
         get_texture(game, line);
     else if (is_color(line))

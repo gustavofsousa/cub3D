@@ -20,6 +20,7 @@ void get_color(t_game *game, char *line)
         game->texture.ceiling = translate_rgb(arg, game);
     else if (is_floor(cardinal, game))
         game->texture.floor = translate_rgb(arg, game);
+    free_matrix(line_mtx);
 }
 
 int is_color(char *line)
