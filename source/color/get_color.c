@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int translate_rgb(char *rgb, t_game *game)
 {

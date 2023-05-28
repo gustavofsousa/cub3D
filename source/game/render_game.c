@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	init_game(t_game *game)
 {	
@@ -20,5 +20,4 @@ int	init_game(t_game *game)
 void    render_game(t_game *game)
 {
     init_game(game);
-
 }

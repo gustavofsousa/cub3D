@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 // make img to texture
 t_img   get_argure(char *path, t_game *game)

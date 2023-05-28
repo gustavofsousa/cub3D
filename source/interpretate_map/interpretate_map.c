@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void    interpretate_line(t_game *game, char *line)
 {

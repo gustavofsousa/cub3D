@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int is_north(char *cardinal, t_game *game)
 {

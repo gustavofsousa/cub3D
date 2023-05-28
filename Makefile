@@ -13,11 +13,19 @@ LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 
-MAIN				:=	main render_game setup validate_map	interpretate_map	common_libft	get_texture	get_color	cardinal_points
-##INTERPRETATION	:=	
-##GAME				:=	
+MAIN				:=	main	setup	common_libft			
+INTERPRETATE_MAP	:=	interpretate_map	cardinal_points
+COLOR				:=	get_color
+TEXTURE				:=	get_texture
+VALIDATE_MAP		:=	validate_map
+GAME				:=	render_game
 
-SRC		:=	$(MAIN)
+SRC		:=	$(MAIN)	\
+			$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\
+			$(addprefix validate_map/, $(VALIDATE_MAP))	\
+			$(addprefix color/, $(COLOR))	\
+			$(addprefix texture/, $(TEXTURE))	\
+			$(addprefix game/, $(GAME))
 
 SRCS	:=	$(addsuffix .c, $(SRC))
 OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
@@ -37,7 +45,7 @@ MLX_LIB	:= $(addprefix $(MLX), mlx.a)
 MLX_INC	:= -Imlx_linux -O3
 MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-##LISTDIR 	:=	map_check render
+LISTDIR 	:=	color texture game interpretate_map validate_map
 
 #$(shell echo '$@ <- Nome da regra.')
 #$(shell echo '$< <- Nome da primeira dependência.')
@@ -63,7 +71,7 @@ all:	obj $(MLX_LIB) $(LIBLIB) $(NAME)
 
 obj:
 	@mkdir -p $(OBJDIR)
-	##@mkdir -p $(addprefix $(OBJDIR), $(LISTDIR))
+	@mkdir -p $(addprefix $(OBJDIR), $(LISTDIR))
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
