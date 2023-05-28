@@ -42,3 +42,12 @@ int get_texture(t_game *game, char *line)
     free_matrix(line_mtx);
     return (1);
 }
+
+int is_xpm(char *line)
+{
+    while (*line && *line != '.')
+        line++;
+    if (!ft_strncmp(line, ".xpm", 4) && *(line + 4) == '\0')
+        return (1);
+    return (0);
+}

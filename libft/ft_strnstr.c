@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusousa <gusousa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 17:02:13 by gusousa           #+#    #+#             */
-/*   Updated: 2022/05/30 15:39:47 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/05/28 17:58:12 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 				return ((char *)haystack);
 		haystack++;
 	}
-	return (0);
+	return (NULL);
 }

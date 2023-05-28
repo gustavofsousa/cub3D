@@ -16,6 +16,7 @@ void    render_game(t_game *game);
 void	exit_game(char *message, t_game *game);
 
 //Texture
+int is_xpm(char *line);
 int get_texture(t_game *game, char *line);
 
 // Common libft
@@ -23,6 +24,7 @@ void    free_matrix(char **matrix);
 void    update_matrix(char ***matrix, char *new_line);
 int     ft_count_words(char const *s, char c);
 void    trim_new_line(char **line);
+int     is_empty_line(char *line);
 
 
 #endif

@@ -69,5 +69,20 @@ void    trim_new_line(char **line)
 
     trimmed = ft_strtrim(*line, "\n");
     free(*line);
-    *line = trimmed;
+    *line = ft_strdup(trimmed);
+    free (trimmed);
+}
+
+int is_empty_line(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] != ' ' || line[i] != '\n' || line[i] != '\t')
+            return (0);
+        i++;
+    }
+    return (1);
 }
