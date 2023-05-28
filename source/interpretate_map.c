@@ -28,6 +28,16 @@ int has_all_information(t_game *game)
     return (1);
 }
 
+int open_file(char *file_path)
+{
+    int fd;
+
+    fd = open(file_path, O_RDONLY);
+    if (fd == -1)
+        exit_game("File non-existed or non-permission granted", NULL);
+    return (fd);
+}
+
 // Leio a linha
 // E guardo ou na textura ou na matrix.
 void    interpretate_map(t_game *game, char *file_path)
@@ -35,10 +45,7 @@ void    interpretate_map(t_game *game, char *file_path)
     char    *line;
     int     fd;
 
-    // Function for the open();
-    fd = open(file_path, O_RDONLY);
-    if (fd == -1)
-        exit_game("File non-existed or non-permission granted", game);
+    fd = open_file(file_path);
     line = get_nl(fd);
     while (line)
     {
