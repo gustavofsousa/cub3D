@@ -14,9 +14,9 @@ LISTDIR 	:=	color texture game interpretate_map validate_map
 
 ####	Sources & objects	####
 MAIN				:=	main	setup	common_libft			
-INTERPRETATE_MAP	:=	interpretate_map	cardinal_points
-COLOR				:=	get_color
-TEXTURE				:=	get_texture
+INTERPRETATE_MAP	:=	interpretate_map		auxiliar
+COLOR				:=	get_color	checkers
+TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map
 GAME				:=	render_game
 

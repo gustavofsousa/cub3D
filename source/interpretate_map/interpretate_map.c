@@ -1,5 +1,9 @@
 #include "../../include/cub3d.h"
-
+/*
+** Cut the new line at the end of the line
+** Decide if the line is a texture or a color or a map.
+** Call the right function to interpretate the line.
+*/
 void    interpretate_line(t_game *game, char *line_pre)
 {
     char    *line;
@@ -18,8 +22,12 @@ void    interpretate_line(t_game *game, char *line_pre)
     free(line);
 }
 
-// Leio a linha
-// E guardo ou na textura ou na matrix.
+/*
+** Open the file to read.
+** Read the file line by line.
+** If the line is not empty, interpretate it.
+** At end, check if all information needed was given.
+*/
 void    interpretate_map(t_game *game, char *file_path)
 {
     char    *line;
@@ -31,8 +39,8 @@ void    interpretate_map(t_game *game, char *file_path)
     {
         if (!is_empty_line(line))
             interpretate_line(game, line);
-        // When I already have a map, but appear some empty line inside or after it;
-        else if (game->map.mtx)//exit_map();
+        // When I already have a map, but appear some empty line inside or after it; --- Maybe check this in validate_map
+        else if (game->map.mtx)
            exit_game("Incorect empty line or false information", game);
         free(line);
         line = get_nl(fd);
