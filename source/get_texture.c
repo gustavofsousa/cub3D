@@ -9,7 +9,8 @@ t_img   get_path_texture(char *path, t_game *game)
     texture.img = mlx_xpm_file_to_image(texture.ptr, path, &texture.width, &texture.height);
     if (!texture.img)
         exit_game("Invalid texture path", game);
-    texture.addr = mlx_get_data_addr(texture.img, &texture.bpp, &texture.line_len, &texture.endian);
+    texture.addr = (int *)mlx_get_data_addr(texture.img, &texture.bpp, &texture.line_len, &texture.endian);
+    //texture.line_len /= 4;
     return (texture);
 }
 

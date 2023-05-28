@@ -1,8 +1,8 @@
-NO path_here
-SO my_path_to_dir
-WE my_path_to_dir
-EA my_path_to_dir
-fdsadsa
+NO texture/north_wall.xpm
+SO texture/north_wall.xpm
+WE texture/north_wall.xpm
+EA texture/north_wall.xpm
+
 1111
 1001
 1001

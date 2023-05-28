@@ -15,8 +15,6 @@ void	exit_game(char *message, t_game *game)
 	exit(0);
 }
 
-
-
 int	main(int argc, char **argv)
 {
 	t_game	game;

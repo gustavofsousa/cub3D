@@ -3,9 +3,7 @@
 void    interpretate_line(t_game *game, char *line)
 {
     trim_new_line(&line);
-    if (get_texture(game, line))
-        return ;
-    else
+    if (!get_texture(game, line))
     {
         update_matrix(&game->map.mtx, line);
         // game->map.width = max(atual or strlen(line));
