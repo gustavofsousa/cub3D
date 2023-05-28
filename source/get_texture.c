@@ -26,17 +26,17 @@ int get_texture(t_game *game, char *line)
     line_mtx  = ft_split(line, ' ');
     cardinal = line_mtx[0];
     path_text = line_mtx[1];
-    if (!ft_strncmp("NO", cardinal, 3) && !game->texture.north.ptr)
+    if (is_north(cardinal, game))
         game->texture.north = get_path_texture(path_text, game);
-    else if (!ft_strncmp("SO", cardinal, 3) && !game->texture.south.ptr)
-        game->texture.south = get_path_texture(path_text, game );
-    else if (!ft_strncmp("WE", cardinal, 3) && !game->texture.west.ptr)
+    else if (is_south(cardinal, game))
+        game->texture.south = get_path_texture(path_text, game);
+    else if (is_west(cardinal, game))
         game->texture.west = get_path_texture(path_text, game);
-    else if (!ft_strncmp("EA", cardinal, 3) && !game->texture.east.ptr)
+    else if (is_east(cardinal, game))
         game->texture.east = get_path_texture(path_text, game);
-    else if (!ft_strncmp("C", cardinal, 2) && game->texture.ceiling == -1)
+    else if (is_ceiling(cardinal, game))
         game->texture.ceiling = get_color(path_text, game);
-    else if (!ft_strncmp("F", cardinal, 2) && game->texture.floor == -1)
+    else if (is_floor(cardinal, game))
         game->texture.floor = get_color(path_text, game);
     else
     {

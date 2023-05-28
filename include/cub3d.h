@@ -29,6 +29,13 @@ int     is_empty_line(char *line);
 // Color
 int     get_color(char *line, t_game *game);
 
+// cardinal_points
+int     is_north(char *cardinal, t_game *game);
+int     is_south(char *cardinal, t_game *game);
+int     is_west(char *cardinal, t_game *game);
+int     is_east(char *cardinal, t_game *game);
+int     is_ceiling(char *cardinal, t_game *game);
+int     is_floor(char *cardinal, t_game *game);
 
 #endif
 
