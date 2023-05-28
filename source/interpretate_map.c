@@ -21,7 +21,9 @@ int has_all_information(t_game *game)
     if (!game->texture.north.ptr
         || !game->texture.south.ptr
         || !game->texture.west.ptr
-        || !game->texture.east.ptr)
+        || !game->texture.east.ptr
+        || game->texture.ceiling == -1
+        || game->texture.floor == -1)
         return (0);
     return (1);
 }
@@ -48,7 +50,7 @@ void    interpretate_map(t_game *game, char *file_path)
         free(line);
         line = get_nl(fd);
     }    
-    //if (!has_all_information(game))
-    //    exit_game("Missing information", game);
+    if (!has_all_information(game))
+        exit_game("Missing information", game);
     close(fd);
 }

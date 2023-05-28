@@ -23,6 +23,8 @@ void    init_variables(t_game *game)
     game->texture.south.ptr = NULL;
     game->texture.west.ptr = NULL;
     game->texture.east.ptr = NULL;
+    game->texture.ceiling = -1;
+    game->texture.floor = -1;
 
 
     
