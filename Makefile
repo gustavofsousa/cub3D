@@ -17,7 +17,7 @@ MAIN				:=	main	setup	common_libft
 INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
-VALIDATE_MAP		:=	validate_map	check_player_existence	check_hole_in_wall
+VALIDATE_MAP		:=	validate_map	check_player_existence	check_hole_in_wall	check_invalid_char
 GAME				:=	render_game
 
 SRC		:=	$(MAIN)	\

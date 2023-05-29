@@ -2,7 +2,8 @@
 
 void    validate_map(t_game *game)
 {
-    check_player_existence(game);
-    check_hole_in_wall(game);
+    check_invalid_char(game);
+    //check_player_existence(game);
+    //check_hole_in_wall(game);
 
 }
