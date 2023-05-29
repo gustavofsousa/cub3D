@@ -7,7 +7,7 @@ int	is_valid_cell(char map_cell)
     return (0);
 }
 
-void    check_invalid_char(t_game *game)
+void    validate_char(t_game *game)
 {
     int i;
     int j;

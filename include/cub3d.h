@@ -40,9 +40,9 @@ int     is_empty_line(char *line);
 
 // Validate_map
 void    validate_map(t_game *game);
-void    check_player_existence(t_game *game);
-void    check_hole_in_wall(t_game *game);
-void    check_invalid_char(t_game *game);
+void    validate_player(t_game *game);
+void    validate_border(t_game *game);
+void    validate_char(t_game *game);
 
 
 
