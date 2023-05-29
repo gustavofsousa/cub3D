@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	{
 		setup(&game);
 		interpretate_map(&game, argv[1]);
-		//validate_map(game);
+		validate_map(&game);
 		//render_game(&game);
 		ft_putendl_fd("Guten morgen", 1);
 		exit_game(NULL, &game);

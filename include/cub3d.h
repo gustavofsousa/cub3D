@@ -10,12 +10,11 @@
 # include <stdio.h> //printf
 
 void    setup(t_game *game);
-void    interpretate_map(t_game *game, char *path_name);
-void    validate_map(t_game *game);
 void    render_game(t_game *game);
 void	exit_game(char *message, t_game *game);
 
 // interpretate_map
+void    interpretate_map(t_game *game, char *path_name);
 int     has_all_information(t_game *game);
 int     open_file(char *file_path);
 
@@ -38,6 +37,12 @@ void    free_matrix(char **matrix);
 void    update_matrix(char ***matrix, char *new_line);
 int     ft_count_words(char const *s, char c);
 int     is_empty_line(char *line);
+
+// Validate_map
+void    validate_map(t_game *game);
+void    check_player_existence(t_game *game);
+void    check_hole_in_wall(t_game *game);
+
 
 
 

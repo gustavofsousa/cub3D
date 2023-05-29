@@ -17,7 +17,7 @@ MAIN				:=	main	setup	common_libft
 INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
-VALIDATE_MAP		:=	validate_map
+VALIDATE_MAP		:=	validate_map	check_player_existence	check_hole_in_wall
 GAME				:=	render_game
 
 SRC		:=	$(MAIN)	\
@@ -34,16 +34,16 @@ OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 LIBLIB		:=	$(LIBDIR)libft.a
 
 ############## mlx library  for mac ##############
-##MLX		:= ./miniLibX/
-##MLX_LIB	:= $(addprefix $(MLX), libmlx.a)
-##MLX_INC	:= -I ./miniLibX
-##MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
+MLX		:= ./miniLibX/
+MLX_LIB	:= $(addprefix $(MLX), libmlx.a)
+MLX_INC	:= -I ./miniLibX
+MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 
 ############## mlx library  for mac ##############
-MLX		:= ./mlx_linux
-MLX_LIB	:= $(addprefix $(MLX), mlx.a)
-MLX_INC	:= -Imlx_linux -O3
-MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+##MLX		:= ./mlx_linux
+##MLX_LIB	:= $(addprefix $(MLX), mlx.a)
+##MLX_INC	:= -Imlx_linux -O3
+##MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 # Colors
 BLACK	=	\033[0;30m
