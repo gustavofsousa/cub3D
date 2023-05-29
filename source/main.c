@@ -15,6 +15,15 @@ void	exit_game(char *message, t_game *game)
 	exit(0);
 }
 
+void	print_mtx(char **mtx)
+{
+	int	i;
+
+	i = -1;
+	while (mtx[++i])
+		printf("%s\n", mtx[i]);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -23,6 +32,7 @@ int	main(int argc, char **argv)
 	{
 		setup(&game);
 		interpretate_map(&game, argv[1]);
+		print_mtx(game.map.mtx);
 		validate_map(&game);
 		//render_game(&game);
 		ft_putendl_fd("Guten morgen", 1);
