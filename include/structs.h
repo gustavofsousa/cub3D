@@ -28,7 +28,8 @@ typedef struct	s_ray
 
 typedef struct	s_player
 {
-
+	int		x;
+	int		y;
 }				t_player;
 
 typedef struct	s_texture

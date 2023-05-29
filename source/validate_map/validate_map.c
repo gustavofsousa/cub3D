@@ -3,7 +3,7 @@
 void    validate_map(t_game *game)
 {
     validate_char(game);
-    //validate_play(game);
+    validate_player(game);
     //validate_border(game);
 
 }
