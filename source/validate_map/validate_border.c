@@ -50,30 +50,20 @@ void    validate_right(t_game *game, char **map)
 
 }
 
-int    is_valid_down(char *line_down, int pos)
-{
-    if (line_down[pos] != '1' || line_down[pos] != ' ')
-        return (0);
-    return (1);
-}
-
-int    validate_up(t_game *game)
+int validate_down(t_game *game)
 {
     int     i;
     char    *line;
 
-    line = game->map.mtx[0];
     i = -1;
-    while (line[++i])
+    while (game->map.mtx[++i])
     {
-        if (line[i] != '1' && line[i] != ' ')
-            return (0);
-        if (line[i] == ' ' && !is_valid_down(game->map.mtx[1], i))
+        line = game->map.mtx[i];
+        if (line[game->map.width - 1] != '1' && line[game->map.width - 1] != ' ')
             return (0);
     }
     return (1);
 }
-
 
 // a prmeira linha precisa ser 1
 // Vejo se o primeiro char deopis do espaço de toda linha é 1.
@@ -82,9 +72,9 @@ int    validate_up(t_game *game)
 // Vou olhando na linha maior até chegar ao fim se só tem 1.
 void    validate_border(t_game *game)
 {
-    if (!validate_up(game))
+    if (!validate_up(game)
+        || !validate_down(game))
         exit_game("it's just another brick in the wall", game);
-    //validate_down(game);
     //validate_left(game);
     //validate_right(game, game->map.mtx);
     //validate_middle(game);

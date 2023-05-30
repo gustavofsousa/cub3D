@@ -43,6 +43,10 @@ void    validate_map(t_game *game);
 void    validate_player(t_game *game);
 void    validate_border(t_game *game);
 void    validate_char(t_game *game);
+int     validate_up(t_game *game);
+int     is_valid_down(char *line_down, int pos);
+
+
 
 
 
