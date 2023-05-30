@@ -76,3 +76,10 @@ int is_empty_line(char *line)
     }
     return (1);
 }
+
+int is_space(char c)
+{
+    if (c == ' ' || c == '\t')
+        return (1);
+    return (0);
+}

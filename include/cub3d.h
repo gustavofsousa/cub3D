@@ -37,6 +37,8 @@ void    free_matrix(char **matrix);
 void    update_matrix(char ***matrix, char *new_line);
 int     ft_count_words(char const *s, char c);
 int     is_empty_line(char *line);
+int     is_space(char c);
+
 
 // Validate_map
 void    validate_map(t_game *game);
@@ -46,7 +48,11 @@ void    validate_char(t_game *game);
 int     validate_up(t_game *game);
 int     is_valid_down(char *line_down, int pos);
 int     validate_down(t_game *game);
-int     s_valid_up(char *line_up, int pos);
+int     is_valid_up(char *line_up, int pos);
+int     validate_left(t_game *game);
+int     validate_right(t_game *game);
+
+
 
 
 
