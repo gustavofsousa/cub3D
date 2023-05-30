@@ -32,12 +32,12 @@ int	main(int argc, char **argv)
 	{
 		setup(&game);
 		interpretate_map(&game, argv[1]);
-		print_mtx(game.map.mtx);
+		//print_mtx(game.map.mtx);
 		validate_map(&game);
 		//render_game(&game);
 		ft_putendl_fd("Guten morgen", 1);
 		exit_game(NULL, &game);
-		}
+	}
 	ft_putendl_fd("Usage: ./cub3D <map.cub>", 1);
 	return (1);
 

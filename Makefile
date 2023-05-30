@@ -39,7 +39,7 @@ MLX_LIB	:= $(addprefix $(MLX), libmlx.a)
 MLX_INC	:= -I ./miniLibX
 MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 
-############## mlx library  for mac ##############
+############## mlx library  for linux ##############
 ##MLX		:= ./mlx_linux
 ##MLX_LIB	:= $(addprefix $(MLX), mlx.a)
 ##MLX_INC	:= -Imlx_linux -O3

@@ -59,5 +59,7 @@ void    validate_border(t_game *game)
 {
     //validate_first_col(game);
     //validate_first_line(game);
+    //validate_last_line(game);
     validate_per_line(game, game->map.mtx);
+    //validate_space(game);
 }
