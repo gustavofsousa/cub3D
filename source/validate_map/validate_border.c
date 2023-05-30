@@ -32,7 +32,7 @@ char    *max_str(char *s1, char *s2)
     return (s2);
 }
 
-void    validate_per_line(t_game *game, char **map)
+void    validate_right(t_game *game, char **map)
 {
     int     i;
     char    *bigger_line;
@@ -50,6 +50,31 @@ void    validate_per_line(t_game *game, char **map)
 
 }
 
+int    is_valid_down(char *line_down, int pos)
+{
+    if (line_down[pos] != '1' || line_down[pos] != ' ')
+        return (0);
+    return (1);
+}
+
+int    validate_up(t_game *game)
+{
+    int     i;
+    char    *line;
+
+    line = game->map.mtx[0];
+    i = -1;
+    while (line[++i])
+    {
+        if (line[i] != '1' && line[i] != ' ')
+            return (0);
+        if (line[i] == ' ' && !is_valid_down(game->map.mtx[1], i))
+            return (0);
+    }
+    return (1);
+}
+
+
 // a prmeira linha precisa ser 1
 // Vejo se o primeiro char deopis do espaço de toda linha é 1.
 // próxima linha vou até a posição de quem for maior
@@ -57,9 +82,10 @@ void    validate_per_line(t_game *game, char **map)
 // Vou olhando na linha maior até chegar ao fim se só tem 1.
 void    validate_border(t_game *game)
 {
-    //validate_first_col(game);
-    //validate_first_line(game);
-    //validate_last_line(game);
-    validate_per_line(game, game->map.mtx);
-    //validate_space(game);
+    if (!validate_up(game))
+        exit_game("it's just another brick in the wall", game);
+    //validate_down(game);
+    //validate_left(game);
+    //validate_right(game, game->map.mtx);
+    //validate_middle(game);
 }
