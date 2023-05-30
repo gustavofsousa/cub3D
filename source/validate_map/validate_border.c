@@ -50,21 +50,6 @@ void    validate_right(t_game *game, char **map)
 
 }
 
-int validate_down(t_game *game)
-{
-    int     i;
-    char    *line;
-
-    i = -1;
-    while (game->map.mtx[++i])
-    {
-        line = game->map.mtx[i];
-        if (line[game->map.width - 1] != '1' && line[game->map.width - 1] != ' ')
-            return (0);
-    }
-    return (1);
-}
-
 // a prmeira linha precisa ser 1
 // Vejo se o primeiro char deopis do espaço de toda linha é 1.
 // próxima linha vou até a posição de quem for maior

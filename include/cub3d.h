@@ -45,6 +45,9 @@ void    validate_border(t_game *game);
 void    validate_char(t_game *game);
 int     validate_up(t_game *game);
 int     is_valid_down(char *line_down, int pos);
+int     validate_down(t_game *game);
+int     s_valid_up(char *line_up, int pos);
+
 
 
 
