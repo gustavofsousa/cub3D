@@ -2,8 +2,8 @@
 
 int    is_all_wall(char *line, int pos)
 {
-    while (line[pos++])
-        if (line[pos] != '1')
+    while (line[pos])
+        if (line[pos++] != '1')
             return (0);
     return (1);
 }
