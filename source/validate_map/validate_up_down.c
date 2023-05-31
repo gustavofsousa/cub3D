@@ -11,14 +11,18 @@ int validate_down(t_game *game)
 {
     int     i;
     char    *line;
+    int     last;
+    int     pre_last;
 
-    line = game->map.mtx[game->map.height - 1];
+    last = game->map.height - 1;
+    pre_last = game->map.height - 2;
+    line = game->map.mtx[last];
     i = -1;
     while (line[++i])
     {
         if (line[i] != '1' && line[i] != ' ')
             return (0);
-        if (line[i] == ' ' && !is_valid_up_down(game->map.mtx[game->map.height - 2], i))
+        if (line[i] == ' ' && !is_valid_up_down(game->map.mtx[pre_last], i))
             return (0);
     }
     return (1);
