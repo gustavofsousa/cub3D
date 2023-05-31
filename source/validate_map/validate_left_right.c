@@ -68,7 +68,7 @@ int    validate_right(t_game *game)
         s2 = game->map.mtx[i];
         len_s1 = ft_strlen(s1);
         len_s2 = ft_strlen(s2);
-        if (!is_valid_at_pos(s1, s2, len_s1, len_s2))
+        if (!is_valid_at_pos(s1, s2, len_s1 - 1, len_s2 - 1))
             return (0);
         if (len_s1 < len_s2 && !is_valid_wall(s2, len_s1, len_s2))
             return (0);
