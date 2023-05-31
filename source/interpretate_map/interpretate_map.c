@@ -6,9 +6,11 @@
 */
 void    interpretate_line(t_game *game, char *line_pre)
 {
+    char    *line2;
     char    *line;
 
-    line = ft_strtrim(line_pre, "\n");
+    line2 = ft_strtrim(line_pre, "\n");
+    line = ft_strtrim(line2, " ");
     if (is_xpm(line))
         get_texture(game, line);
     else if (is_color(line))
