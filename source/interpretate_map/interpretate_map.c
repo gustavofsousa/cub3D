@@ -43,7 +43,7 @@ void    interpretate_map(t_game *game, char *file_path)
             interpretate_line(game, line);
         // When I already have a map, but appear some empty line inside or after it; --- Maybe check this in validate_map
         else if (game->map.mtx)
-           exit_game("Incorect empty line or false information", game);
+            exit_game("Incorect empty line or false information", game);
         free(line);
         line = get_nl(fd);
     }    
