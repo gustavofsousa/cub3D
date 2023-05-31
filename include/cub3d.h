@@ -43,12 +43,14 @@ int     is_space(char c);
 // Validate_map
 void    validate_map(t_game *game);
 void    validate_player(t_game *game);
-void    validate_border(t_game *game);
 void    validate_char(t_game *game);
+void    validate_border(t_game *game);
 int     validate_up(t_game *game);
 int     validate_down(t_game *game);
 int     validate_left(t_game *game);
 int     validate_right(t_game *game);
+void    validate_middle(t_game *game);
+int     is_valid_up_down(char *line_updown, int pos);
 
 
 

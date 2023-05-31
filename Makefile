@@ -18,7 +18,7 @@ INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
-						validate_up_down	validate_left_right
+						validate_up_down	validate_left_right	validate_middle
 GAME				:=	render_game
 
 SRC		:=	$(MAIN)	\
