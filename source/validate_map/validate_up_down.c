@@ -2,7 +2,7 @@
 
 int    is_valid_up_down(char *line_updown, int pos)
 {
-    if (line_updown[pos] != '1' || line_updown[pos] != ' ')
+    if (line_updown[pos] != '1' && line_updown[pos] != ' ')
         return (0);
     return (1);
 }
