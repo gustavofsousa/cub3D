@@ -5,5 +5,4 @@ void    validate_map(t_game *game)
     validate_char(game);
     validate_player(game);
     validate_border(game);
-
 }

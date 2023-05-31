@@ -4,8 +4,8 @@ WE textures/north_wall.xpm
 EA textures/north_wall.xpm
 F 255,0,0
 C 0,0,255
-11111111
-100E0001
-10001111
-100001
+111111111
+   110E0111 
+   10111
+111101
 111111
