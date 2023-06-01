@@ -39,9 +39,9 @@ int translate_rgb(char *rgb, t_game *game)
     int c;
     char**lonely;
 
+    if (ft_count_words(rgb, ',') != 3)
+        exit_game("Number rgb not valid", game);
     lonely = ft_split(rgb, ',');
-    if (ft_count_line(lonely) != 3)
-        invalid_rgb(lonely, game);
     r = ft_atoi(lonely[0]);
     g = ft_atoi(lonely[1]);
     b = ft_atoi(lonely[2]);
