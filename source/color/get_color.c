@@ -15,6 +15,22 @@ int is_valid_number(char **mtx, int r, int g, int b)
     return (1);
 }
 
+void    invalid_rgb(char **mtx, t_game *game)
+{
+    free_matrix(mtx);
+    exit_game("Number rgb not valid", game);
+}
+
+int ft_count_line(char **mtx)
+{
+    int i;
+
+    i = 0;
+    while (mtx[i])
+        i++;
+    return (i);
+
+}
 int translate_rgb(char *rgb, t_game *game)
 {
     int r;
@@ -24,14 +40,13 @@ int translate_rgb(char *rgb, t_game *game)
     char**lonely;
 
     lonely = ft_split(rgb, ',');
+    if (ft_count_line(lonely) != 3)
+        invalid_rgb(lonely, game);
     r = ft_atoi(lonely[0]);
     g = ft_atoi(lonely[1]);
     b = ft_atoi(lonely[2]);
     if (!is_valid_number(lonely, r, g, b))
-    {
-        free_matrix(lonely);
-        exit_game("Number rgb not valid", game);
-    }
+        invalid_rgb(lonely, game);
     c = r;
     c = (c << 8) | g;
     c = (c << 8) | b;
