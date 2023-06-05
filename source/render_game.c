@@ -1,15 +1,26 @@
 #include "../include/cub3d.h"
 
-typedef struct s_data
-{
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-} t_data;
+int map[15][20] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+
+void pixel_put(t_img *data, int x, int y, int color)
 {
 	char *dst;
 
@@ -17,32 +28,78 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// void	render_map2d(t_game *game)
-// {
-// 	const int map[LENGHT][HEIGHT] = {
-// 		{1, 1, 1, 1, 1},
-// 		{1, 0, 0, 0, 1},
-// 		{1, 1, 0, 0, 1},
-// 		{1, 0, 0, 1, 1},
-// 		{1, 0, 0, 0, 1},
-// 		{1, 1, 1, 1, 1}
-// 	};
+void draw_square(t_img *img, int x0, int y0, int l)
+{
+	int	x;
+	int	y;
 
-// 	pixel_put(game, 0, 0, 0xFFFFFF);
-// }
+	x = x0;
+	while  (x < x0 + l)
+	{
+		y = y0;
+		while (y < y0 + l)
+		{
+			pixel_put(img, x, y, 0x00FF0000);
+			y++;
+		}
+		x++;
+	}
+}
+
+int	calc_square_sz(int nrows, int ncols, int width, int height)
+{
+	int size;
+
+	size = height/nrows;
+	if ((width/ncols) < size)
+	{
+		size = width/ncols;
+	}
+	return (size);
+}
+
+void	render_map2d(t_img *img, int x0, int y0)
+{
+	int x;
+	int y;
+	int square_sz;
+
+	square_sz = 8;
+	x = x0;
+	while (x < ROW)
+ 	{
+		y = y0;
+		while (y < COLUMN)
+		{
+			if (map[x][y] == 1)
+				draw_square(img, x * square_sz, y * square_sz , square_sz);
+			y++;
+		}
+		x++;
+	}
+}	
 
 void render_game()
 {
-	void *mlx;
-	void *mlx_win;
-	t_data img;
+	t_img img;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
+	img.mlx = mlx_init();
+	img.mlx_win = mlx_new_window(img.mlx, LENGHT, HEIGHT, "cub3D");
+	img.img = mlx_new_image(img.mlx, LENGHT, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 															 &img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	render_map2d(&img, 0, 0);
+	int x = 0;
+	int y = 0;
+	while (x < ROW) {
+		y = 0;
+		while (y < COLUMN) {
+			printf("%i, ", map[x][y]);
+			y++;
+		}
+		printf("\n");
+		x++;
+	}
+	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
+	mlx_loop(img.mlx);
 }

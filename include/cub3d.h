@@ -9,7 +9,7 @@
 
 #include "structs.h"
 #include "constants.h"
-#
+
 void render_game(void);
 
 #endif

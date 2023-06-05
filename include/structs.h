@@ -5,6 +5,8 @@ typedef struct s_img
 {
 	void *img;
 	char *addr;
+	void *mlx;
+	void *mlx_win;
 	int bits_per_pixel;
 	int line_length;
 	int endian;
