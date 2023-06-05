@@ -1,111 +1,48 @@
-NAME		:=	cub3D	
-##MAKEFLAGS	:= --silent
+# Library Name #
+NAME	=	cub3D
 
-####	Compilers & flags	####
-CC		:=	cc
-CFLAGS	:=	-Wextra -Wall -Werror -g
+# Mandatory Variables #
+SRCS	=	./source/main.c ./source/render_game.c
 
-####	Directories	####
-SRCDIR	:=	source/
-OBJDIR	:=	obj/
-INCDIR	:=	include/
-LIBDIR	:=	libft/
-LISTDIR 	:=	color texture game interpretate_map validate_map
+# Libft Variables #
+LIBFT		=	./libft/libft.a
+LIBFT_DIR	=	./libft
+INC			=	-I. -I$(LIBFT_DIR)
 
-####	Sources & objects	####
-MAIN				:=	main	setup	common_libft			
-INTERPRETATE_MAP	:=	interpretate_map		auxiliar
-COLOR				:=	get_color	checkers
-TEXTURE				:=	get_texture	cardinal_points
-VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
-						validate_up_down	validate_left_right
-GAME				:=	render_game
+# Compiling Variables #
+CC		=	cc
+CFLAGS»·=	-Wall -Wextra -Werror
+RM		=	rm -f
 
-SRC		:=	$(MAIN)	\
-			$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\
-			$(addprefix validate_map/, $(VALIDATE_MAP))	\
-			$(addprefix color/, $(COLOR))	\
-			$(addprefix texture/, $(TEXTURE))	\
-			$(addprefix game/, $(GAME))
+# Colors #
+GREEN	=	\e[32m
+YELLOW	=	\e[33m
+RESET	=	\e[0m
+_SUCCESS	=	✅ $(GREEN)Successfully compiled$(RESET)
+_INFO		=	ℹ️  $(YELLOW)Info$(RESET)
 
-SRCS	:=	$(addsuffix .c, $(SRC))
-OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
+# Functions #
+$(NAME): $(SRCS)
+	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C miniLibX all &> /dev/null
+	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(INC) -Ofast -LminiLibX -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@printf "$(_SUCCESS) cub3D is ready.\n"
 
-####	Libft		####
-LIBLIB		:=	$(LIBDIR)libft.a
-
-####	defining OS name variable	####
-UNAME := $(shell uname)
-
-############## mlx library  for mac ##############
-ifeq ($(UNAME), Darwin)
-	MLX		:= ./miniLibX/
-	MLX_LIB	:= $(addprefix $(MLX), libmlx.a	)
-	MLX_INC	:= -I ./miniLibX
-	MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
-endif
-############## mlx library  for linux ##############
-ifeq ($(UNAME), Linux)
-	MLX		:= ./mlx_linux
-	MLX_LIB	:= $(addprefix $(MLX), mlx.a)
-	MLX_INC	:= -Imlx_linux -O3
-	MLX_LNK	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-endif
-
-# Colors
-BLACK	=	\033[0;30m
-BLUE	=	\033[0;34m
-CYAN	=	\033[0;36m
-GREEN	=	\033[0;32m
-MAGENTA	=	\033[1;35m
-ORANGE	=	\033[1;38;5;214m
-RED		=	\033[0;31m
-RESET	=	\033[0m
-WHITE	=	\033[0;37m
-YELLOW	=	\033[0;33m
-
-######	Commands	######
-
-all:	obj $(MLX_LIB) $(LIBLIB) $(NAME)
-
-obj:
-	@mkdir -p $(OBJDIR)
-	@mkdir -p $(addprefix $(OBJDIR), $(LISTDIR))
-
-$(OBJDIR)%.o : $(SRCDIR)%.c
-	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
-	@echo "Take a look in the objects you conceived😉 ->$(MAGENTA) $@$(WHITE)"
-
-$(NAME): $(OBJ)
-	@$(CC) $(OBJ) $(MLX_LNK) $(LIBLIB) $(LINK) -o $@
-	@echo "Let's play it! piupiu 🤪"
-
-$(LIBLIB):
-	@make -C $(LIBDIR) all
-	@echo "libf lib created🙃"
-
-$(MLX_LIB):
-	make -C $(MLX)
+all: $(NAME)
 
 clean:
-	@rm -rf $(OBJDIR)
-	@make -C $(LIBDIR) clean
-	@echo "I deleted everything, sir 🪖👮🏻‍♂️"
+	@$(RM) *.o */*.o */*/*.o
+	@printf "$(_INFO) libft removed.\n"
+	@printf "$(_INFO) cub3D removed.\n"
 
 fclean:	clean
-	@rm -rf $(NAME)
-	@make -C $(LIBDIR) fclean
-	@echo "I deleted even the deletion, sir 🪖👮🏻‍♂️"
+	@$(RM) $(NAME)
+	@$(RM) *.a */*.a */*/*/*.a
 
-re: fclean all
+re:		fclean all
 
-val:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./minishell
+mandatory:	$(NAME)
 
-.PHONY: re, fclean, clean, all
+m	:	mandatory
 
-#$(shell echo '$@ <- Nome da regra.')
-#$(shell echo '$< <- Nome da primeira dependência.')
-#$(shell echo '$^ <- Lista de dependências.')
-#$(shell echo '$? <- Lista de dependências mais recentes que a regra.')
-#$(shell echo '$* <- Nome do arquivo sem sufixo.')
+.PHONY:	all clean fclean re mandatory m
