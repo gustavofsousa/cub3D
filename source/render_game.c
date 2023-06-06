@@ -34,7 +34,7 @@ void pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void draw_square(t_img *img, int x0, int y0, int l)
+void draw_square(t_img *img, int x0, int y0, int color, int l)
 {
 	int x;
 	int y;
@@ -45,7 +45,7 @@ void draw_square(t_img *img, int x0, int y0, int l)
 		y = y0;
 		while (y < y0 + l)
 		{
-			pixel_put(img, x, y, 0x00FF0000);
+			pixel_put(img, x, y, color);
 			y++;
 		}
 		x++;
@@ -59,7 +59,7 @@ int calc_square_sz(int nrows, int ncols, int length, int height)
 	size = height / (ncols);
 	if ((length / ncols) < size)
 		size = length / (nrows);
-	return (size - size / 8);
+	return (size);
 }
 
 void render_map2d(t_img *img, int square_sz)
@@ -75,7 +75,9 @@ void render_map2d(t_img *img, int square_sz)
 		while (j < COLUMN)
 		{
 			if (map[i][j] == 1)
-				draw_square(img, i * (square_sz + square_sz / 8), j * (square_sz + square_sz / 8), calc_square_sz(ROW, COLUMN, LENGHT, HEIGHT));
+				draw_square(img, i * square_sz, j * square_sz, 0xFF0000 ,calc_square_sz(ROW, COLUMN, LENGHT, HEIGHT));
+      else
+				draw_square(img, i * square_sz, j * square_sz, 0xFFF000 ,calc_square_sz(ROW, COLUMN, LENGHT, HEIGHT));
 			j++;
 		}
 		i++;
@@ -102,26 +104,23 @@ void draw_player(t_img *img, int x0, int y0, int l)
 
 int	key_hooks(int keycode, t_data *data)
 {
-  // 126 -> up
-  // 124 -> right
-  // 125 -> down
-  // 123 -> left
-
   if (keycode == 53)
 	{
 		mlx_destroy_window(data->img.mlx, data->img.mlx_win);
 		exit(0);
 	}
-  if (keycode >= 123 && keycode <= 126)
-	{
-    if (keycode == 126)
-      data->player.play_y -= 12;
-
-    mlx_clear_window(data->img.mlx, data->img.mlx_win);
-    render_map2d(&data->img, 22);
-	  draw_player(&data->img, data->player.play_x, data->player.play_y , 12);
-	  mlx_put_image_to_window(data->img.mlx, data->img.mlx_win, data->img.img, 0, 0);
-  }
+  if (keycode == 126 || keycode == 13)
+    data->player.play_y -= 12;
+  else if (keycode == 125 || keycode == 1)
+    data->player.play_y += 12;
+  else if (keycode == 123 || keycode == 0)
+    data->player.play_x -= 12;
+  else if (keycode == 124 || keycode == 2)
+    data->player.play_x += 12;
+  // mlx_clear_window(data->img.mlx, data->img.mlx_win);
+  render_map2d(&data->img, 22);
+  draw_player(&data->img, data->player.play_x, data->player.play_y , 12);
+  mlx_put_image_to_window(data->img.mlx, data->img.mlx_win, data->img.img, 0, 0);
   return (0);
 }
 
@@ -136,6 +135,7 @@ void render_game(void)
   data.player.play_x = 30;
   data.player.play_y = 30;
 	init_game(&data.img);
+  mlx_do_key_autorepeaton(data.img.mlx);
 	render_map2d(&data.img, 22);
 	draw_player(&data.img, data.player.play_x, data.player.play_y , 12);
   mlx_key_hook(data.img.mlx_win, key_hooks, &data);
