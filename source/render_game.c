@@ -1,23 +1,30 @@
 #include "../include/cub3d.h"
 
 int map[15][20] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
+void init_game(t_img *img)
+{
+	img->mlx = mlx_init();
+	img->mlx_win = mlx_new_window(img->mlx, LENGHT, HEIGHT, "cub3D");
+	img->img = mlx_new_image(img->mlx, LENGHT, HEIGHT);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+																&img->line_length, &img->endian);
+}
 
 void pixel_put(t_img *data, int x, int y, int color)
 {
@@ -29,11 +36,11 @@ void pixel_put(t_img *data, int x, int y, int color)
 
 void draw_square(t_img *img, int x0, int y0, int l)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	x = x0;
-	while  (x < x0 + l)
+	while (x < x0 + l)
 	{
 		y = y0;
 		while (y < y0 + l)
@@ -45,43 +52,49 @@ void draw_square(t_img *img, int x0, int y0, int l)
 	}
 }
 
-int	calc_square_sz(int nrows, int ncols, int length, int height)
+int calc_square_sz(int nrows, int ncols, int length, int height)
 {
 	int size;
 
-	size = height/(ncols);
-	if ((length/ncols) < size)
-		size = length/(nrows);
-	return (size - size/8);
+	size = height / (ncols);
+	if ((length / ncols) < size)
+		size = length / (nrows);
+	return (size - size / 8);
 }
 
-void	render_map2d(t_img *img, int square_sz)
+void render_map2d(t_img *img, int square_sz)
 {
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
 
-    while (i < ROW) {
+	i = 0;
+	j = 0;
+	while (i < ROW)
+	{
 		j = 0;
-        while (j < COLUMN) {
+		while (j < COLUMN)
+		{
 			if (map[i][j] == 1)
-          	  draw_square(img, i * (square_sz + square_sz/8), j * (square_sz + square_sz/8), calc_square_sz(ROW, COLUMN, LENGHT, HEIGHT));
+				draw_square(img, i * (square_sz + square_sz / 8), j * (square_sz + square_sz / 8), calc_square_sz(ROW, COLUMN, LENGHT, HEIGHT));
 			j++;
-        }
+		}
 		i++;
-    }
+	}
 }
 
-void render_game()
+void render_game(void)
 {
 	t_img img;
+	int r;
+	int c;
+	int char_x;
+	int char_y;
 
-	img.mlx = mlx_init();
-	img.mlx_win = mlx_new_window(img.mlx, LENGHT, HEIGHT, "cub3D");
-	img.img = mlx_new_image(img.mlx, LENGHT, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-															 &img.endian);
-	int r = 15;
-	int c = 20;
+	r = 15;
+	c = 20;
+	char_x = 5;
+	char_y = 5;
+	init_game(&img);
 	render_map2d(&img, 22);
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
 	mlx_loop(img.mlx);
