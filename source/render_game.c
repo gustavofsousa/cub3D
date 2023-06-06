@@ -82,20 +82,63 @@ void render_map2d(t_img *img, int square_sz)
 	}
 }
 
+void draw_player(t_img *img, int x0, int y0, int l)
+{
+	int x;
+	int y;
+
+	x = x0;
+	while (x < x0 + l)
+	{
+		y = y0;
+		while (y < y0 + l)
+		{
+			pixel_put(img, x, y, 0x0FF000);
+			y++;
+		}
+		x++;
+	}
+}
+
+int	key_hooks(int keycode, t_data *data)
+{
+  // 126 -> up
+  // 124 -> right
+  // 125 -> down
+  // 123 -> left
+
+  if (keycode == 53)
+	{
+		mlx_destroy_window(data->img.mlx, data->img.mlx_win);
+		exit(0);
+	}
+  if (keycode >= 123 && keycode <= 126)
+	{
+    if (keycode == 126)
+      data->player.play_y -= 12;
+
+    mlx_clear_window(data->img.mlx, data->img.mlx_win);
+    render_map2d(&data->img, 22);
+	  draw_player(&data->img, data->player.play_x, data->player.play_y , 12);
+	  mlx_put_image_to_window(data->img.mlx, data->img.mlx_win, data->img.img, 0, 0);
+  }
+  return (0);
+}
+
 void render_game(void)
 {
-	t_img img;
 	int r;
 	int c;
-	int char_x;
-	int char_y;
+  t_data    data;
 
 	r = 15;
 	c = 20;
-	char_x = 5;
-	char_y = 5;
-	init_game(&img);
-	render_map2d(&img, 22);
-	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
-	mlx_loop(img.mlx);
+  data.player.play_x = 30;
+  data.player.play_y = 30;
+	init_game(&data.img);
+	render_map2d(&data.img, 22);
+	draw_player(&data.img, data.player.play_x, data.player.play_y , 12);
+  mlx_key_hook(data.img.mlx_win, key_hooks, &data);
+	mlx_put_image_to_window(data.img.mlx, data.img.mlx_win, data.img.img, 0, 0);
+	mlx_loop(data.img.mlx);
 }
