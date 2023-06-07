@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:52:21 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/07 22:01:29 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	interpretate_line(t_game *game, char *line_pre)
 	{
 		update_matrix(&game->map.mtx, line);
 		game->map.height++;
-		//game->map.width = max(atual or strlen(line));
 	}
 	free(line);
 }
