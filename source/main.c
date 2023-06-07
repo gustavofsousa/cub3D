@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
+/*   Updated: 2023/06/07 12:36:17 by gustavosous      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	free_map(t_game *game)
@@ -40,5 +52,4 @@ int	main(int argc, char **argv)
 	}
 	ft_putendl_fd("Usage: ./cub3D <map.cub>", 1);
 	return (1);
-
 }
