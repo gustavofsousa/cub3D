@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:36:17 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/07 21:24:20 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	free_map(t_game *game)
 {
-	free_matrix(game->map.mtx);
+	if (game && game->map.mtx)
+		free_matrix(game->map.mtx);
 }
 
 void	exit_game(char *message, t_game *game)
