@@ -1,48 +1,34 @@
-# Library Name #
-NAME	=	cub3D
+NAME=cub3D
 
-# Mandatory Variables #
-SRCS	=	./source/main.c ./source/render_game.c
+SRCS= source/main.c \
+			source/render_game.c \
 
-# Libft Variables #
-LIBFT		=	./libft/libft.a
-LIBFT_DIR	=	./libft
-INC			=	-I. -I$(LIBFT_DIR)
+LIBFT=libft/libft.a
 
-# Compiling Variables #
-CC		=	cc
-CFLAGS»·=	-Wall -Wextra -Werror
-RM		=	rm -f
+OBJ=$(SRCS:.c=.o)
 
-# Colors #
-GREEN	=	\e[32m
-YELLOW	=	\e[33m
-RESET	=	\e[0m
-_SUCCESS	=	✅ $(GREEN)Successfully compiled$(RESET)
-_INFO		=	ℹ️  $(YELLOW)Info$(RESET)
+%.o: %.c
+	cc  -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-# Functions #
-$(NAME): $(SRCS)
-	@$(MAKE) -C $(LIBFT_DIR)
-	@$(MAKE) -C miniLibX all &> /dev/null
-	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(INC) -Ofast -LminiLibX -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	@printf "$(_SUCCESS) cub3D is ready.\n"
+$(NAME): $(OBJ)
+		make -s -C mlx_Linux
+		make -s -C libft
+		cc $(OBJ) -Lmlx_Linux -lmlx_Linux -L/usr/lib -Imlx_Linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
 
 all: $(NAME)
 
 clean:
-	@$(RM) *.o */*.o */*/*.o
-	@printf "$(_INFO) libft removed.\n"
-	@printf "$(_INFO) cub3D removed.\n"
+	make clean -s -C mlx_Linux
+	make clean -s -C libft
+	rm -f $(OBJ)
 
-fclean:	clean
-	@$(RM) $(NAME)
-	@$(RM) *.a */*.a */*/*/*.a
+fclean: clean
+	make fclean -s -C libft
+	rm -fr $(NAME)
 
-re:		fclean all
+re: fclean all
 
-mandatory:	$(NAME)
+val:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./$(NAME)
 
-m	:	mandatory
-
-.PHONY:	all clean fclean re mandatory m
+.PHONY: all clean fclean re
