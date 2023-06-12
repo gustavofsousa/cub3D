@@ -13,7 +13,7 @@ OBJ=$(SRCS:.c=.o)
 $(NAME): $(OBJ)
 		make -s -C mlx_Linux
 		make -s -C libft
-		cc $(OBJ) -Lmlx_Linux -lmlx_Linux -L/usr/lib -Imlx_Linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
+		cc $(OBJ) -Lmlx_Linux -lmlx_Linux -L/usr/lib -Imlx_Linux -lXext -lX11 -lm -o $(NAME) $(LIBFT)
 
 all: $(NAME)
 

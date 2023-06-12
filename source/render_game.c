@@ -75,7 +75,7 @@ void render_map2d(t_img *img, int square_sz)
 		while (j < COLUMN)
 		{
 			if (map[i][j] == 1)
-				draw_square(img, i * (square_sz + square_sz / 8), j * (square_sz + square_sz / 8), calc_square_sz(ROW, COLUMN, LENGHT, HEIGHT));
+				draw_square(img, j * (square_sz + square_sz / 8), i * (square_sz + square_sz / 8), calc_square_sz(ROW, COLUMN, LENGHT, HEIGHT));
 			j++;
 		}
 		i++;
