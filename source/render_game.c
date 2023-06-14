@@ -113,7 +113,7 @@ void	walk_up(t_data *data)
 		data->player.play_y -= 2;
 }
 
-void	walk_right(t_data *data)
+void	walk_down(t_data *data)
 {
 	int new_pos;
 	
@@ -122,7 +122,7 @@ void	walk_right(t_data *data)
 		data->player.play_y += 2;
 }
 
-void	walk_down(t_data *data)
+void	walk_right(t_data *data)
 {
 	int new_pos;
 	
@@ -142,18 +142,18 @@ void	walk_left(t_data *data)
 
 int	key_hooks(int keycode, t_data *data)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		mlx_destroy_window(data->img.mlx, data->img.mlx_win);
 		exit(0);
 	}
-	if (keycode == 126 || keycode == 13)
+	if (keycode == 65362 || keycode == 119)
 		walk_up(data);
-	else if (keycode == 125 || keycode == 1)
+	else if (keycode == 65363 || keycode == 100)
 		walk_right(data);
-	else if (keycode == 123 || keycode == 0)
+	else if (keycode == 65361 || keycode == 97)
 		walk_left(data);
-	else if (keycode == 124 || keycode == 2)
+	else if (keycode == 65364 || keycode == 115)
 		walk_down(data);
 	// mlx_clear_window(data->img.mlx, data->img.mlx_win);
 	render_map2d(&data->img, 22);

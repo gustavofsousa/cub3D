@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #include "../libft/libft.h"
-#include "../mlx_linux/mlx.h"
+#include "../mlx_Linux/mlx.h"
 
 #include "structs.h"
 #include "constants.h"
