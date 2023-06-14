@@ -67,18 +67,21 @@ void draw_vertical_line(t_img *img, int x, int y0, int yf, int color)
 
 void	render_map3d(t_data *data) {
 
-	data->player.play_x = 17;
-	data->player.play_y = 9;
+	data->player.play_x = 7;
+	data->player.play_y = 10;
+
 	double	dirX = -1;
 	double	dirY = 0;
+
 	double	planeX = 0;
 	double	planeY = 0.66;
+
 	int		w = LENGHT; //INICIALIZAARR CORRETAMENTE
 	int		color = 0x529e35;
 
-	for(int x = 0; x < w; x++)
+	for(int x = 0; x < 50; x++)
 	{
-		printf("%i\n", x);
+		printf("\n%i\n", x);
 		//calculate ray position and direction
 		double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
 		printf("camerax:%f\n", cameraX);
