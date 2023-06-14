@@ -14,8 +14,8 @@ typedef struct s_img
 
 typedef struct s_player
 {
-  int play_x;
-  int play_y;
+  double play_x;
+  double play_y;
 } t_player;
 
 typedef struct s_data
