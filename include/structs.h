@@ -19,12 +19,15 @@ typedef struct s_player
 	double	dirX;
 	double	dirY;
 	double	speed;
+	double	rot_speed;
 } t_player;
 
 typedef struct s_key_state
 {
 	int		w_is_press;
+	int		a_is_press;
 	int		s_is_press;
+	int		d_is_press;
 } t_key_state;
 
 

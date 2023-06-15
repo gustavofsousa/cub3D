@@ -3,6 +3,7 @@
 
 #include <fcntl.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "../libft/libft.h"
 #include "../mlx_Linux/mlx.h"

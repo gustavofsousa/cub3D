@@ -109,48 +109,52 @@ void	draw_player(t_img *img, t_player player, int l)
 	//pixel_put(img, dirX_pxl, dirY_pxl, 0x000FF0);
 }
 
-void	walk_up(t_data *data)
+void	walk_forward(t_data *data)
 {
 	double new_x;
 	double new_y;
 
 	new_x = data->player.play_x + data->player.dirX * data->player.speed;
 	new_y = data->player.play_y + data->player.dirY * data->player.speed;
-	if (map[(int)new_x][(int)data->player.play_y] == 0)
+	if (map[(int)trunc(new_x)][(int)trunc(data->player.play_y)] == 0)
 		data->player.play_x = new_x;
-	if (map[(int)data->player.play_x, (int)new_y])
+	if (map[(int)trunc(data->player.play_x)][(int)trunc(new_y)] == 0)
 		data->player.play_y = new_y;
 }
 
-void	walk_down(t_data *data)
+void	walk_backward(t_data *data)
 {
 	double new_x;
 	double new_y;
 
 	new_x = data->player.play_x - data->player.dirX * data->player.speed;
 	new_y = data->player.play_y - data->player.dirY * data->player.speed;
-	if (map[(int)new_x][(int)data->player.play_y] == 0)
+	if (map[(int)trunc(new_x)][(int)trunc(data->player.play_y)] == 0)
 		data->player.play_x = new_x;
-	if (map[(int)data->player.play_x, (int)new_y])
+	if (map[(int)trunc(data->player.play_x)][(int)trunc(new_y)])
 		data->player.play_y = new_y;
 }
 
+// double oldDirX = dirX;
+//       dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+//       dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+
 void	walk_right(t_data *data)
 {
-	int new_pos;
+	double oldX;
 	
-	new_pos = (data->player.play_x + 2);
-	if (map[new_pos][(int)data->player.play_y] != 1)
-		data->player.play_x += 2;
+	oldX = (data->player.dirX);
+	data->player.dirX = data->player.dirX * cos(-data->player.rot_speed) - data->player.dirY * sin(-data->player.rot_speed);
+	data->player.dirY = oldX * sin(-data->player.rot_speed) + data->player.dirY * cos(-data->player.rot_speed);
 }
 
 void	walk_left(t_data *data)
 {
-	int new_pos;
+	double oldX;
 	
-	new_pos = (data->player.play_x - 2);
-	if (map[new_pos][(int)data->player.play_y] != 1)
-		data->player.play_x -= 2;
+	oldX = (data->player.dirX);
+	data->player.dirX = data->player.dirX * cos(data->player.rot_speed) - data->player.dirY * sin(data->player.rot_speed);
+	data->player.dirY = oldX * sin(data->player.rot_speed) + data->player.dirY * cos(data->player.rot_speed);
 }
 
 int handle_key_press(int keycode, t_data *data)
@@ -159,15 +163,23 @@ int handle_key_press(int keycode, t_data *data)
 		data->key.w_is_press = 1;// Additional code for player movement
 	if (keycode == 65364 || keycode == 115)
 		data->key.s_is_press = 1;
+	if (keycode == 65363 || keycode == 100)
+		data->key.d_is_press = 1;
+	if (keycode == 65361 || keycode == 97)
+		data->key.a_is_press = 1;
     return (0);
 }
 
 int handle_key_release(int keycode, t_data *data)
 {
 	if (keycode == 65362 || keycode == 119) // Replace KEY_S with the key you want to use for walking
-			data->key.w_is_press = 0;
+		data->key.w_is_press = 0;
 	if (keycode == 65364 || keycode == 115) // Replace KEY_S with the key you want to use for walking
-			data->key.s_is_press = 0;
+		data->key.s_is_press = 0;
+	if (keycode == 65363 || keycode == 100)
+		data->key.d_is_press = 0;
+	if (keycode == 65361 || keycode == 97)
+		data->key.a_is_press = 0;
 	return (0);
 }
 
@@ -188,9 +200,13 @@ int	key_hooks(int keycode, t_data *data)
 int movement(t_data *data)
 {
 	if (data->key.w_is_press)
-		walk_up (data);
+		walk_forward (data);
 	if (data->key.s_is_press)
-		walk_down (data);
+		walk_backward (data);
+	if (data->key.d_is_press)
+		walk_right (data);
+	if (data->key.a_is_press)
+		walk_left (data);
 	return (0);
 }
 
@@ -222,8 +238,11 @@ void	render_game(void)
 	data.player.dirX = 1;
 	data.player.dirY = 0;
 	data.player.speed = 0.005;
+	data.player.rot_speed = 0.003;
 	data.key.w_is_press = 0;
+	data.key.a_is_press = 0;
 	data.key.s_is_press = 0;
+	data.key.d_is_press = 0;
 	init_game(&data.img);
 	render_map2d(&data.img, 22);
 	draw_player(&data.img, data.player, 12);
