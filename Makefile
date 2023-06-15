@@ -1,14 +1,15 @@
 NAME=cub3D
 
-SRCS= source/main.c \
-			source/render_game.c \
+SRCS=	source/main.c \
+		source/render_game.c \
+		source/draw_line.c \
 
 LIBFT=libft/libft.a
 
 OBJ=$(SRCS:.c=.o)
 
 %.o: %.c
-	cc  -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	cc  -g -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 $(NAME): $(OBJ)
 		make -s -C mlx_Linux

@@ -187,6 +187,7 @@ void	render_game(void)
 	init_game(&data.img);
 	render_map3d(&data);
 	// draw_vertical_line(&data.img, LENGHT-1, 0, HEIGHT/3, 0xFF0000);
+	// draw_line(&data.img, (int[2]){0,0}, (int[2]){100,100});
 	mlx_key_hook(data.img.mlx_win, key_hooks, &data);
 	mlx_put_image_to_window(data.img.mlx, data.img.mlx_win, data.img.img, 0, 0);
 	mlx_loop(data.img.mlx);
