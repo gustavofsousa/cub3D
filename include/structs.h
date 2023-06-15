@@ -14,14 +14,17 @@ typedef struct s_img
 
 typedef struct s_player
 {
-  int play_x;
-  int play_y;
+	double	play_x;
+	double	play_y;
+	double	dirX;
+	double	dirY;
+	double	speed;
 } t_player;
 
 typedef struct s_data
 {
-  t_img img;
-  t_player player;
+	t_img img;
+	t_player player;
 } t_data;
 
 #endif
