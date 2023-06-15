@@ -91,11 +91,11 @@ void	draw_player(t_img *img, t_player player, int l)
 	int	x_pxl = 22 * player.play_x;
 	int	y_pxl = 22 * player.play_y;
 
-	x = x_pxl;
-	while (x < x_pxl + l) //draw player square
+	x = x_pxl - l/2;
+	while (x < x_pxl + l/2) //draw player square
 	{
-		y = y_pxl;
-		while (y < y_pxl + l)
+		y = y_pxl -l/2;
+		while (y < y_pxl + l/2)
 		{
 			pixel_put(img, x, y, 0x0FF000);
 			y++;
@@ -105,7 +105,8 @@ void	draw_player(t_img *img, t_player player, int l)
 	//draw direction point
 	int	dirX_pxl = (player.play_x + player.dirX) * 22;
 	int dirY_pxl = (player.play_y + player.dirY) * 22;
-	pixel_put(img, dirX_pxl, dirY_pxl, 0x000FF0);
+	draw_line(img, (int[2]){player.play_x * 22, player.play_y * 22}, (int[2]){dirX_pxl, dirY_pxl}, 0x0000FF);
+	//pixel_put(img, dirX_pxl, dirY_pxl, 0x000FF0);
 }
 
 void	walk_up(t_data *data)
@@ -155,21 +156,19 @@ void	walk_left(t_data *data)
 int handle_key_press(int keycode, t_data *data)
 {
     if (keycode == 65362 || keycode == 119) // Replace KEY_W with the key you want to use for walking
-    {
-        printf("key pressed.\n");
-        // Additional code for player movement
-    }
+		data->key.w_is_press = 1;// Additional code for player movement
+	if (keycode == 65364 || keycode == 115)
+		data->key.s_is_press = 1;
     return (0);
 }
 
 int handle_key_release(int keycode, t_data *data)
 {
-    if (keycode == 65362 || keycode == 119) // Replace KEY_W with the key you want to use for walking
-    {
-        printf("key released.\n");
-        // Additional code for player movement
-    }
-    return (0);
+	if (keycode == 65362 || keycode == 119) // Replace KEY_S with the key you want to use for walking
+			data->key.w_is_press = 0;
+	if (keycode == 65364 || keycode == 115) // Replace KEY_S with the key you want to use for walking
+			data->key.s_is_press = 0;
+	return (0);
 }
 
 int	key_hooks(int keycode, t_data *data)
@@ -179,20 +178,35 @@ int	key_hooks(int keycode, t_data *data)
 		mlx_destroy_window(data->img.mlx, data->img.mlx_win);
 		exit(0);
 	}
-	if (keycode == 65362 || keycode == 119)
-		walk_up(data);
-	else if (keycode == 65363 || keycode == 100)
-		walk_right(data);
-	else if (keycode == 65361 || keycode == 97)
-		walk_left(data);
-	else if (keycode == 65364 || keycode == 115)
-		walk_down(data);
-	// mlx_clear_window(data->img.mlx, data->img.mlx_win);
+	// render_map2d(&data->img, 22);
+	// draw_player(&data->img, data->player, 12);
+	// mlx_put_image_to_window(data->img.mlx, data->img.mlx_win, data->img.img, 0,
+	// 		0);
+	return (0);
+}
+
+int movement(t_data *data)
+{
+	if (data->key.w_is_press)
+		walk_up (data);
+	if (data->key.s_is_press)
+		walk_down (data);
+	return (0);
+}
+
+void render(t_data *data)
+{
 	render_map2d(&data->img, 22);
 	draw_player(&data->img, data->player, 12);
 	mlx_put_image_to_window(data->img.mlx, data->img.mlx_win, data->img.img, 0,
 			0);
-	return (0);
+}
+
+int game_loop(t_data *data)
+{
+	movement(data);
+	render(data);
+	return 0;
 }
 
 void	render_game(void)
@@ -207,14 +221,17 @@ void	render_game(void)
 	data.player.play_y = 17;
 	data.player.dirX = 1;
 	data.player.dirY = 0;
-	data.player.speed = 0.5;
+	data.player.speed = 0.005;
+	data.key.w_is_press = 0;
+	data.key.s_is_press = 0;
 	init_game(&data.img);
 	render_map2d(&data.img, 22);
 	draw_player(&data.img, data.player, 12);
 	// draw_line(&data.img, (int[2]){100,100}, (int[2]){200,200}, 0x0000FF); //example of use, draw a line from (100,100) to (200,200), coordinates must be given in pixels
 	mlx_hook(data.img.mlx_win, 2, 1L << 0, handle_key_press, &data);
     mlx_hook(data.img.mlx_win, 3, 1L << 1, handle_key_release, &data);
-	mlx_key_hook(data.img.mlx_win, key_hooks, &data);
+	//mlx_key_hook(data.img.mlx_win, key_hooks, &data);
+	mlx_loop_hook(data.img.mlx, game_loop, &data);
 	mlx_put_image_to_window(data.img.mlx, data.img.mlx_win, data.img.img, 0, 0);
 	mlx_loop(data.img.mlx);
 }

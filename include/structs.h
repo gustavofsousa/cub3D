@@ -21,10 +21,18 @@ typedef struct s_player
 	double	speed;
 } t_player;
 
+typedef struct s_key_state
+{
+	int		w_is_press;
+	int		s_is_press;
+} t_key_state;
+
+
 typedef struct s_data
 {
 	t_img img;
 	t_player player;
+	t_key_state key;
 } t_data;
 
 #endif
