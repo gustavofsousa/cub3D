@@ -1,7 +1,8 @@
 NAME=cub3D
 
-SRCS= source/main.c \
-			source/render_game.c \
+SRCS=	source/main.c \
+		source/render_game.c \
+		source/draw_line.c \
 
 LIBFT=libft/libft.a
 

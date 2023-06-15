@@ -10,6 +10,8 @@
 #include "structs.h"
 #include "constants.h"
 
-void render_game(void);
+void	render_game(void);
+void	draw_line(t_img *img, int i[2], int f[2], int color);
+void	pixel_put(t_img *data, int x, int y, int color);
 
 #endif

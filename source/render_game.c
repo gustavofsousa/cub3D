@@ -195,6 +195,7 @@ void	render_game(void)
 	init_game(&data.img);
 	render_map2d(&data.img, 22);
 	draw_player(&data.img, data.player, 12);
+	// draw_line(&data.img, (int[2]){100,100}, (int[2]){200,200}, 0x0000FF); //example of use, draw a line from (100,100) to (200,200), coordinates must be given in pixels
 	mlx_key_hook(data.img.mlx_win, key_hooks, &data);
 	mlx_put_image_to_window(data.img.mlx, data.img.mlx_win, data.img.img, 0, 0);
 	mlx_loop(data.img.mlx);
