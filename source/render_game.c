@@ -108,34 +108,30 @@ void	draw_player(t_img *img, t_player player, int l)
 	pixel_put(img, dirX_pxl, dirY_pxl, 0x000FF0);
 }
 
-// readKeys();
-//     //move forward if no wall in front of you
-//     if (keyDown(SDLK_UP))
-//     {
-//       if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
-//       if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
-//     }
-//     //move backwards if no wall behind you
-//     if (keyDown(SDLK_DOWN))
-//     {
-//       if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
-//       if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
-//     }
-
 void	walk_up(t_data *data)
 {
-	// int new_pos;
+	double new_x;
+	double new_y;
 
-		data->player.play_x += data->player.dirX * data->player.speed;
-		data->player.play_y += data->player.dirY * data->player.speed;
+	new_x = data->player.play_x + data->player.dirX * data->player.speed;
+	new_y = data->player.play_y + data->player.dirY * data->player.speed;
+	if (map[(int)new_x][(int)data->player.play_y] == 0)
+		data->player.play_x = new_x;
+	if (map[(int)data->player.play_x, (int)new_y])
+		data->player.play_y = new_y;
 }
 
 void	walk_down(t_data *data)
 {
-	// int new_pos;
-	
-		data->player.play_x -= data->player.dirX * data->player.speed;
-		data->player.play_y -= data->player.dirY * data->player.speed;
+	double new_x;
+	double new_y;
+
+	new_x = data->player.play_x - data->player.dirX * data->player.speed;
+	new_y = data->player.play_y - data->player.dirY * data->player.speed;
+	if (map[(int)new_x][(int)data->player.play_y] == 0)
+		data->player.play_x = new_x;
+	if (map[(int)data->player.play_x, (int)new_y])
+		data->player.play_y = new_y;
 }
 
 void	walk_right(t_data *data)
@@ -154,6 +150,26 @@ void	walk_left(t_data *data)
 	new_pos = (data->player.play_x - 2);
 	if (map[new_pos][(int)data->player.play_y] != 1)
 		data->player.play_x -= 2;
+}
+
+int handle_key_press(int keycode, t_data *data)
+{
+    if (keycode == 65362 || keycode == 119) // Replace KEY_W with the key you want to use for walking
+    {
+        printf("key pressed.\n");
+        // Additional code for player movement
+    }
+    return (0);
+}
+
+int handle_key_release(int keycode, t_data *data)
+{
+    if (keycode == 65362 || keycode == 119) // Replace KEY_W with the key you want to use for walking
+    {
+        printf("key released.\n");
+        // Additional code for player movement
+    }
+    return (0);
 }
 
 int	key_hooks(int keycode, t_data *data)
@@ -196,6 +212,8 @@ void	render_game(void)
 	render_map2d(&data.img, 22);
 	draw_player(&data.img, data.player, 12);
 	// draw_line(&data.img, (int[2]){100,100}, (int[2]){200,200}, 0x0000FF); //example of use, draw a line from (100,100) to (200,200), coordinates must be given in pixels
+	mlx_hook(data.img.mlx_win, 2, 1L << 0, handle_key_press, &data);
+    mlx_hook(data.img.mlx_win, 3, 1L << 1, handle_key_release, &data);
 	mlx_key_hook(data.img.mlx_win, key_hooks, &data);
 	mlx_put_image_to_window(data.img.mlx, data.img.mlx_win, data.img.img, 0, 0);
 	mlx_loop(data.img.mlx);
