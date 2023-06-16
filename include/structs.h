@@ -14,14 +14,28 @@ typedef struct s_img
 
 typedef struct s_player
 {
-  double play_x;
-  double play_y;
+	double	play_x;
+	double	play_y;
+	double	dirX;
+	double	dirY;
+	double	speed;
+	double	rot_speed;
 } t_player;
+
+typedef struct s_key_state
+{
+	int		w_is_press;
+	int		a_is_press;
+	int		s_is_press;
+	int		d_is_press;
+} t_key_state;
+
 
 typedef struct s_data
 {
-  t_img img;
-  t_player player;
+	t_img img;
+	t_player player;
+	t_key_state key;
 } t_data;
 
 #endif

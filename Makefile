@@ -9,7 +9,7 @@ LIBFT=libft/libft.a
 OBJ=$(SRCS:.c=.o)
 
 %.o: %.c
-	cc  -g -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	cc  -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 $(NAME): $(OBJ)
 		make -s -C mlx_Linux

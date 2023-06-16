@@ -3,6 +3,7 @@
 
 #include <fcntl.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "../libft/libft.h"
 #include "../mlx_Linux/mlx.h"
@@ -11,7 +12,7 @@
 #include "constants.h"
 
 void	render_game(void);
-void	draw_line(t_img *img, int i[2], int f[2]);
+void	draw_line(t_img *img, int i[2], int f[2], int color);
 void	pixel_put(t_img *data, int x, int y, int color);
 
 #endif

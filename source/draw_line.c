@@ -12,7 +12,7 @@
 
 #include "../include/cub3d.h"
 
-static void	bresenham_x(t_img *img, int i[2], int f[2])
+static void	bresenham_x(t_img *img, int i[2], int f[2], int color)
 {
 	int	a;
 	int	b;
@@ -21,7 +21,7 @@ static void	bresenham_x(t_img *img, int i[2], int f[2])
 	a = 2 * (abs(f[1] - i[1]));
 	b = a - 2 * (abs(f[0] - i[0]));
 	p = a - (f[0] - i[0]);
-	pixel_put(img, i[0], i[1], 0xFFF000);
+	pixel_put(img, i[0], i[1], color);
 	while (i[0] != f[0] || i[1] != f[1])
 	{
 		if (p < 0)
@@ -35,11 +35,11 @@ static void	bresenham_x(t_img *img, int i[2], int f[2])
 			p += b;
 		}
 		i[0]++;
-		pixel_put(img, i[0], i[1], 0xFFF000);
+		pixel_put(img, i[0], i[1], color);
 	}
 }
 
-static void	bresenham_y(t_img *img, int i[2], int f[2])
+static void	bresenham_y(t_img *img, int i[2], int f[2], int color)
 {
 	int	a;
 	int	b;
@@ -48,7 +48,7 @@ static void	bresenham_y(t_img *img, int i[2], int f[2])
 	a = 2 * (abs(f[0] - i[0]));
 	b = a - 2 * (abs(f[1] - i[1]));
 	p = a - (f[1] - i[1]);
-	pixel_put(img, i[0], i[1], 0xFFF000);
+	pixel_put(img, i[0], i[1], color);
 	while (i[0] != f[0] || i[1] != f[1])
 	{
 		if (p < 0)
@@ -62,11 +62,11 @@ static void	bresenham_y(t_img *img, int i[2], int f[2])
 			p += b;
 		}
 		i[1]++;
-		pixel_put(img, i[0], i[1], 0xFFF000);
+		pixel_put(img, i[0], i[1], color);
 	}
 }
 
-void	draw_line(t_img *img, int i[2], int f[2])
+void	draw_line(t_img *img, int i[2], int f[2], int color)
 {
 	int	dist_x;
 	int	dist_y;
@@ -76,15 +76,15 @@ void	draw_line(t_img *img, int i[2], int f[2])
 	if (dist_x >= dist_y)
 	{
 		if (i[0] < f[0])
-			bresenham_x(img, i, f);
+			bresenham_x(img, i, f, color);
 		else
-			bresenham_x(img, f, i);
+			bresenham_x(img, f, i, color);
 	}
 	else
 	{
 		if (i[1] < f[1])
-			bresenham_y(img, i, f);
+			bresenham_y(img, i, f, color);
 		else
-			bresenham_y(img, f, i);
+			bresenham_y(img, f, i, color);
 	}
 }
