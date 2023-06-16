@@ -39,8 +39,8 @@ typedef struct s_data
 	t_player	player;
 	t_key_state	key;
 	int			**map;
-	int			n_rows;
 	int			n_columns;
+	int			n_rows;
 } t_data;
 
 #endif

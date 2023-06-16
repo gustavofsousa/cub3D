@@ -51,8 +51,6 @@ int loop_hook(t_data *data)
 
 void	render_game(t_data *data)
 {
-	// render_map2d(data, 22);
-	// render_map3d(data);
 	render_player(&data->img, data->player, 12);
 	mlx_hook(data->img.mlx_win, 2, 1L << 0, handle_key_press, data);
 	mlx_hook(data->img.mlx_win, 3, 1L << 1, handle_key_release, data);

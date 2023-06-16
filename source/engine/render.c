@@ -23,17 +23,8 @@ void render_map2d(t_data *data, int square_sz)
 	}
 }
 
-void	render_map3d(t_data *data) {
-
-	data->player.play_x = 7;
-	data->player.play_y = 10;
-
-	double	dirX = -1;
-	double	dirY = 0;
-
-	double	cam_plane_dirX = 0;
-	double	cam_plane_dirY = 0.66;
-
+void	render_map3d(t_data *data) 
+{
 	int		w = LENGHT;
 	int		color = 0x529e35;
 
@@ -44,9 +35,9 @@ void	render_map3d(t_data *data) {
 		double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
 		// printf("camerax:%f\n", cameraX);
 
-		double rayDirX = dirX + cam_plane_dirX * cameraX;
+		double rayDirX = data->player.dirX + data->player.cam_plane_dirX * cameraX;
 		// printf("rayDirX:%f ", rayDirX);
-		double rayDirY = dirY + cam_plane_dirY * cameraX;
+		double rayDirY = data->player.dirY + data->player.cam_plane_dirY * cameraX;
 		// printf("rayDirY:%f\n", rayDirY);
 
 		int mapX = (int)data->player.play_x;

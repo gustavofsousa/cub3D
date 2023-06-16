@@ -24,17 +24,17 @@ void	setup_map(t_data *dat)
 
 	x = 0;
 	y = 0;
-	dat->map =  malloc(dat->n_rows * sizeof(int*));
-	while (x < dat->n_rows)
+	dat->map =  malloc(dat->n_columns * sizeof(int*));
+	while (x < dat->n_columns)
 	{
-		dat->map[x] = malloc(dat->n_columns * sizeof(int));
+		dat->map[x] = malloc(dat->n_rows * sizeof(int));
 		x++;
 	}
 	x = 0;
-	while (x < dat->n_rows)
+	while (x < dat->n_columns)
 	{
 		y = 0;
-		while (y < dat->n_columns)
+		while (y < dat->n_rows)
 		{
 			dat->map[x][y] =  map[x][y];
 			y++;
@@ -57,8 +57,8 @@ void	setup_data(t_data *dat)
 	dat->key.a_is_press = 0;
 	dat->key.s_is_press = 0;
 	dat->key.d_is_press = 0;
-	dat->n_columns = 20;
-	dat->n_rows = 15;
+	dat->n_rows = 20;
+	dat->n_columns = 15;
 	setup_map(dat);
 }
 
