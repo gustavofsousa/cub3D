@@ -131,7 +131,7 @@ void	walk_backward(t_data *data)
 	new_y = data->player.play_y - data->player.dirY * data->player.speed;
 	if (map[(int)trunc(new_x)][(int)trunc(data->player.play_y)] == 0)
 		data->player.play_x = new_x;
-	if (map[(int)trunc(data->player.play_x)][(int)trunc(new_y)])
+	if (map[(int)trunc(data->player.play_x)][(int)trunc(new_y)] == 0)
 		data->player.play_y = new_y;
 }
 
@@ -139,7 +139,7 @@ void	walk_backward(t_data *data)
 //       dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
 //       dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
 
-void	walk_right(t_data *data)
+void	walk_left(t_data *data)
 {
 	double oldX;
 	
@@ -148,7 +148,7 @@ void	walk_right(t_data *data)
 	data->player.dirY = oldX * sin(-data->player.rot_speed) + data->player.dirY * cos(-data->player.rot_speed);
 }
 
-void	walk_left(t_data *data)
+void	walk_right(t_data *data)
 {
 	double oldX;
 	
