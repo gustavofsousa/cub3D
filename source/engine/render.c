@@ -37,17 +37,17 @@ void	render_map3d(t_data *data) {
 	int		w = LENGHT;
 	int		color = 0x529e35;
 
-	for(int x = 0; x < 50; x++)
+	for(int x = 0; x < w; x++)
 	{
-		printf("\n%i\n", x);
+		// printf("\n%i\n", x);
 		//calculate ray position and direction
 		double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
-		printf("camerax:%f\n", cameraX);
+		// printf("camerax:%f\n", cameraX);
 
 		double rayDirX = dirX + cam_plane_dirX * cameraX;
-		printf("rayDirX:%f ", rayDirX);
+		// printf("rayDirX:%f ", rayDirX);
 		double rayDirY = dirY + cam_plane_dirY * cameraX;
-		printf("rayDirY:%f\n", rayDirY);
+		// printf("rayDirY:%f\n", rayDirY);
 
 		int mapX = (int)data->player.play_x;
 		int mapY = (int)data->player.play_y;
@@ -109,32 +109,32 @@ void	render_map3d(t_data *data) {
 			if (data->map[mapX][mapY] > 0)
 				hit = 1;
 		}
-		//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
-		// if (side == 0)
-		// 	perpWallDist = (sideDistX + deltaDistX);
-    	// else
-		// 	perpWallDist = (sideDistY + deltaDistY);
+		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+		if (side == 0)
+			perpWallDist = (sideDistX + deltaDistX);
+    	else
+			perpWallDist = (sideDistY + deltaDistY);
 		
 		
 		// printf("wall hit:%i,%i perpWallDist:%f", mapX, mapY, perpWallDist);
-		// //Calculate height of line to draw on screen
-		// int h = HEIGHT; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
-		// int lineHeight = (int)(h / perpWallDist);
+		//Calculate height of line to draw on screen
+		int h = HEIGHT; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
+		int lineHeight = (int)(h / perpWallDist);
 
-		// //calculate lowest and highest pixel to fill in current stripe
-		// int drawStart = -lineHeight / 2 + h / 2;
-		// if(drawStart < 0) //guarantee not to draw outside the screen/image
-		// 	drawStart = 0;
+		//calculate lowest and highest pixel to fill in current stripe
+		int drawStart = -lineHeight / 2 + h / 2;
+		if(drawStart < 0) //guarantee not to draw outside the screen/image
+			drawStart = 0;
 		
-		// int drawEnd = lineHeight / 2 + h / 2;
-		// if(drawEnd >= h) //guarantee not to draw outside the screen/image
-		// 	drawEnd = h - 1;
+		int drawEnd = lineHeight / 2 + h / 2;
+		if(drawEnd >= h) //guarantee not to draw outside the screen/image
+			drawEnd = h - 1;
 
-		// // printf("x:%i, drawStart:%i, drawEnd: %i\n", x, drawStart, drawEnd);
-		// if (side == 0)
-		// 	draw_vertical_line(&data->img, x, drawStart, drawEnd, color);
-		// else	
-		// 	draw_vertical_line(&data->img, x, drawStart, drawEnd, 0x32aa6e);
+		// printf("x:%i, drawStart:%i, drawEnd: %i\n", x, drawStart, drawEnd);
+		if (side == 0)
+			draw_vertical_line(&data->img, x, drawStart, drawEnd, color);
+		else	
+			draw_vertical_line(&data->img, x, drawStart, drawEnd, 0x32aa6e);
 	}
 }
 
