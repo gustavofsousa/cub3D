@@ -2,11 +2,16 @@ NAME=cub3D
 
 SRCS=	source/main.c \
 		source/render_game.c \
-		source/draw_line.c \
+		source/engine/setup.c \
+		source/engine/render.c \
+		source/engine/draw.c \
+		source/engine/hooks.c
 
 LIBFT=libft/libft.a
 
 OBJ=$(SRCS:.c=.o)
+
+CFLAGS=-Wall -Wextra -Werror
 
 %.o: %.c
 	cc  -I/usr/include -Imlx_linux -O3 -c $< -o $@
@@ -14,7 +19,7 @@ OBJ=$(SRCS:.c=.o)
 $(NAME): $(OBJ)
 		make -s -C mlx_Linux
 		make -s -C libft
-		cc $(OBJ) -Lmlx_Linux -lmlx_Linux -L/usr/lib -Imlx_Linux -lXext -lX11 -lm -o $(NAME) $(LIBFT)
+		cc $(OBJ) $(CFLAGS) -Lmlx_Linux -lmlx_Linux -L/usr/lib -Imlx_Linux -lXext -lX11 -lm -o $(NAME) $(LIBFT)
 
 all: $(NAME)
 

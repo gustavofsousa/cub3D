@@ -2,9 +2,11 @@
 
 int main(int argc, char **argv)
 {
+	t_data data;
+	
 	(void)argv;
-
-	if (argc == 1)
-		render_game();
+	setup_data(&data);
+	setup_game(&data.img);
+	render_game(&data);
 	return (1);
 }

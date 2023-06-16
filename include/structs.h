@@ -35,9 +35,12 @@ typedef struct s_key_state
 
 typedef struct s_data
 {
-	t_img img;
-	t_player player;
-	t_key_state key;
+	t_img		img;
+	t_player	player;
+	t_key_state	key;
+	int			**map;
+	int			n_rows;
+	int			n_columns;
 } t_data;
 
 #endif

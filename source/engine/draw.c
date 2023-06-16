@@ -1,16 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fcaetano <fernandacunha@id.uff.br>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 17:01:55 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/03/19 16:57:36 by fcaetano         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../../include/cub3d.h"
 
-#include "../include/cub3d.h"
+void	pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 static void	bresenham_x(t_img *img, int i[2], int f[2], int color)
 {
@@ -86,5 +82,32 @@ void	draw_line(t_img *img, int i[2], int f[2], int color)
 			bresenham_y(img, i, f, color);
 		else
 			bresenham_y(img, f, i, color);
+	}
+}
+
+void draw_vertical_line(t_img *img, int x, int y0, int yf, int color)
+{
+	while (y0 <= yf)
+	{
+		pixel_put(img, x, y0, color);
+		y0++;
+	}
+}
+
+void	draw_square(t_img *img, int x0, int y0, int color, int l)
+{
+	int	x;
+	int	y;
+
+	x = x0;
+	while (x < x0 + l)
+	{
+		y = y0;
+		while (y < y0 + l)
+		{
+			pixel_put(img, x, y, color);
+			y++;
+		}
+		x++;
 	}
 }
