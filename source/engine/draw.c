@@ -94,6 +94,28 @@ void draw_vertical_line(t_img *img, int x, int y0, int yf, int color)
 	}
 }
 
+void	draw_background(t_data dat, int ceiling_color, int floor_color)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	x = 0;
+	while (x < LENGHT)
+	{
+		y = 0;
+		color = ceiling_color;
+		while (y < HEIGHT)
+		{
+			if (y == HEIGHT/2)
+				color = floor_color;
+			pixel_put(&dat.img,x, y, color);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	draw_square(t_img *img, int x0, int y0, int color, int l)
 {
 	int	x;

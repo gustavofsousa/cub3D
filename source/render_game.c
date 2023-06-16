@@ -41,8 +41,8 @@ int loop_hook(t_data *data)
 		walk_right (data);
 	if (data->key.a_is_press)
 		walk_left (data);
-	render_map2d(data, 22);
-	// render_map3d(data);
+	// render_map2d(data, 22);
+	render_map3d(data);
 	render_player(&data->img, data->player, 12);
 	mlx_put_image_to_window(data->img.mlx, data->img.mlx_win, data->img.img, 0,
 			0);

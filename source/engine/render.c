@@ -26,8 +26,11 @@ void render_map2d(t_data *data, int square_sz)
 void	render_map3d(t_data *data) 
 {
 	int		w = LENGHT;
-	int		color = 0x529e35;
-
+	int		color = 0x777777;
+	int		color_floor = 0xCCCCCC;
+	
+	draw_background(*data, color, color_floor);
+	color = 0x529e35;
 	for(int x = 0; x < w; x++)
 	{
 		// printf("\n%i\n", x);
