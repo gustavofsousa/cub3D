@@ -18,6 +18,8 @@ typedef struct s_player
 	double	play_y;
 	double	dirX;
 	double	dirY;
+	double	cam_plane_dirX;
+	double	cam_plane_dirY;
 	double	speed;
 	double	rot_speed;
 } t_player;
