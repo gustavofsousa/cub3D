@@ -31,17 +31,16 @@ void	render_map3d(t_data *data)
 	
 	draw_background(*data, color, color_floor);
 	color = 0x529e35;
+	printf("\nplayer: %f,%f\n", data->player.play_x, data->player.play_y);
 	for(int x = 0; x < w; x++)
 	{
 		// printf("\n%i\n", x);
 		//calculate ray position and direction
-		double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
+		double cameraX = 2.0 * x / (double)w - 1.0; //x-coordinate in camera space
 		// printf("camerax:%f\n", cameraX);
 
 		double rayDirX = data->player.dirX + data->player.cam_plane_dirX * cameraX;
-		// printf("rayDirX:%f ", rayDirX);
 		double rayDirY = data->player.dirY + data->player.cam_plane_dirY * cameraX;
-		// printf("rayDirY:%f\n", rayDirY);
 
 		int mapX = trunc(data->player.play_x); //current square of the map, the ray is in
 		int mapY = trunc(data->player.play_y); //current square of the map, the ray is in
@@ -49,8 +48,8 @@ void	render_map3d(t_data *data)
 		double sideDistX;
 		double sideDistY;
 
-		double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1 / rayDirX); //C has infinity, so theres is no need to check rayDir and assign 1e30
-		double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1 / rayDirY); //C has infinity, so theres is no need to check rayDir and assign 1e30
+		double deltaDistX = fabs(1.0 / rayDirX); //C has infinity, so theres is no need to check rayDir and assign 1e30
+		double deltaDistY = fabs(1.0 / rayDirY); //C has infinity, so theres is no need to check rayDir and assign 1e30
 		
 		double perpWallDist;
 
@@ -63,26 +62,23 @@ void	render_map3d(t_data *data)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (data->player.play_x - mapX) * deltaDistX;
+			sideDistX = (data->player.play_x - (double)mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - data->player.play_x) * deltaDistX;
+			sideDistX = ((double)mapX + 1.0 - data->player.play_x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (data->player.play_y - mapY) * deltaDistY;
+			sideDistY = (data->player.play_y - (double)mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - data->player.play_y) * deltaDistY;
+			sideDistY = ((double)mapY + 1.0 - data->player.play_y) * deltaDistY;
 		}
-
-		// perform DDA
-		// printf("stepX:%i stepY:%i\n", stepX, stepY);
 		while (hit == 0)
 		{
 		//jump to next data->map square, either in x-direction, or in y-direction
@@ -105,9 +101,9 @@ void	render_map3d(t_data *data)
 		}
 		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 		if (side == 0)
-			perpWallDist = (sideDistX + deltaDistX);
+			perpWallDist = (sideDistX - deltaDistX);
     	else
-			perpWallDist = (sideDistY + deltaDistY);
+			perpWallDist = (sideDistY - deltaDistY);
 		
 		
 		// printf("wall hit:%i,%i perpWallDist:%f", mapX, mapY, perpWallDist);
