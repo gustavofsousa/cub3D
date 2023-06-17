@@ -25,7 +25,7 @@ void render_map2d(t_data *data, int square_sz)
 
 void	render_map3d(t_data *data) 
 {
-	int		w = LENGHT;
+	double	w = LENGHT;
 	int		color = 0x777777;
 	int		color_floor = 0xCCCCCC;
 	
@@ -43,14 +43,14 @@ void	render_map3d(t_data *data)
 		double rayDirY = data->player.dirY + data->player.cam_plane_dirY * cameraX;
 		// printf("rayDirY:%f\n", rayDirY);
 
-		int mapX = (int)data->player.play_x;
-		int mapY = (int)data->player.play_y;
+		int mapX = trunc(data->player.play_x); //current square of the map, the ray is in
+		int mapY = trunc(data->player.play_y); //current square of the map, the ray is in
 
 		double sideDistX;
 		double sideDistY;
 
-		double deltaDistX = (rayDirX == 0) ? 1e30 : abs(1 / rayDirX); //C has infinity, so theres is no need to check rayDir and assign 1e30
-		double deltaDistY = (rayDirY == 0) ? 1e30 : abs(1 / rayDirY); //C has infinity, so theres is no need to check rayDir and assign 1e30
+		double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1 / rayDirX); //C has infinity, so theres is no need to check rayDir and assign 1e30
+		double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1 / rayDirY); //C has infinity, so theres is no need to check rayDir and assign 1e30
 		
 		double perpWallDist;
 

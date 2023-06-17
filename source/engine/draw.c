@@ -14,8 +14,8 @@ static void	bresenham_x(t_img *img, int i[2], int f[2], int color)
 	int	b;
 	int	p;
 
-	a = 2 * (abs(f[1] - i[1]));
-	b = a - 2 * (abs(f[0] - i[0]));
+	a = 2 * (ft_abs(f[1] - i[1]));
+	b = a - 2 * (ft_abs(f[0] - i[0]));
 	p = a - (f[0] - i[0]);
 	pixel_put(img, i[0], i[1], color);
 	while (i[0] != f[0] || i[1] != f[1])
@@ -41,8 +41,8 @@ static void	bresenham_y(t_img *img, int i[2], int f[2], int color)
 	int	b;
 	int	p;
 
-	a = 2 * (abs(f[0] - i[0]));
-	b = a - 2 * (abs(f[1] - i[1]));
+	a = 2 * (ft_abs(f[0] - i[0]));
+	b = a - 2 * (ft_abs(f[1] - i[1]));
 	p = a - (f[1] - i[1]);
 	pixel_put(img, i[0], i[1], color);
 	while (i[0] != f[0] || i[1] != f[1])
@@ -67,8 +67,8 @@ void	draw_line(t_img *img, int i[2], int f[2], int color)
 	int	dist_x;
 	int	dist_y;
 
-	dist_x = abs(f[0] - i[0]); //CONFIRM THAT ABS CAN BE USED
-	dist_y = abs(f[1] - i[1]);
+	dist_x = ft_abs(f[0] - i[0]);
+	dist_y = ft_abs(f[1] - i[1]);
 	if (dist_x >= dist_y)
 	{
 		if (i[0] < f[0])
