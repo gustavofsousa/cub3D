@@ -31,17 +31,19 @@ int handle_key_release(int keycode, t_data *data)
 int loop_hook(t_data *data)
 {
 	if (data->key.w_is_press || data->key.s_is_press || data->key.d_is_press || data->key.a_is_press)
+	{
 		render_map3d(data);
-	if (data->key.w_is_press)
-		walk_forward (data);
-	if (data->key.s_is_press)
-		walk_backward (data);
-	if (data->key.d_is_press)
-		walk_right (data);
-	if (data->key.a_is_press)
-		walk_left (data);
-	// render_map2d(data, 22);
-	render_player(&data->img, data->player, 12);
+		if (data->key.w_is_press)
+			walk_forward (data);
+		if (data->key.s_is_press)
+			walk_backward (data);
+		if (data->key.d_is_press)
+			walk_right (data);
+		if (data->key.a_is_press)
+			walk_left (data);
+		// render_map2d(data, 22);
+		render_player(&data->img, data->player, 12);
+	}
 	mlx_put_image_to_window(data->img.mlx, data->img.mlx_win, data->img.img, 0,
 			0);
 	return (0);

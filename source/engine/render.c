@@ -23,62 +23,68 @@ void render_map2d(t_data *data, int square_sz)
 	}
 }
 
-void	render_map3d(t_data *data) 
+void	render_walls(t_data* data, int color_A, int color_B) // create ray structure
 {
-	double	w = LENGHT;
-	int		color = 0x777777;
-	int		color_floor = 0xCCCCCC;
-	
-	draw_background(*data, color, color_floor);
-	color = 0x529e35;
-	printf("\nplayer: %f,%f\n", data->player.play_x, data->player.play_y);
+	double w;
+	w = LENGHT;
 	for(int x = 0; x < w; x++)
 	{
 		// printf("\n%i\n", x);
 		//calculate ray position and direction
-		double cameraX = 2.0 * x / (double)w - 1.0; //x-coordinate in camera space
+		double cameraX; //x-coordinate in camera space
+		cameraX = 2.0 * x / (double)w - 1.0; //x-coordinate in camera space
 		// printf("camerax:%f\n", cameraX);
+		double rayDirX;
+		double rayDirY;
 
-		double rayDirX = data->player.dirX + data->player.cam_plane_dirX * cameraX;
-		double rayDirY = data->player.dirY + data->player.cam_plane_dirY * cameraX;
+		rayDirX = data->player.dirX + data->player.cam_plane_dirX * cameraX;
+		rayDirY = data->player.dirY + data->player.cam_plane_dirY * cameraX;
 
-		int mapX = trunc(data->player.play_x); //current square of the map, the ray is in
-		int mapY = trunc(data->player.play_y); //current square of the map, the ray is in
+		int mapX; //current square of the map, the ray is in
+		int mapY; //current square of the map, the ray is in
+		mapX = trunc(data->player.play_x); //current square of the map, the ray is in
+		mapY = trunc(data->player.play_y); //current square of the map, the ray is in
 
 		double sideDistX;
 		double sideDistY;
 
-		double deltaDistX = fabs(1.0 / rayDirX); //C has infinity, so theres is no need to check rayDir and assign 1e30
-		double deltaDistY = fabs(1.0 / rayDirY); //C has infinity, so theres is no need to check rayDir and assign 1e30
+		double deltaDistX; //C has infinity, so theres is no need to check rayDir and assign 1e30
+		double deltaDistY; //C has infinity, so theres is no need to check rayDir and assign 1e30
+		deltaDistX = fabs(1.0 / rayDirX); //C has infinity, so theres is no need to check rayDir and assign 1e30
+		deltaDistY = fabs(1.0 / rayDirY); //C has infinity, so theres is no need to check rayDir and assign 1e30
 		
 		double perpWallDist;
 
 		int stepX;
 		int stepY;
 
-		int hit = 0; //was there a wall hit?
+		int hit; //was there a wall hit?
+		hit = 0; //was there a wall hit?
 		int side;
 
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (data->player.play_x - (double)mapX) * deltaDistX;
+			sideDistX = (data->player.play_x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = ((double)mapX + 1.0 - data->player.play_x) * deltaDistX;
+			sideDistX = (mapX + 1.0 - data->player.play_x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (data->player.play_y - (double)mapY) * deltaDistY;
+			sideDistY = (data->player.play_y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = ((double)mapY + 1.0 - data->player.play_y) * deltaDistY;
+			sideDistY = (mapY + 1.0 - data->player.play_y) * deltaDistY;
 		}
+
+// SPLIT FT
+
 		while (hit == 0)
 		{
 		//jump to next data->map square, either in x-direction, or in y-direction
@@ -108,24 +114,40 @@ void	render_map3d(t_data *data)
 		
 		// printf("wall hit:%i,%i perpWallDist:%f", mapX, mapY, perpWallDist);
 		//Calculate height of line to draw on screen
-		int h = HEIGHT; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
-		int lineHeight = (int)(h / perpWallDist);
+		int h; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
+		h = HEIGHT; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
+		int lineHeight;
+		lineHeight = (int)(h / perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + h / 2;
+		int drawStart;
+		drawStart = -lineHeight / 2 + h / 2;
 		if(drawStart < 0) //guarantee not to draw outside the screen/image
 			drawStart = 0;
 		
-		int drawEnd = lineHeight / 2 + h / 2;
+		int drawEnd;
+		drawEnd = lineHeight / 2 + h / 2;
 		if(drawEnd >= h) //guarantee not to draw outside the screen/image
 			drawEnd = h - 1;
 
 		// printf("x:%i, drawStart:%i, drawEnd: %i\n", x, drawStart, drawEnd);
 		if (side == 0)
-			draw_vertical_line(&data->img, x, drawStart, drawEnd, color);
+			draw_vertical_line(&data->img, x, drawStart, drawEnd, color_A);
 		else	
-			draw_vertical_line(&data->img, x, drawStart, drawEnd, 0x32aa6e);
+			draw_vertical_line(&data->img, x, drawStart, drawEnd, color_B);
 	}
+}
+
+void	render_map3d(t_data *data) 
+{
+	double	w = LENGHT;
+	int		color_A = 0x777777;
+	int		color_B = 0xCCCCCC;
+	
+	draw_background(*data, color_A, color_B);
+	color_A = 0x529e35;
+	color_B = 0x32aa6e;
+	render_walls(data, color_A, color_B);
 }
 
 void	render_player(t_img *img, t_player player, int l)
