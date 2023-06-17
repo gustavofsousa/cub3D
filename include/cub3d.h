@@ -26,5 +26,6 @@ void walk_backward(t_data *data);
 void walk_left(t_data *data);
 void walk_right(t_data *data);
 void setup_map(t_data *dat);
+int  close_window(t_data *data);
 
 #endif
