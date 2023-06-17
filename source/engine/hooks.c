@@ -49,3 +49,10 @@ void walk_right(t_data *data)
   data->player.cam_plane_dirX = data->player.cam_plane_dirX * cos(data->player.rot_speed) - data->player.cam_plane_dirY * sin(data->player.rot_speed);
   data->player.cam_plane_dirY = oldX * sin(data->player.rot_speed) + data->player.cam_plane_dirY * cos(data->player.rot_speed);
 }
+
+int close_window(t_data *data)
+{
+	if (data->img.mlx_win)
+		mlx_destroy_window(data->img.mlx, data->img.mlx_win);
+	exit(0);
+}
