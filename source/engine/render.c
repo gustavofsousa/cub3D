@@ -27,7 +27,7 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 {
 	double w;
 	w = LENGHT;
-	for(int x = 0; x < w; x++)
+	for(int x = 0; x < w; x++) // USE WHILE INSTEAD
 	{
 		// printf("\n%i\n", x);
 		//calculate ray position and direction
