@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 22:01:29 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/19 15:00:09 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,19 @@ void	interpretate_map(t_game *game, char *file_path)
 	{
 		if (!is_empty_line(line))
 			interpretate_line(game, line);
-		// When I already have a map, but appear some empty line inside or after it;
-		//-- Maybe check this in validate_map
 		else if (game->map.mtx)
-			exit_game("Incorect empty line or false information", game);
+		{
+			free(line);
+			close(fd);
+			exit_game("Empty line or false information", game);
+		}
 		free(line);
 		line = get_nl(fd);
 	}
 	if (!has_all_information(game))
+	{
+		close (fd);
 		exit_game("Missing information", game);
+	}
 	close(fd);
 }
