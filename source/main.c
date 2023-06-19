@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 21:24:20 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/19 15:01:54 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 		interpretate_map(&game, argv[1]);
 		print_mtx(game.map.mtx);
 		validate_map(&game);
+		transform_map_int(&game);
 		//render_game(&game);
 		ft_putendl_fd("Guten morgen", 1);
 		exit_game(NULL, &game);

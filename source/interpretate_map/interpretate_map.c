@@ -6,11 +6,20 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/19 15:00:09 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/19 15:15:48 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	get_max_width(t_game *game, char *line)
+{
+	int	len_line;
+
+	len_line = ft_strlen(line);
+	if (len_line > game->map.width)
+		game->map.width = len_line;
+}
 
 /*
 ** Cut the new line at the end of the line
@@ -32,6 +41,7 @@ void	interpretate_line(t_game *game, char *line_pre)
 	{
 		update_matrix(&game->map.mtx, line);
 		game->map.height++;
+		get_max_width(game, line);
 	}
 	free(line);
 }
