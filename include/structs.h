@@ -39,13 +39,15 @@ typedef struct s_key_state
 
 typedef struct s_data
 {
-	t_img		img;
-	t_player	player;
-	t_key_state	key;
-	int			**map;
-	int			n_columns;
-	int			n_rows;
-	int			texture[8][TEXTURE_HEIGHT*TEXTURE_WIDTH];
+	t_img			img;
+	t_player		player;
+	t_key_state		key;
+	int				**map;
+	int				n_columns;
+	int				n_rows;
+	unsigned int	texture_width;
+	unsigned int	texture_height;
+	int				texture[8][TEXTURE_HEIGHT*TEXTURE_WIDTH];
 } t_data;
 
 #endif

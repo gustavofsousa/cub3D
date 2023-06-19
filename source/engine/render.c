@@ -27,22 +27,24 @@ void render_map2d(t_data *data, int square_sz)
 
 void	load_textures(t_data *data)
 {
-	for (int x = 0; x < TEXTURE_WIDTH; x++)
+	data->texture_height = 64;
+	data->texture_width = 64;
+	for (int x = 0; x < data->texture_width; x++)
 	{
-		for (int y = 0 ; y < TEXTURE_HEIGHT; y ++)
+		for (int y = 0 ; y < data->texture_height; y ++)
 		{
-			int xorcolor = (x * 256 / TEXTURE_WIDTH) ^ (y * 256 / TEXTURE_HEIGHT);
-			//int xcolor = x * 256 / TEXTURE_WIDTH;
-			int ycolor = y * 256 / TEXTURE_HEIGHT;
-			int xycolor = y * 128 / TEXTURE_HEIGHT + x * 128 / TEXTURE_WIDTH;
-			data->texture[0][TEXTURE_WIDTH * y + x] = 65536 * 254 * (x != y && x != TEXTURE_WIDTH - y); //flat red texture with black cross
-			data->texture[1][TEXTURE_WIDTH * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-			data->texture[2][TEXTURE_WIDTH * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-			data->texture[3][TEXTURE_WIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-			data->texture[4][TEXTURE_WIDTH * y + x] = 256 * xorcolor; //xor green
-			data->texture[5][TEXTURE_WIDTH * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-			data->texture[6][TEXTURE_WIDTH * y + x] = 65536 * ycolor; //red gradient
-			data->texture[7][TEXTURE_WIDTH * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+			int xorcolor = (x * 256 / data->texture_width) ^ (y * 256 / data->texture_height);
+			//int xcolor = x * 256 / data->texture_width;
+			int ycolor = y * 256 / data->texture_height;
+			int xycolor = y * 128 / data->texture_height + x * 128 / data->texture_width;
+			data->texture[0][data->texture_width * y + x] = 65536 * 254 * (x != y && x != data->texture_width - y); //flat red texture with black cross
+			data->texture[1][data->texture_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+			data->texture[2][data->texture_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+			data->texture[3][data->texture_width * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+			data->texture[4][data->texture_width * y + x] = 256 * xorcolor; //xor green
+			data->texture[5][data->texture_width * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+			data->texture[6][data->texture_width * y + x] = 65536 * ycolor; //red gradient
+			data->texture[7][data->texture_width * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
 		}
 	}
 }
@@ -170,14 +172,14 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 
 		//x coordinate on the texture
 		int texture_hit_X;
-		texture_hit_X = tile_hit_X * (double)TEXTURE_WIDTH;
+		texture_hit_X = tile_hit_X * (double)data->texture_width;
 		if(side == 0 && rayDirX > 0)
-			texture_hit_X = TEXTURE_WIDTH - texture_hit_X - 1;
+			texture_hit_X = data->texture_width - texture_hit_X - 1;
 		if(side == 1 && rayDirY < 0)
-			texture_hit_X = TEXTURE_WIDTH - texture_hit_X - 1;
+			texture_hit_X = data->texture_width - texture_hit_X - 1;
 
  		double step;
- 		step = 1.0 * TEXTURE_HEIGHT / lineHeight;
+ 		step = 1.0 * data->texture_height / lineHeight;
 		// Starting texture coordinate
 		double texPos;
 		texPos = (drawStart - h / 2 + lineHeight / 2) * step;
@@ -185,9 +187,9 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 		{
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			int texY;
-			texY = (int)texPos & (TEXTURE_HEIGHT - 1);
+			texY = (int)texPos & (data->texture_height - 1);
 			texPos += step;
-			unsigned long color = data->texture[texture_i][TEXTURE_HEIGHT * texY + texture_hit_X];
+			unsigned long color = data->texture[texture_i][data->texture_height * texY + texture_hit_X];
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (side == 1)
 				color = (color >> 1) & 8355711;
