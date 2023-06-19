@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:38:34 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/19 15:24:04 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_variables(t_game *game)
 	game->map.height = 0;
 	game->map.width = 0;
 	game->map.mtx = NULL;
+	game->map.mtx_int = NULL;
 // texture
 	game->texture.north.ptr = NULL;
 	game->texture.south.ptr = NULL;
