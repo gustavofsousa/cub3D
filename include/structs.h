@@ -1,5 +1,9 @@
 #ifndef STRUCT_H
-#define STRUCT_H
+# define STRUCT_H
+
+
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
 
 typedef struct s_img
 {
@@ -41,6 +45,7 @@ typedef struct s_data
 	int			**map;
 	int			n_columns;
 	int			n_rows;
+	int			texture[8][TEXTURE_HEIGHT*TEXTURE_WIDTH];
 } t_data;
 
 #endif

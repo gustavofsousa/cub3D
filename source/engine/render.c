@@ -1,5 +1,7 @@
 #include "../../include/cub3d.h"
 
+#include <stdint.h> // REMOVE AND TEST UNSIGNED LONG
+
 void render_map2d(t_data *data, int square_sz)
 {
 	int	i;
@@ -23,10 +25,33 @@ void render_map2d(t_data *data, int square_sz)
 	}
 }
 
+void	load_textures(t_data *data)
+{
+	for (int x = 0; x < TEXTURE_WIDTH; x++)
+	{
+		for (int y = 0 ; y < TEXTURE_HEIGHT; y ++)
+		{
+			int xorcolor = (x * 256 / TEXTURE_WIDTH) ^ (y * 256 / TEXTURE_HEIGHT);
+			//int xcolor = x * 256 / TEXTURE_WIDTH;
+			int ycolor = y * 256 / TEXTURE_HEIGHT;
+			int xycolor = y * 128 / TEXTURE_HEIGHT + x * 128 / TEXTURE_WIDTH;
+			data->texture[0][TEXTURE_WIDTH * y + x] = 65536 * 254 * (x != y && x != TEXTURE_WIDTH - y); //flat red texture with black cross
+			data->texture[1][TEXTURE_WIDTH * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+			data->texture[2][TEXTURE_WIDTH * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+			data->texture[3][TEXTURE_WIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+			data->texture[4][TEXTURE_WIDTH * y + x] = 256 * xorcolor; //xor green
+			data->texture[5][TEXTURE_WIDTH * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+			data->texture[6][TEXTURE_WIDTH * y + x] = 65536 * ycolor; //red gradient
+			data->texture[7][TEXTURE_WIDTH * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+		}
+	}
+}
+
 void	render_walls(t_data* data, int color_A, int color_B) // create ray structure
 {
 	double w;
 	w = LENGHT;
+	
 	for(int x = 0; x < w; x++) // USE WHILE INSTEAD
 	{
 		// printf("\n%i\n", x);
@@ -130,11 +155,44 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 		if(drawEnd >= h) //guarantee not to draw outside the screen/image
 			drawEnd = h - 1;
 
-		// printf("x:%i, drawStart:%i, drawEnd: %i\n", x, drawStart, drawEnd);
+		int texture_i = data->map[mapX][mapY] - 1;
+
+		// load_textures(data); -> already beeing called at render_map3D;
+		// uint32_t buffer[HEIGHT][LENGHT];
+		//calculate value of tile_hit_coord -> position the ray hit the tile
+		double tile_hit_X; //where exactly the wall was hit
 		if (side == 0)
-			draw_vertical_line(&data->img, x, drawStart, drawEnd, color_A);
-		else	
-			draw_vertical_line(&data->img, x, drawStart, drawEnd, color_B);
+			tile_hit_X = data->player.play_y + perpWallDist * rayDirY;
+		else
+			tile_hit_X = data->player.play_x + perpWallDist * rayDirX;
+		
+		tile_hit_X -= floor((tile_hit_X)); //just the decimal portion
+
+		//x coordinate on the texture
+		int texture_hit_X;
+		texture_hit_X = tile_hit_X * (double)TEXTURE_WIDTH;
+		if(side == 0 && rayDirX > 0)
+			texture_hit_X = TEXTURE_WIDTH - texture_hit_X - 1;
+		if(side == 1 && rayDirY < 0)
+			texture_hit_X = TEXTURE_WIDTH - texture_hit_X - 1;
+
+ 		double step;
+ 		step = 1.0 * TEXTURE_HEIGHT / lineHeight;
+		// Starting texture coordinate
+		double texPos;
+		texPos = (drawStart - h / 2 + lineHeight / 2) * step;
+		for(int y = drawStart; y<drawEnd; y++)
+		{
+			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+			int texY;
+			texY = (int)texPos & (TEXTURE_HEIGHT - 1);
+			texPos += step;
+			unsigned long color = data->texture[texture_i][TEXTURE_HEIGHT * texY + texture_hit_X];
+			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+			if (side == 1)
+				color = (color >> 1) & 8355711;
+			pixel_put(&data->img, x, y, color);
+		}
 	}
 }
 
@@ -147,6 +205,7 @@ void	render_map3d(t_data *data)
 	draw_background(*data, color_A, color_B);
 	color_A = 0x529e35;
 	color_B = 0x32aa6e;
+	load_textures(data);
 	render_walls(data, color_A, color_B);
 }
 
