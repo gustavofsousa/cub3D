@@ -13,7 +13,7 @@ LIBDIR	:=	libft/
 LISTDIR 	:=	color texture game interpretate_map validate_map
 
 ####	Sources & objects	####
-MAIN				:=	main	setup	common_libft			
+MAIN				:=	main	setup	common_libft	transform_map	
 INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points

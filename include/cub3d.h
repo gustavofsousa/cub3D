@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:41:11 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/19 15:11:34 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ int		validate_left(t_game *game);
 int		validate_right(t_game *game);
 void	validate_middle(t_game *game);
 int		is_valid_up_down(char *line_updown, int pos);
+
+// Transform_map
+void	transform_map_int(t_game *game);
 
 #endif
