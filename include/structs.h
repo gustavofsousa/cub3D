@@ -19,6 +19,7 @@ typedef struct s_map
 	int		height;
 	int		width;
 	char	**mtx;
+	int		**mtx_int;
 }			t_map;
 
 typedef struct	s_ray

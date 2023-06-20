@@ -13,12 +13,12 @@ LIBDIR	:=	libft/
 LISTDIR 	:=	color texture game interpretate_map validate_map
 
 ####	Sources & objects	####
-MAIN				:=	main	setup	common_libft			
+MAIN				:=	main	setup	common_libft	transform_map	
 INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
-						validate_up_down	validate_left_right
+						validate_up_down	validate_left_right	validate_middle
 GAME				:=	render_game
 
 SRC		:=	$(MAIN)	\
@@ -44,6 +44,7 @@ ifeq ($(UNAME), Darwin)
 	MLX_INC	:= -I ./miniLibX
 	MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 endif
+
 ############## mlx library  for linux ##############
 ifeq ($(UNAME), Linux)
 	MLX		:= ./mlx_linux
