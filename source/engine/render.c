@@ -2,11 +2,10 @@
 
 #include <stdint.h> // REMOVE AND TEST UNSIGNED LONG
 
-void render_map2d(t_data *data, int square_sz)
+void	render_map2d(t_data *data, int square_sz)
 {
 	int	i;
 	int	j;
-
 
 	i = 0;
 	j = 0;
@@ -15,10 +14,12 @@ void render_map2d(t_data *data, int square_sz)
 		j = 0;
 		while (j < COLUMN)
 		{
-			if (data->map[i][j]  == 1)
-				draw_square(&data->img, i * square_sz, j * square_sz, 0xFF0000, 22);
+			if (data->map[i][j] == 1)
+				draw_square(&data->img, i * square_sz, j * square_sz,
+					0xFF0000, 22);
 			else
- 				draw_square(&data->img, i * square_sz, j * square_sz, 0xFFF000, 22);
+ 				draw_square(&data->img, i * square_sz, j * square_sz,
+					0xFFF000, 22);
 			j++;
 		}
 		i++;

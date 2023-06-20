@@ -73,7 +73,7 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
 
 char	*get_nl(int fd);
 void	move_remains(char *str, int pos);
-int		ft_strlen_gnl(char *str, int *end_flag);
+int	ft_strlen_gnl(char *str, int *end_flag);
 char	*ft_calloc_gnl(size_t n_elements, size_t size);
 char	*ft_strdup_gnl(char *src, int len_stash);
 void	ft_strlcpy_gnl(char *dst, char *src, int size);

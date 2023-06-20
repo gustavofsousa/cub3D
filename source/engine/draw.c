@@ -85,7 +85,7 @@ void	draw_line(t_img *img, int i[2], int f[2], int color)
 	}
 }
 
-void draw_vertical_line(t_img *img, int x, int y0, int yf, int color)
+void	draw_vertical_line(t_img *img, int x, int y0, int yf, int color)
 {
 	while (y0 <= yf)
 	{
@@ -107,9 +107,9 @@ void	draw_background(t_data dat, int ceiling_color, int floor_color)
 		color = ceiling_color;
 		while (y < HEIGHT)
 		{
-			if (y == HEIGHT/2)
+			if (y == HEIGHT / 2)
 				color = floor_color;
-			pixel_put(&dat.img,x, y, color);
+			pixel_put(&dat.img, x, y, color);
 			y++;
 		}
 		x++;
