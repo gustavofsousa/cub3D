@@ -26,28 +26,36 @@ void	walk_backward(t_data *data)
 		data->player.play_y = new_y;
 }
 
-void	walk_left(t_data *data)
+void	walk_left(t_player *player)
 {
-	double	oldX;
+	double	old_x;
 
-	oldX = (data->player.dirX);
-	data->player.dirX = data->player.dirX * cos(-data->player.rot_speed) - data->player.dirY * sin(-data->player.rot_speed);
-	data->player.dirY = oldX * sin(-data->player.rot_speed) + data->player.dirY * cos(-data->player.rot_speed);
-	oldX = data->player.cam_plane_dirX;
-	data->player.cam_plane_dirX = data->player.cam_plane_dirX * cos(-data->player.rot_speed) - data->player.cam_plane_dirY * sin(-data->player.rot_speed);
-	data->player.cam_plane_dirY = oldX * sin(-data->player.rot_speed) + data->player.cam_plane_dirY * cos(-data->player.rot_speed);
+	old_x = (player->dirX);
+	player->dirX = player->dirX * cos(-player->rot_speed)
+		- player->dirY * sin(-player->rot_speed);
+	player->dirY = old_x * sin(-player->rot_speed)
+		+ player->dirY * cos(-player->rot_speed);
+	old_x = player->cam_plane_dirX;
+	player->cam_plane_dirX = player->cam_plane_dirX * cos(-player->rot_speed)
+		- player->cam_plane_dirY * sin(-player->rot_speed);
+	player->cam_plane_dirY = old_x * sin(-player->rot_speed)
+		+ player->cam_plane_dirY * cos(-player->rot_speed);
 }
 
-void	walk_right(t_data *data)
+void	walk_right(t_player *player)
 {
-	double	oldX;
+	double	old_x;
 
-	oldX = (data->player.dirX);
-	data->player.dirX = data->player.dirX * cos(data->player.rot_speed) - data->player.dirY * sin(data->player.rot_speed);
-	data->player.dirY = oldX * sin(data->player.rot_speed) + data->player.dirY * cos(data->player.rot_speed);
-	oldX = data->player.cam_plane_dirX;
-	data->player.cam_plane_dirX = data->player.cam_plane_dirX * cos(data->player.rot_speed) - data->player.cam_plane_dirY * sin(data->player.rot_speed);
-	data->player.cam_plane_dirY = oldX * sin(data->player.rot_speed) + data->player.cam_plane_dirY * cos(data->player.rot_speed);
+	old_x = (player->dirX);
+	player->dirX = player->dirX * cos(player->rot_speed)
+		- player->dirY * sin(player->rot_speed);
+	player->dirY = old_x * sin(player->rot_speed)
+		+ player->dirY * cos(player->rot_speed);
+	old_x = player->cam_plane_dirX;
+	player->cam_plane_dirX = player->cam_plane_dirX * cos(player->rot_speed)
+		- player->cam_plane_dirY * sin(player->rot_speed);
+	player->cam_plane_dirY = old_x * sin(player->rot_speed)
+		+ player->cam_plane_dirY * cos(player->rot_speed);
 }
 
 int	close_window(t_data *data)

@@ -25,6 +25,8 @@ typedef struct s_player
 	double	cam_plane_dirY;
 	double	speed;
 	double	rot_speed;
+	int		dirx_pxl;
+	int		diry_pxl;
 }	t_player;
 
 typedef struct s_key_state

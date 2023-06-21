@@ -1,31 +1,5 @@
 #include "../../include/cub3d.h"
 
-#include <stdint.h> // REMOVE AND TEST UNSIGNED LONG
-
-void	render_map2d(t_data *data, int square_sz)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < ROW)
-	{
-		j = 0;
-		while (j < COLUMN)
-		{
-			if (data->map[i][j] == 1)
-				draw_square(&data->img, i * square_sz, j * square_sz,
-					0xFF0000, 22);
-			else
- 				draw_square(&data->img, i * square_sz, j * square_sz,
-					0xFFF000, 22);
-			j++;
-		}
-		i++;
-	}
-}
-
 void	load_textures(t_data *data)
 {
 	data->texture_height = 64;
@@ -136,7 +110,7 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 		if (side == 0)
 			perpWallDist = (sideDistX - deltaDistX);
-    	else
+		else
 			perpWallDist = (sideDistY - deltaDistY);
 		
 		
@@ -179,8 +153,8 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 		if(side == 1 && rayDirY < 0)
 			texture_hit_X = data->texture_width - texture_hit_X - 1;
 
- 		double step;
- 		step = 1.0 * data->texture_height / lineHeight;
+		 double step;
+		 step = 1.0 * data->texture_height / lineHeight;
 		// Starting texture coordinate
 		double texPos;
 		texPos = (drawStart - h / 2 + lineHeight / 2) * step;
@@ -199,45 +173,45 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 	}
 }
 
-void	render_map3d(t_data *data) 
-{
-	double	w = LENGHT;
-	int		color_A = 0x777777;
-	int		color_B = 0xCCCCCC;
-	
-	draw_background(*data, color_A, color_B);
-	color_A = 0x529e35;
-	color_B = 0x32aa6e;
-	load_textures(data);
-	render_walls(data, color_A, color_B);
-}
 
-void	render_player(t_img *img, t_player player, int l)
+void	draw_player_square(t_img *img, t_player player, int l)
 {
 	int	x;
 	int	y;
-	int	x_pxl = 22 * player.play_x;
-	int	y_pxl = 22 * player.play_y;
+	int	y_pxl;
+	int	x_pxl;
 
-	x = x_pxl - l/2;
-	while (x < x_pxl + l/2) //draw player square
+	x_pxl = 22 * player.play_x;
+	y_pxl = 22 * player.play_y;
+	x = x_pxl - l / 2;
+	while (x < x_pxl + l / 2) //draw player square
 	{
-		y = y_pxl -l/2;
-		while (y < y_pxl + l/2)
+		y = y_pxl - l / 2;
+		while (y < y_pxl + l / 2)
 		{
 			pixel_put(img, x, y, 0x0FF000);
 			y++;
 		}
 		x++;
 	}
-	//draw direction point
-	int	dirX_pxl = (player.play_x + player.dirX) * 22;
-	int dirY_pxl = (player.play_y + player.dirY) * 22;
-	int planXn = (player.play_x + player.dirX - player.cam_plane_dirX) * 22;
-	int planYn = (player.play_y + player.dirY - player.cam_plane_dirY) * 22;
-	int planXp = (player.play_x + player.dirX + player.cam_plane_dirX) * 22;
-	int planYp = (player.play_y + player.dirY +  player.cam_plane_dirY) * 22;
-	draw_line(img, (int[2]){player.play_x * 22, player.play_y * 22}, (int[2]){dirX_pxl, dirY_pxl}, 0x0000FF);
-	pixel_put(img, planXn, planYn, 0x0000FF);
-	pixel_put(img, planXp, planYp, 0x0000FF);
+}
+
+void	render_player(t_img *img, t_player player, int l)
+{
+	int	plan_xn;
+	int	plan_yn;
+	int	plan_xp;
+	int	plan_yp;
+
+	plan_xn = (player.play_x + player.dirX - player.cam_plane_dirX) * 22;
+	plan_yn = (player.play_y + player.dirY - player.cam_plane_dirY) * 22;
+	plan_xp = (player.play_x + player.dirX + player.cam_plane_dirX) * 22;
+	plan_yp = (player.play_y + player.dirY + player.cam_plane_dirY) * 22;
+	draw_player_square(img, player, l);
+	player.dirx_pxl = (player.play_x + player.dirX) * 22;
+	player.diry_pxl = (player.play_y + player.dirY) * 22;
+	draw_line (img, (int [2]){player.play_x * 22, player.play_y * 22},
+		(int [2]){player.dirx_pxl, player.diry_pxl}, 0x0000FF);
+	pixel_put(img, plan_xn, plan_yn, 0x0000FF);
+	pixel_put(img, plan_xp, plan_yp, 0x0000FF);
 }

@@ -39,9 +39,9 @@ int	loop_hook(t_data *data)
 		if (data->key.s_is_press)
 			walk_backward (data);
 		if (data->key.d_is_press)
-			walk_right (data);
+			walk_right (&data->player);
 		if (data->key.a_is_press)
-			walk_left (data);
+			walk_left (&data->player);
 		// render_map2d(data, 22);
 		render_player(&data->img, data->player, 12);
 	}

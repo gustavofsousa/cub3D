@@ -3,7 +3,8 @@ NAME=cub3D
 
 # Sources #
 SRCS=	source/main.c source/render_game.c source/engine/setup.c \
-	source/engine/render.c source/engine/draw.c source/engine/hooks.c
+	source/engine/render.c source/engine/draw.c source/engine/hooks.c \
+	source/engine/bresenham.c source/engine/render_map.c
 
 # Libft Variables #
 LIBFT=libft/libft.a
