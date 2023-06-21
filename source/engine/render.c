@@ -38,7 +38,67 @@ t_double_vector	calc_ray_dir(int x, t_data *data)
 	return (ray_dir);
 }
 
+void	calc_wall_hit(t_data *data, t_ray_info *ray)
+{
+		t_double_vector	sideDist;
+		t_double_vector	deltaDist; //C has infinity, so theres is no need to check ray->dir and assign 1e30
+		t_int_vector	step;
 
+		ray->map_hit_coord.x = trunc(data->player.play_x); //current square of the ray->map_hit_coord, the ray is in
+		ray->map_hit_coord.y = trunc(data->player.play_y); //current square of the ray->map_hit_coord, the ray is in
+		deltaDist.x = fabs(1.0 / ray->dir.x);
+		deltaDist.y = fabs(1.0 / ray->dir.y);
+
+		int hit; //was there a wall hit?
+		hit = 0; //was there a wall hit?
+
+		if (ray->dir.x < 0)
+		{
+			step.x = -1;
+			sideDist.x = (data->player.play_x - ray->map_hit_coord.x) * deltaDist.x;
+		}
+		else
+		{
+			step.x = 1;
+			sideDist.x = (ray->map_hit_coord.x + 1.0 - data->player.play_x) * deltaDist.x;
+		}
+		if (ray->dir.y < 0)
+		{
+			step.y = -1;
+			sideDist.y = (data->player.play_y - ray->map_hit_coord.y) * deltaDist.y;
+		}
+		else
+		{
+			step.y = 1;
+			sideDist.y = (ray->map_hit_coord.y + 1.0 - data->player.play_y) * deltaDist.y;
+		}
+
+		while (hit == 0)
+		{
+		//jump to next data->map square, either in x-direction, or in y-direction
+		// printf("sideDist.x:%f sideDist.y:%f , deltaDist.x:%f destaDistY:%f\n", sideDist.x, sideDist.y, deltaDist.x, deltaDist.y); 
+			if (sideDist.x < sideDist.y)
+			{
+				sideDist.x += deltaDist.x;
+				ray->map_hit_coord.x += step.x;
+				ray->side_hit = 0;
+			}
+			else
+			{
+				sideDist.y += deltaDist.y;
+				ray->map_hit_coord.y += step.y;
+				ray->side_hit = 1;
+			}
+			//Check if ray has hit a wall
+			if (data->map[ray->map_hit_coord.x][ray->map_hit_coord.y] > 0)
+				hit = 1;
+		}
+		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+		if (ray->side_hit == 0)
+			ray->perp_wall_dist = (sideDist.x - deltaDist.x);
+		else
+			ray->perp_wall_dist = (sideDist.y - deltaDist.y);
+}
 
 void	render_walls(t_data* data, int color_A, int color_B) // create ray structure
 {
@@ -51,84 +111,13 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 	while (x < w)
 	{
 		ray.dir = calc_ray_dir(x, data);
-
-		// int map.x; //current square of the map, the ray is in
-		// int map.y; //current square of the map, the ray is in
-		t_int_vector map;
-		map.x = trunc(data->player.play_x); //current square of the map, the ray is in
-		map.y = trunc(data->player.play_y); //current square of the map, the ray is in
-
-		t_double_vector sideDist;
-		// s_double_vector sideDist.y;
-
-		t_double_vector deltaDist; //C has infinity, so theres is no need to check ray.dir and assign 1e30
-		// s_double_vector deltaDist.y; //C has infinity, so theres is no need to check ray.dir and assign 1e30
-		deltaDist.x = fabs(1.0 / ray.dir.x); //C has infinity, so theres is no need to check ray.dir and assign 1e30
-		deltaDist.y = fabs(1.0 / ray.dir.y); //C has infinity, so theres is no need to check ray.dir and assign 1e30
-		
-		t_int_vector step;
-		// int step.y;
-
-		double perpWallDist;
-
-		int hit; //was there a wall hit?
-		hit = 0; //was there a wall hit?
-		int side;
-
-		if (ray.dir.x < 0)
-		{
-			step.x = -1;
-			sideDist.x = (data->player.play_x - map.x) * deltaDist.x;
-		}
-		else
-		{
-			step.x = 1;
-			sideDist.x = (map.x + 1.0 - data->player.play_x) * deltaDist.x;
-		}
-		if (ray.dir.y < 0)
-		{
-			step.y = -1;
-			sideDist.y = (data->player.play_y - map.y) * deltaDist.y;
-		}
-		else
-		{
-			step.y = 1;
-			sideDist.y = (map.y + 1.0 - data->player.play_y) * deltaDist.y;
-		}
-
-		while (hit == 0)
-		{
-		//jump to next data->map square, either in x-direction, or in y-direction
-		// printf("sideDist.x:%f sideDist.y:%f , deltaDist.x:%f destaDistY:%f\n", sideDist.x, sideDist.y, deltaDist.x, deltaDist.y); 
-			if (sideDist.x < sideDist.y)
-			{
-				sideDist.x += deltaDist.x;
-				map.x += step.x;
-				side = 0;
-			}
-			else
-			{
-				sideDist.y += deltaDist.y;
-				map.y += step.y;
-				side = 1;
-			}
-			//Check if ray has hit a wall
-			if (data->map[map.x][map.y] > 0)
-				hit = 1;
-		}
-		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
-		if (side == 0)
-			perpWallDist = (sideDist.x - deltaDist.x);
-		else
-			perpWallDist = (sideDist.y - deltaDist.y);
-		
-		
-		// printf("wall hit:%i,%i perpWallDist:%f", map.x, map.y, perpWallDist);
-		//Calculate height of line to draw on screen
+		calc_wall_hit(data, &ray);
+	
 		int h; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
 		h = HEIGHT; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
+
 		int lineHeight;
-		lineHeight = (int)(h / perpWallDist);
+		lineHeight = (int)(h / ray.perp_wall_dist);
 
 		//calculate lowest and highest pixel to fill in current stripe
 		int drawStart;
@@ -141,25 +130,25 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 		if(drawEnd >= h) //guarantee not to draw outside the screen/image
 			drawEnd = h - 1;
 
-		int texture_i = data->map[map.x][map.y] - 1;
+		int texture_i = data->map[ray.map_hit_coord.x][ray.map_hit_coord.y] - 1;
 
-		// load_textures(data); -> already beeing called at render_map3D;
+		// load_textures(data); -> already beeing called at render_ray.map_hit_coord3D;
 		// uint32_t buffer[HEIGHT][LENGHT];
 		//calculate value of tile_hit_coord -> position the ray hit the tile
 		double tile_hit_X; //where exactly the wall was hit
-		if (side == 0)
-			tile_hit_X = data->player.play_y + perpWallDist * ray.dir.y;
+		if (ray.side_hit == 0)
+			tile_hit_X = data->player.play_y + ray.perp_wall_dist * ray.dir.y;
 		else
-			tile_hit_X = data->player.play_x + perpWallDist * ray.dir.x;
+			tile_hit_X = data->player.play_x + ray.perp_wall_dist * ray.dir.x;
 		
 		tile_hit_X -= floor((tile_hit_X)); //just the decimal portion
 
 		//x coordinate on the texture
 		int texture_hit_X;
 		texture_hit_X = tile_hit_X * (double)data->texture_width;
-		if(side == 0 && ray.dir.x > 0)
+		if(ray.side_hit == 0 && ray.dir.x > 0)
 			texture_hit_X = data->texture_width - texture_hit_X - 1;
-		if(side == 1 && ray.dir.y < 0)
+		if(ray.side_hit == 1 && ray.dir.y < 0)
 			texture_hit_X = data->texture_width - texture_hit_X - 1;
 
 		 double stepTex;
@@ -175,7 +164,7 @@ void	render_walls(t_data* data, int color_A, int color_B) // create ray structur
 			texPos += stepTex;
 			unsigned long color = data->texture[texture_i][data->texture_height * texY + texture_hit_X];
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if (side == 1)
+			if (ray.side_hit == 1)
 				color = (color >> 1) & 8355711;
 			pixel_put(&data->img, x, y, color);
 		}
