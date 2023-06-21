@@ -48,15 +48,13 @@ all: $(OBJDIR) $(NAME)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(addprefix $(OBJDIR), get_next_line/)
-	@echo "directories for objects created"
 
 $(NAME): $(OBJ)
 	@ar -rcs $(NAME) $(OBJ)
-	@echo "$(YELLOW)lib created$(WHITE)"
+	@echo "✅ $(GREEN)Successfully compiled$(RESET) libft is ready."
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "objects created 😉 ->$(MAGENTA) $@$(WHITE)"
 
 clean:
 	$(RM) $(OBJDIR)

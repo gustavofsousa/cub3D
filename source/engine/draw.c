@@ -8,60 +8,6 @@ void	pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-static void	bresenham_x(t_img *img, int i[2], int f[2], int color)
-{
-	int	a;
-	int	b;
-	int	p;
-
-	a = 2 * (ft_abs(f[1] - i[1]));
-	b = a - 2 * (ft_abs(f[0] - i[0]));
-	p = a - (f[0] - i[0]);
-	pixel_put(img, i[0], i[1], color);
-	while (i[0] != f[0] || i[1] != f[1])
-	{
-		if (p < 0)
-			p += a;
-		else
-		{
-			if (i[1] > f[1])
-				i[1]--;
-			else
-				i[1]++;
-			p += b;
-		}
-		i[0]++;
-		pixel_put(img, i[0], i[1], color);
-	}
-}
-
-static void	bresenham_y(t_img *img, int i[2], int f[2], int color)
-{
-	int	a;
-	int	b;
-	int	p;
-
-	a = 2 * (ft_abs(f[0] - i[0]));
-	b = a - 2 * (ft_abs(f[1] - i[1]));
-	p = a - (f[1] - i[1]);
-	pixel_put(img, i[0], i[1], color);
-	while (i[0] != f[0] || i[1] != f[1])
-	{
-		if (p < 0)
-			p += a;
-		else
-		{
-			if (i[0] > f[0])
-				i[0]--;
-			else
-				i[0]++;
-			p += b;
-		}
-		i[1]++;
-		pixel_put(img, i[0], i[1], color);
-	}
-}
-
 void	draw_line(t_img *img, int i[2], int f[2], int color)
 {
 	int	dist_x;
@@ -85,14 +31,14 @@ void	draw_line(t_img *img, int i[2], int f[2], int color)
 	}
 }
 
-void draw_vertical_line(t_img *img, int x, int y0, int yf, int color)
-{
-	while (y0 <= yf)
-	{
-		pixel_put(img, x, y0, color);
-		y0++;
-	}
-}
+// void	draw_vertical_line(t_img *img, int x, int y0, int yf, int color)
+// {
+// 	while (y0 <= yf)
+// 	{
+// 		pixel_put(img, x, y0, color);
+// 		y0++;
+// 	}
+// }
 
 void	draw_background(t_data dat, int ceiling_color, int floor_color)
 {
@@ -107,25 +53,27 @@ void	draw_background(t_data dat, int ceiling_color, int floor_color)
 		color = ceiling_color;
 		while (y < HEIGHT)
 		{
-			if (y == HEIGHT/2)
+			if (y == HEIGHT / 2)
 				color = floor_color;
-			pixel_put(&dat.img,x, y, color);
+			pixel_put(&dat.img, x, y, color);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	draw_square(t_img *img, int x0, int y0, int color, int l)
+void	draw_square(t_img *img, int x0, int y0, int color)
 {
 	int	x;
 	int	y;
+	int	size;
 
+	size = 22;
 	x = x0;
-	while (x < x0 + l)
+	while (x < x0 + size)
 	{
 		y = y0;
-		while (y < y0 + l)
+		while (y < y0 + size)
 		{
 			pixel_put(img, x, y, color);
 			y++;

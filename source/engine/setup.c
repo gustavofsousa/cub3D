@@ -62,7 +62,7 @@ void	setup_map(t_data *dat)
 
 	x = 0;
 	y = 0;
-	dat->map =  malloc(dat->n_columns * sizeof(int*));
+	dat->map = malloc(dat->n_columns * sizeof(int *));
 	while (x < dat->n_columns)
 	{
 		dat->map[x] = malloc(dat->n_rows * sizeof(int));
@@ -74,7 +74,7 @@ void	setup_map(t_data *dat)
 		y = 0;
 		while (y < dat->n_rows)
 		{
-			dat->map[x][y] =  map[x][y];
+			dat->map[x][y] = map[x][y];
 			y++;
 		}
 		x++;
