@@ -192,45 +192,24 @@ void	raycast(t_data* data, int color_A, int color_B)
 	}
 }
 
-
-void	draw_player_square(t_img *img, t_player player, int l)
+void	draw_background(t_data dat, int ceiling_color, int floor_color)
 {
 	int	x;
 	int	y;
-	int	y_pxl;
-	int	x_pxl;
+	int	color;
 
-	x_pxl = 22 * player.x;
-	y_pxl = 22 * player.y;
-	x = x_pxl - l / 2;
-	while (x < x_pxl + l / 2)
+	x = 0;
+	while (x < LENGHT)
 	{
-		y = y_pxl - l / 2;
-		while (y < y_pxl + l / 2)
+		y = 0;
+		color = ceiling_color;
+		while (y < HEIGHT)
 		{
-			pixel_put(img, x, y, 0x0FF000);
+			if (y == HEIGHT / 2)
+				color = floor_color;
+			pixel_put(&dat.img, x, y, color);
 			y++;
 		}
 		x++;
 	}
-}
-
-void	render_player(t_img *img, t_player player, int l)
-{
-	int	plan_xn;
-	int	plan_yn;
-	int	plan_xp;
-	int	plan_yp;
-
-	plan_xn = (player.x + player.dirX - player.cam_plane_dirX) * 22;
-	plan_yn = (player.y + player.dirY - player.cam_plane_dirY) * 22;
-	plan_xp = (player.x + player.dirX + player.cam_plane_dirX) * 22;
-	plan_yp = (player.y + player.dirY + player.cam_plane_dirY) * 22;
-	draw_player_square(img, player, l);
-	player.dirx_pxl = (player.x + player.dirX) * 22;
-	player.diry_pxl = (player.y + player.dirY) * 22;
-	draw_line (img, (int [2]){player.x * 22, player.y * 22},
-		(int [2]){player.dirx_pxl, player.diry_pxl}, 0x0000FF);
-	pixel_put(img, plan_xn, plan_yn, 0x0000FF);
-	pixel_put(img, plan_xp, plan_yp, 0x0000FF);
 }
