@@ -45,9 +45,9 @@ typedef struct s_data
 	int				**map;
 	int				n_columns;
 	int				n_rows;
-	unsigned int	texture_width;
-	unsigned int	texture_height;
-	int				texture[8][TEXTURE_HEIGHT * TEXTURE_WIDTH];
+	unsigned int	tex_width;
+	unsigned int	tex_height;
+	int				tex[8][TEXTURE_HEIGHT * TEXTURE_WIDTH];
 }	t_data;
 
 typedef struct s_int_vector

@@ -2,24 +2,24 @@
 
 void	load_textures(t_data *data)
 {
-	data->texture_height = 64;
-	data->texture_width = 64;
-	for (int x = 0; x < data->texture_width; x++)
+	data->tex_height = 64;
+	data->tex_width = 64;
+	for (int x = 0; x < data->tex_width; x++)
 	{
-		for (int y = 0 ; y < data->texture_height; y ++)
+		for (int y = 0 ; y < data->tex_height; y ++)
 		{
-			int xorcolor = (x * 256 / data->texture_width) ^ (y * 256 / data->texture_height);
-			//int xcolor = x * 256 / data->texture_width;
-			int ycolor = y * 256 / data->texture_height;
-			int xycolor = y * 128 / data->texture_height + x * 128 / data->texture_width;
-			data->texture[0][data->texture_width * y + x] = 65536 * 254 * (x != y && x != data->texture_width - y); //flat red texture with black cross
-			data->texture[1][data->texture_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-			data->texture[2][data->texture_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-			data->texture[3][data->texture_width * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-			data->texture[4][data->texture_width * y + x] = 256 * xorcolor; //xor green
-			data->texture[5][data->texture_width * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-			data->texture[6][data->texture_width * y + x] = 65536 * ycolor; //red gradient
-			data->texture[7][data->texture_width * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+			int xorcolor = (x * 256 / data->tex_width) ^ (y * 256 / data->tex_height);
+			//int xcolor = x * 256 / data->tex_width;
+			int ycolor = y * 256 / data->tex_height;
+			int xycolor = y * 128 / data->tex_height + x * 128 / data->tex_width;
+			data->tex[0][data->tex_width * y + x] = 65536 * 254 * (x != y && x != data->tex_width - y); //flat red tex with black cross
+			data->tex[1][data->tex_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+			data->tex[2][data->tex_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+			data->tex[3][data->tex_width * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+			data->tex[4][data->tex_width * y + x] = 256 * xorcolor; //xor green
+			data->tex[5][data->tex_width * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+			data->tex[6][data->tex_width * y + x] = 65536 * ycolor; //red gradient
+			data->tex[7][data->tex_width * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey tex
 		}
 	}
 }
@@ -66,12 +66,10 @@ void	calc_ray_info(t_data *data, t_ray_info *ray)
 
 void	calc_wall_hit(t_data *data, t_ray_info *ray)
 {
-	int hit; //was there a wall hit?
-	hit = 0; //was there a wall hit?
+	int hit;
+	hit = 0;
 	while (hit == 0)
 	{
-	//jump to next data->map square, either in x-direction, or in y-direction
-	// printf("ray->side.x:%f ray->side.y:%f , ray->delta.x:%f destaDistY:%f\n", ray->side.x, ray->side.y, ray->delta.x, ray->delta.y); 
 		if (ray->side.x < ray->side.y)
 		{
 			ray->side.x += ray->delta.x;
@@ -84,7 +82,6 @@ void	calc_wall_hit(t_data *data, t_ray_info *ray)
 			ray->map_hit.y += ray->step.y;
 			ray->side_hit = 1;
 		}
-		//Check if ray has hit a wall
 		if (data->map[ray->map_hit.x][ray->map_hit.y] > 0)
 			hit = 1;
 	}
@@ -94,7 +91,6 @@ void	calc_perp_wall_dist(t_data *data, t_ray_info *ray)
 {
 		calc_ray_info(data, ray);
 		calc_wall_hit(data, ray);
-		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 		if (ray->side_hit == 0)
 			ray->perp_wall_dist = (ray->side.x - ray->delta.x);
 		else
@@ -105,7 +101,7 @@ int	calc_lowest_pixel (int line_height)
 {
 	int drawStart;
 	drawStart = -line_height / 2 + HEIGHT / 2;
-	if(drawStart < 0) //guarantee not to draw outside the screen/image
+	if(drawStart < 0)
 		drawStart = 0;
 	return (drawStart);
 }
@@ -114,65 +110,69 @@ int	calc_highest_pixel (int line_height)
 {
 	int drawEnd;
 	drawEnd = line_height / 2 + HEIGHT / 2;
-	if(drawEnd >= HEIGHT) //guarantee not to draw outside the screen/image
+	if(drawEnd >= HEIGHT)
 		drawEnd = HEIGHT - 1;
 	return (drawEnd);
 }
 
 double	calc_tile_hit_x (t_data *data, t_ray_info *ray)
 {
-		double tile_hit_X; //where exactly the wall was hit
+		double tile_hit_X;
 
 		if (ray->side_hit == 0)
 			tile_hit_X = data->player.y + ray->perp_wall_dist * ray->dir.y;
 		else
 			tile_hit_X = data->player.x + ray->perp_wall_dist * ray->dir.x;
 		
-		tile_hit_X -= floor((tile_hit_X)); //just the decimal portion
+		tile_hit_X -= floor((tile_hit_X));
 		return (tile_hit_X);
 }
 
-int	calc_texture_hit_x(t_data *data, t_ray_info *ray, double tile_hit_X)
+int	calc_tex_hit_x(t_data *data, t_ray_info *ray)
 {
-		int texture_hit_X;
-		texture_hit_X = tile_hit_X * (double)data->texture_width;
-		if((ray->side_hit == 0 && ray->dir.x > 0) ||
-			(ray->side_hit == 1 && ray->dir.y < 0))
-			texture_hit_X = data->texture_width - texture_hit_X - 1;
-		return (texture_hit_X);
+	int tex_hit_X;
+	double tile_hit_X;
+
+	tile_hit_X = calc_tile_hit_x(data, ray);
+	tex_hit_X = tile_hit_X * (double)data->tex_width;
+	if((ray->side_hit == 0 && ray->dir.x > 0) ||
+		(ray->side_hit == 1 && ray->dir.y < 0))
+		tex_hit_X = data->tex_width - tex_hit_X - 1;
+	return (tex_hit_X);
+}
+
+unsigned long	tex_color(t_data *data, int tex_pos, int tex_i, int tex_hit_x)
+{
+	int texY;
+
+	texY = (int)tex_pos & (data->tex_height - 1);
+	return (data->tex[tex_i][data->tex_height * texY + tex_hit_x]);
 }
 
 void	draw_x_line(t_data *data, t_ray_info *ray, int line_height, int x)
 {
-		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart;
-		drawStart = calc_lowest_pixel(line_height);
-		int drawEnd;
-		drawEnd = calc_highest_pixel(line_height);
-		//calculate value of tile_hit_coord -> position the ray hit the tile
-		double tile_hit_X; //where exactly the wall was hit
-		tile_hit_X = calc_tile_hit_x(data, ray); //just the decimal portion
-		//x coordinate on the texture
-		int texture_hit_X;
-		texture_hit_X = calc_texture_hit_x(data, ray, tile_hit_X);
-		int texture_i = data->map[ray->map_hit.x][ray->map_hit.y] - 1;
-		double stepTex;
-		stepTex = 1.0 * data->texture_height / line_height;
-		// Starting texture coordinate
-		double texPos;
-		texPos = (drawStart - HEIGHT / 2 + line_height / 2) * stepTex;
-		for(int y = drawStart; y<drawEnd; y++)
-		{
-			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-			int texY;
-			texY = (int)texPos & (data->texture_height - 1);
-			texPos += stepTex;
-			unsigned long color = data->texture[texture_i][data->texture_height * texY + texture_hit_X];
-			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if (ray->side_hit == 1)
-				color = (color >> 1) & 8355711;
-			pixel_put(&data->img, x, y, color);
-		}
+	int draw_limits[2];
+	double stepTex;
+	double tex_pos;
+	int tex_i;
+	int	tex_hit_x;
+
+	tex_i = data->map[ray->map_hit.x][ray->map_hit.y] - 1;
+	tex_hit_x = calc_tex_hit_x(data, ray);
+	draw_limits[0] = calc_lowest_pixel(line_height);
+	draw_limits[1] = calc_highest_pixel(line_height);
+	stepTex = 1.0 * data->tex_height / line_height;
+	tex_pos = (draw_limits[0] - HEIGHT / 2 + line_height / 2) * stepTex;
+	for(int y = draw_limits[0]; y<draw_limits[1]; y++)
+	{
+		tex_pos += stepTex;
+		if (ray->side_hit == 1)
+			pixel_put(&data->img, x, y,
+			(tex_color(data, tex_pos, tex_i, tex_hit_x) >> 1) & 8355711);
+		else
+			pixel_put(&data->img, x, y,
+			tex_color(data, tex_pos, tex_i, tex_hit_x));
+	}
 }
 
 void	raycast(t_data* data, int color_A, int color_B)
@@ -203,7 +203,7 @@ void	draw_player_square(t_img *img, t_player player, int l)
 	x_pxl = 22 * player.x;
 	y_pxl = 22 * player.y;
 	x = x_pxl - l / 2;
-	while (x < x_pxl + l / 2) //draw player square
+	while (x < x_pxl + l / 2)
 	{
 		y = y_pxl - l / 2;
 		while (y < y_pxl + l / 2)
