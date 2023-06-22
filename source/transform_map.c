@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 16:56:16 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 18:43:481 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,10 @@
 
 void	put_value(t_game *game, int i, int j)
 {
-	if (game->map.mtx[i][j] == '1' || game->map.mtx[i][j] == ' ')
+	if (ft_strchr(" 1", game->map.mtx[i][j]))
 		game->map.mtx_int[i][j] = 1;
-	else if (game->map.mtx[i][j] == '0')
+	else if (ft_strchr("0NSEW", game->map.mtx[i][j]))
 		game->map.mtx_int[i][j] = 0;
-	else if (game->map.mtx[i][j] == 'N')
-		game->map.mtx_int[i][j] = 2;
-	else if (game->map.mtx[i][j] == 'S')
-		game->map.mtx_int[i][j] = 3;
-	else if (game->map.mtx[i][j] == 'E')
-		game->map.mtx_int[i][j] = 4;
-	else if (game->map.mtx[i][j] == 'W')
-		game->map.mtx_int[i][j] = 5;
 }
 
 int	**malloc_matrix(int height, int width)
@@ -54,7 +46,7 @@ void	transform_map_int(t_game *game)
 	i = -1;
 	game->map.mtx_int = malloc_matrix(game->map.rows, game->map.cols);
 	if (!game->map.mtx_int)
-		return ;
+		exit_game("error: malloc failed", game);
 	while (++i < game->map.cols)
 	{
 		j = -1;
