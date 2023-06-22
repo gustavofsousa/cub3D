@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:49:23 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 17:16:55 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_img	get_argure(char *path, t_game *game)
 			&texture.height);
 	if (!texture.img)
 		exit_game("Invalid texture path", game);
-	texture.addr = (int *)mlx_get_data_addr(texture.img,
+	texture.addr = mlx_get_data_addr(texture.img,
 			&texture.bpp,
 			&texture.line_len,
 			&texture.endian);

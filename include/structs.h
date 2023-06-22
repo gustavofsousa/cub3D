@@ -1,37 +1,62 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
+#include "constants.h"
+
 typedef struct s_img
 {
-	int		height;
-	int		width;
-	void	*ptr;
-	void	*win;
+	int		height; // texture height, not initialized yet
+	int		width; // texture width, not initialized yet
+	void	*ptr; //mlx
+	void	*win; //mlx_win
 	void	*img;
-	int		*addr;
-	int		bpp;
-	int		line_len;
+	char	*addr;
+	int		bpp; // bits_per_pixel
+	int		line_len; //line_length
 	int		endian;
 }			t_img;
 
 typedef struct s_map
 {
-	int		height;
-	int		width;
+	int		rows; // = n_rows
+	int		cols; // = n_columns
 	char	**mtx;
 	int		**mtx_int;
 }			t_map;
 
-typedef struct	s_ray
+typedef struct s_player
 {
+	double	x;
+	double	y;
+	double	dirX;
+	double	dirY;
+	double	cam_plane_dirX;
+	double	cam_plane_dirY;
+	double	speed;
+	double	rot_speed;
+	int		dirx_pxl;
+	int		diry_pxl;
+}	t_player;
 
-}				t_ray;
-
-typedef struct	s_player
+typedef struct s_key_state
 {
-	int		x;
-	int		y;
-}				t_player;
+	int	w_is_press;
+	int	a_is_press;
+	int	s_is_press;
+	int	d_is_press;
+}	t_key_state;
+
+typedef struct s_int_vector
+{
+	int	x;
+	int	y;
+}	t_int_vector;
+
+typedef struct s_double_vector
+{
+	double	x;
+	double	y;
+}	t_double_vector;
 
 typedef struct	s_texture
 {
@@ -43,14 +68,30 @@ typedef struct	s_texture
 	int		ceiling;
 }				t_texture;
 
+typedef struct s_ray_info
+{
+	t_double_vector	dir;
+	t_double_vector	side;
+	t_double_vector	delta;
+	t_int_vector	step;
+	t_int_vector	map_hit;
+	int				side_hit;
+	double			perp_wall_dist;
+}	t_ray_info;
+
 typedef struct	s_game
 {
-	int			*canvas;
-	t_img		mlx;
+	t_img		img;
 	t_map		map;
-	t_ray		ray;
+	t_ray_info		ray;
 	t_player	player;
 	t_texture	texture;
-}				t_game;
+	t_key_state		key;
+	int	tex_width; //delete after using texture files
+	int	tex_height; //delete after using texture files
+	int				tex[8][TEXTURE_HEIGHT * TEXTURE_WIDTH]; //delete after using texture files
+	// int				**map; //delete after using texture files
 
+}				t_game;
+ 
 #endif

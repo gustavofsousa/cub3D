@@ -1,3 +1,4 @@
-
-#define LENGHT 200
-#define HEIGHT 200
+#define LENGHT 640
+#define HEIGHT 480
+#define TEXTURE_WIDTH 64
+#define TEXTURE_HEIGHT 64

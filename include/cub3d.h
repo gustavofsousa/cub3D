@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/19 15:11:34 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 17:36:18 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 //# include "../miniLibX/mlx.h"
 # include <fcntl.h> //open().
 # include <stdio.h> //printf
+#include <math.h>
 
 void	setup(t_game *game);
 void	render_game(t_game *game);
 void	exit_game(char *message, t_game *game);
+int     close_window(t_game *game);
 
 // interpretate_map
 void	interpretate_map(t_game *game, char *path_name);
@@ -37,6 +39,7 @@ int		is_north(char *cardinal, t_game *game);
 int		is_south(char *cardinal, t_game *game);
 int		is_west(char *cardinal, t_game *game);
 int		is_east(char *cardinal, t_game *game);
+void	load_textures(t_game *game);
 
 // Color
 int		is_color(char *line);
@@ -65,5 +68,26 @@ int		is_valid_up_down(char *line_updown, int pos);
 
 // Transform_map
 void	transform_map_int(t_game *game);
+
+// Ray casting
+void	render_map3d(t_game *game);
+void	raycast(t_game* game);
+
+// Map 2D
+void	render_map2d(t_game *game, int square_sz);
+void	render_player(t_img *img, t_player player, int l);
+
+// Movend
+void	walk_backward(t_game *game);
+void	walk_right(t_player *player);
+void	walk_forward(t_game *game);
+void	walk_left(t_player *player);
+
+//Draw
+void	draw_square(t_img *img, int x0, int y0, int color);
+void	draw_background(t_game game, int ceiling_color, int floor_color);
+void	pixel_put(t_img *data, int x, int y, int color);
+void	bresenham_x(t_img *img, int i[2], int f[2], int color);
+void	bresenham_y(t_img *img, int i[2], int f[2], int color);
 
 #endif

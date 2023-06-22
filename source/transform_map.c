@@ -6,7 +6,7 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/19 15:25:43 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 16:56:16 by gustavosous      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	transform_map_int(t_game *game)
 	int	j;
 
 	i = -1;
-	game->map.mtx_int = malloc_matrix(game->map.height, game->map.width);
+	game->map.mtx_int = malloc_matrix(game->map.rows, game->map.cols);
 	if (!game->map.mtx_int)
 		return ;
-	while (++i < game->map.height)
+	while (++i < game->map.cols)
 	{
 		j = -1;
-		while (++j < game->map.width)
+		while (++j < game->map.cols)
 			put_value(game, i, j);
 	}
 }

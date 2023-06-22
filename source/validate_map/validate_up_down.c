@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_up_down.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:46:50 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 15:52:49 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	validate_down(t_game *game)
 	int		last;
 	int		pre_last;
 
-	last = game->map.height - 1;
-	pre_last = game->map.height - 2;
+	last = game->map.rows - 1;
+	pre_last = game->map.rows - 2;
 	line = game->map.mtx[last];
 	i = -1;
 	while (line[++i])
