@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 17:16:04 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 18:54:56 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	init_mlx(t_game *game)
 
 void	init_var_raycasting(t_game *game)
 {
-	game->player.x = 22;
-	game->player.y = 11.5;
+	game->player.x = 0;
+	game->player.y = 0;
 	game->player.cam_plane_dirX = 0;
 	game->player.cam_plane_dirY = 0.66;
-	game->player.dirX = 1;
+	game->player.dirX = 0;
 	game->player.dirY = 0;
 	game->player.speed = 0.005;
 	game->player.rot_speed = 0.003;
@@ -43,15 +43,13 @@ void	init_var_raycasting(t_game *game)
 	game->key.a_is_press = 0;
 	game->key.s_is_press = 0;
 	game->key.d_is_press = 0;
-	game->map.rows = 24;
-	game->map.cols = 24;
 }
 
 void	init_var_map(t_game *game)
 {
 // mlx
-	game->img.height = 640;
-	game->img.width = 480;
+	game->img.height = 64;
+	game->img.width = 64;
 // Map
 	game->map.rows = 0;
 	game->map.cols = 0;
