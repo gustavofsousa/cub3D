@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   interpretate_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 16:39:07 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 19:16:01 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	get_max_width(t_game *game, char *line)
+void	get_max_col(t_game *game, char *line)
 {
 	int	len_line;
 
 	len_line = ft_strlen(line);
-	if (len_line > game->map.rows)
-		game->map.rows = len_line;
+	if (len_line > game->map.cols)
+		game->map.cols = len_line;
 }
 
 /*
@@ -41,6 +41,7 @@ void	interpretate_line(t_game *game, char *line_pre)
 	{
 		update_matrix(&game->map.mtx, line);
 		game->map.rows++;
+		get_max_col(game, line);
 	}
 	free(line);
 }

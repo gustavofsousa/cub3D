@@ -28,8 +28,8 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
-	double	dirX;
-	double	dirY;
+	double	dirX; //E = 1 ; w = -1 ; N = 0 ; S = 0
+	double	dirY; //E = 0 ; W =  0 ; N = -1; S = 1
 	double	cam_plane_dirX;
 	double	cam_plane_dirY;
 	double	speed;

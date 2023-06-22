@@ -47,7 +47,7 @@ void	transform_map_int(t_game *game)
 	game->map.mtx_int = malloc_matrix(game->map.rows, game->map.cols);
 	if (!game->map.mtx_int)
 		exit_game("error: malloc failed", game);
-	while (++i < game->map.cols)
+	while (++i < game->map.rows)
 	{
 		j = -1;
 		while (++j < game->map.cols)

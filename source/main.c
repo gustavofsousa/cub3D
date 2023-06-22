@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 16:15:54 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:21:10 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,21 @@ void	exit_game(char *message, t_game *game)
 	exit(0);
 }
 
-void	print_mtx(char **mtx)
+void	print_mtx(t_game *game)
 {
 	int	i;
+	int	j;
 
 	i = -1;
-	while (mtx[++i])
-		printf("%s\n", mtx[i]);
+	while (++i < game->map.rows)
+	{
+		j = -1;
+		while (++j < game->map.cols)
+		{
+			printf("%d", game->map.mtx_int[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 int	main(int argc, char **argv)
@@ -48,7 +56,7 @@ int	main(int argc, char **argv)
 		interpretate_map(&game, argv[1]);
 		validate_map(&game);
 		transform_map_int(&game);
-		//render_game(&game);
+		render_game(&game);
 		exit_game(NULL, &game);
 	}
 	ft_putendl_fd("Usage: ./cub3D <map.cub>", 1);

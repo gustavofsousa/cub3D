@@ -82,7 +82,7 @@ void	calc_wall_hit(t_game *game, t_ray_info *ray)
 			ray->map_hit.y += ray->step.y;
 			ray->side_hit = 1;
 		}
-		if (game->map.mtx[ray->map_hit.x][ray->map_hit.y] > 0)
+		if (game->map.mtx_int[ray->map_hit.x][ray->map_hit.y] > 0)
 			hit = 1;
 	}
 }
@@ -157,7 +157,7 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 	int tex_i;
 	int	tex_hit_x;
 
-	tex_i = game->map.mtx[ray->map_hit.x][ray->map_hit.y] - 1;
+	tex_i = game->map.mtx_int[ray->map_hit.x][ray->map_hit.y] - 1;
 	tex_hit_x = calc_tex_hit_x(game, ray);
 	draw_limits[0] = calc_lowest_pixel(line_height);
 	draw_limits[1] = calc_highest_pixel(line_height);
@@ -178,16 +178,16 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 void	raycast(t_game* game)
 {
 	int			x;
-	int			line_height;
+	// int			line_height;
 	t_ray_info	ray;
 
 	x = 0;
 	while (x < LENGHT)
 	{
-		ray.dir = calc_ray_dir(x, game);
-		calc_perp_wall_dist(game, &ray);
-		line_height = (int)(HEIGHT / ray.perp_wall_dist);
-		draw_x_line(game, &ray, line_height, x);
+		// ray.dir = calc_ray_dir(x, game);
+		// calc_perp_wall_dist(game, &ray);
+		// line_height = (int)(HEIGHT / ray.perp_wall_dist);
+		// draw_x_line(game, &ray, line_height, x);
 		x++;
 	}
 }
