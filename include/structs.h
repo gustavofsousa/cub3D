@@ -73,5 +73,4 @@ typedef struct s_ray_info
 	double			perp_wall_dist;
 }	t_ray_info;
 
-
 #endif
