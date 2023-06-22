@@ -26,12 +26,10 @@ void	load_textures(t_data *data)
 
 t_double_vector	calc_ray_dir(int x, t_data *data)
 {
-	double	w;
 	t_double_vector ray_dir;
 
 	double cameraX;
-	w = LENGHT;
-	cameraX = 2.0 * x / (double)w - 1.0;
+	cameraX = 2.0 * x / (double)LENGHT - 1.0;
 
 	ray_dir.x = data->player.dirX + data->player.cam_plane_dirX * cameraX;
 	ray_dir.y = data->player.dirY + data->player.cam_plane_dirY * cameraX;
@@ -103,58 +101,66 @@ void	calc_perp_wall_dist(t_data *data, t_ray_info *ray)
 			ray->perp_wall_dist = (ray->side.y - ray->delta.y);
 }
 
-void	raycast(t_data* data, int color_A, int color_B)
+int	calc_lowest_pixel (int line_height)
 {
-	double		w;
-	int			h; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
-	int			x;
-	int			lineHeight;
-	t_ray_info	ray;
+	int drawStart;
+	drawStart = -line_height / 2 + HEIGHT / 2;
+	if(drawStart < 0) //guarantee not to draw outside the screen/image
+		drawStart = 0;
+	return (drawStart);
+}
 
-	w = LENGHT;
-	h = HEIGHT; //h is the height in pixels of the screen, that way we transform from data->map to pixel coordinates
-	x = 0;
-	while (x < w)
-	{
-		ray.dir = calc_ray_dir(x, data);
-		calc_perp_wall_dist(data, &ray);
-		lineHeight = (int)(h / ray.perp_wall_dist);
-		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart;
-		drawStart = -lineHeight / 2 + h / 2;
-		if(drawStart < 0) //guarantee not to draw outside the screen/image
-			drawStart = 0;
-		int drawEnd;
-		drawEnd = lineHeight / 2 + h / 2;
-		if(drawEnd >= h) //guarantee not to draw outside the screen/image
-			drawEnd = h - 1;
-		
-		int texture_i = data->map[ray.map_hit.x][ray.map_hit.y] - 1;
+int	calc_highest_pixel (int line_height)
+{
+	int drawEnd;
+	drawEnd = line_height / 2 + HEIGHT / 2;
+	if(drawEnd >= HEIGHT) //guarantee not to draw outside the screen/image
+		drawEnd = HEIGHT - 1;
+	return (drawEnd);
+}
 
-		// load_textures(data); -> already beeing called at render_ray.map_hit3D;
-		// uint32_t buffer[HEIGHT][LENGHT];
-		//calculate value of tile_hit_coord -> position the ray hit the tile
+double	calc_tile_hit_x (t_data *data, t_ray_info *ray)
+{
 		double tile_hit_X; //where exactly the wall was hit
-		if (ray.side_hit == 0)
-			tile_hit_X = data->player.y + ray.perp_wall_dist * ray.dir.y;
+
+		if (ray->side_hit == 0)
+			tile_hit_X = data->player.y + ray->perp_wall_dist * ray->dir.y;
 		else
-			tile_hit_X = data->player.x + ray.perp_wall_dist * ray.dir.x;
+			tile_hit_X = data->player.x + ray->perp_wall_dist * ray->dir.x;
 		
 		tile_hit_X -= floor((tile_hit_X)); //just the decimal portion
+		return (tile_hit_X);
+}
 
-		//x coordinate on the texture
+int	calc_texture_hit_x(t_data *data, t_ray_info *ray, double tile_hit_X)
+{
 		int texture_hit_X;
 		texture_hit_X = tile_hit_X * (double)data->texture_width;
-		if(ray.side_hit == 0 && ray.dir.x > 0)
+		if((ray->side_hit == 0 && ray->dir.x > 0) ||
+			(ray->side_hit == 1 && ray->dir.y < 0))
 			texture_hit_X = data->texture_width - texture_hit_X - 1;
-		if(ray.side_hit == 1 && ray.dir.y < 0)
-			texture_hit_X = data->texture_width - texture_hit_X - 1;
+		return (texture_hit_X);
+}
 
-		 double stepTex;
-		 stepTex = 1.0 * data->texture_height / lineHeight;
+void	draw_x_line(t_data *data, t_ray_info *ray, int line_height, int x)
+{
+		//calculate lowest and highest pixel to fill in current stripe
+		int drawStart;
+		drawStart = calc_lowest_pixel(line_height);
+		int drawEnd;
+		drawEnd = calc_highest_pixel(line_height);
+		//calculate value of tile_hit_coord -> position the ray hit the tile
+		double tile_hit_X; //where exactly the wall was hit
+		tile_hit_X = calc_tile_hit_x(data, ray); //just the decimal portion
+		//x coordinate on the texture
+		int texture_hit_X;
+		texture_hit_X = calc_texture_hit_x(data, ray, tile_hit_X);
+		int texture_i = data->map[ray->map_hit.x][ray->map_hit.y] - 1;
+		double stepTex;
+		stepTex = 1.0 * data->texture_height / line_height;
 		// Starting texture coordinate
 		double texPos;
-		texPos = (drawStart - h / 2 + lineHeight / 2) * stepTex;
+		texPos = (drawStart - HEIGHT / 2 + line_height / 2) * stepTex;
 		for(int y = drawStart; y<drawEnd; y++)
 		{
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
@@ -163,10 +169,25 @@ void	raycast(t_data* data, int color_A, int color_B)
 			texPos += stepTex;
 			unsigned long color = data->texture[texture_i][data->texture_height * texY + texture_hit_X];
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-			if (ray.side_hit == 1)
+			if (ray->side_hit == 1)
 				color = (color >> 1) & 8355711;
 			pixel_put(&data->img, x, y, color);
 		}
+}
+
+void	raycast(t_data* data, int color_A, int color_B)
+{
+	int			x;
+	int			line_height;
+	t_ray_info	ray;
+
+	x = 0;
+	while (x < LENGHT)
+	{
+		ray.dir = calc_ray_dir(x, data);
+		calc_perp_wall_dist(data, &ray);
+		line_height = (int)(HEIGHT / ray.perp_wall_dist);
+		draw_x_line(data, &ray, line_height, x);
 		x++;
 	}
 }

@@ -18,7 +18,6 @@ void	render_map2d(t_data *data, int square_sz);
 void	render_map3d(t_data *data);
 void	render_player(t_img *img, t_player player, int l);
 void	draw_line(t_img *img, int i[2], int f[2], int color);
-void	draw_vertical_line(t_img *img, int x, int y0, int yf, int color);
 void	draw_square(t_img *img, int x0, int y0, int color);
 void	pixel_put(t_img *data, int x, int y, int color);
 void	walk_forward(t_data *data);
