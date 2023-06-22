@@ -83,8 +83,8 @@ void	setup_map(t_data *dat)
 
 void	setup_data(t_data *dat)
 {
-	dat->player.play_x = 22;
-	dat->player.play_y = 11.5;
+	dat->player.x = 22;
+	dat->player.y = 11.5;
 	dat->player.cam_plane_dirX = 0;
 	dat->player.cam_plane_dirY = 0.66;
 	dat->player.dirX = 1;

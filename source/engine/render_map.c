@@ -37,5 +37,5 @@ void	render_map3d(t_data *data)
 	color_a = 0x529e35;
 	color_b = 0x32aa6e;
 	load_textures(data);
-	render_walls(data, color_a, color_b);
+	raycast(data, color_a, color_b);
 }

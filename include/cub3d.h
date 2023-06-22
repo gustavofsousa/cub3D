@@ -32,7 +32,7 @@ void	bresenham_y(t_img *img, int i[2], int f[2], int color);
 void	bresenham_x(t_img *img, int i[2], int f[2], int color);
 void	render_map2d(t_data *data, int square_sz);
 void	render_map3d(t_data *data);
-void	render_walls(t_data* data, int color_A, int color_B);
+void	raycast(t_data* data, int color_A, int color_B);
 void	load_textures(t_data *data);
 
 #endif

@@ -17,8 +17,8 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	double	play_x;
-	double	play_y;
+	double	x;
+	double	y;
 	double	dirX;
 	double	dirY;
 	double	cam_plane_dirX;
@@ -65,7 +65,10 @@ typedef struct s_double_vector
 typedef struct s_ray_info
 {
 	t_double_vector	dir;
-	t_int_vector	map_hit_coord;
+	t_double_vector	side;
+	t_double_vector	delta;
+	t_int_vector	step;
+	t_int_vector	map_hit;
 	int				side_hit;
 	double			perp_wall_dist;
 }	t_ray_info;

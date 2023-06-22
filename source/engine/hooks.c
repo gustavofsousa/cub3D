@@ -5,12 +5,12 @@ void	walk_forward(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.play_x + data->player.dirX * data->player.speed;
-	new_y = data->player.play_y + data->player.dirY * data->player.speed;
-	if (data->map[(int)trunc(new_x)][(int)trunc(data->player.play_y)] == 0)
-		data->player.play_x = new_x;
-	if (data->map[(int)trunc(data->player.play_x)][(int)trunc(new_y)] == 0)
-		data->player.play_y = new_y;
+	new_x = data->player.x + data->player.dirX * data->player.speed;
+	new_y = data->player.y + data->player.dirY * data->player.speed;
+	if (data->map[(int)trunc(new_x)][(int)trunc(data->player.y)] == 0)
+		data->player.x = new_x;
+	if (data->map[(int)trunc(data->player.x)][(int)trunc(new_y)] == 0)
+		data->player.y = new_y;
 }
 
 void	walk_backward(t_data *data)
@@ -18,12 +18,12 @@ void	walk_backward(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.play_x - data->player.dirX * data->player.speed;
-	new_y = data->player.play_y - data->player.dirY * data->player.speed;
-	if (data->map[(int)trunc(new_x)][(int)trunc(data->player.play_y)] == 0)
-		data->player.play_x = new_x;
-	if (data->map[(int)trunc(data->player.play_x)][(int)trunc(new_y)] == 0)
-		data->player.play_y = new_y;
+	new_x = data->player.x - data->player.dirX * data->player.speed;
+	new_y = data->player.y - data->player.dirY * data->player.speed;
+	if (data->map[(int)trunc(new_x)][(int)trunc(data->player.y)] == 0)
+		data->player.x = new_x;
+	if (data->map[(int)trunc(data->player.x)][(int)trunc(new_y)] == 0)
+		data->player.y = new_y;
 }
 
 void	walk_left(t_player *player)
