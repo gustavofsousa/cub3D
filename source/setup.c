@@ -3,31 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:38:34 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 16:10:53 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	init_mlx(t_game *game)
+void	init_mlx(t_game *game)
 {
-	game->mlx.ptr = mlx_init();
-	if (game->mlx.ptr == NULL)
-		return (-1);
-	return (0);
+	game->img.ptr = mlx_init();
+	if (game->img.ptr == NULL)
+		exit_game("error: mlx init failed", game);
+	game->img.win = mlx_new_window(game->img.ptr, LENGHT, HEIGHT, "cub3D");
+	if (game->img.win == NULL)
+		exit_game("error: mlx window failed", game);
+	game->img.img = mlx_new_image(game->img.ptr, LENGHT, HEIGHT);
+	if (game->img.img == NULL)
+		exit_game("error: mlx image failed", game);
+	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp,
+			&game->img.line_len, &game->img.endian);
+	if (game->img.addr == NULL)
+		exit_game("error: mlx address failed", game);
 }
 
-void	init_variables(t_game *game)
+void	init_raycasting(t_game *game)
+{
+	game->player.x = 22;
+	game->player.y = 11.5;
+	game->player.cam_plane_dirX = 0;
+	game->player.cam_plane_dirY = 0.66;
+	game->player.dirX = 1;
+	game->player.dirY = 0;
+	game->player.speed = 0.005;
+	game->player.rot_speed = 0.003;
+	game->key.w_is_press = 0;
+	game->key.a_is_press = 0;
+	game->key.s_is_press = 0;
+	game->key.d_is_press = 0;
+	game->map.rows = 24;
+	game->map.cols = 24;
+}
+
+void	init_var_map(t_game *game)
 {
 // mlx
-	game->mlx.height = 600;
-	game->mlx.width = 600;
+	game->img.height = 640;
+	game->img.width = 480;
 // Map
-	game->map.height = 0;
-	game->map.width = 0;
+	game->map.rows = 0;
+	game->map.cols = 0;
 	game->map.mtx = NULL;
 // texture
 	game->texture.north.ptr = NULL;
@@ -40,6 +67,7 @@ void	init_variables(t_game *game)
 
 void	setup(t_game *game)
 {
-	init_variables(game);
+	init_var_map(game);
+	init_var_raycasting(game);
 	init_mlx(game);
 }

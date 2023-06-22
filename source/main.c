@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 21:24:20 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 16:15:54 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	exit_game(char *message, t_game *game)
 	free_map(game);
 	// free_texture(game);
 	// free_mlx(game);
+	// destroy mlx window and image ??
 	exit(0);
 }
 
@@ -45,10 +46,8 @@ int	main(int argc, char **argv)
 	{
 		setup(&game);
 		interpretate_map(&game, argv[1]);
-		print_mtx(game.map.mtx);
 		validate_map(&game);
 		//render_game(&game);
-		ft_putendl_fd("Guten morgen", 1);
 		exit_game(NULL, &game);
 	}
 	ft_putendl_fd("Usage: ./cub3D <map.cub>", 1);

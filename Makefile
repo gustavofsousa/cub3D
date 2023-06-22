@@ -10,23 +10,26 @@ SRCDIR	:=	source/
 OBJDIR	:=	obj/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
-LISTDIR 	:=	color texture game interpretate_map validate_map
+LISTDIR 	:=	color texture game interpretate_map validate_map	engine
 
 ####	Sources & objects	####
-MAIN				:=	main	setup	common_libft			
+MAIN				:=	main	setup	common_libft	render_game
 INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
 						validate_up_down	validate_left_right	validate_middle
-GAME				:=	render_game
+ENGINE				:=	draw	hooks	render_map					\
+						2d/bresenham	2d/draw						\
+						3d/render
 
 SRC		:=	$(MAIN)	\
 			$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\
 			$(addprefix validate_map/, $(VALIDATE_MAP))	\
 			$(addprefix color/, $(COLOR))	\
 			$(addprefix texture/, $(TEXTURE))	\
-			$(addprefix game/, $(GAME))
+			$(addprefix game/, $(GAME))			\
+			$(addprefix engine/, $(ENGINE))
 
 SRCS	:=	$(addsuffix .c, $(SRC))
 OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
@@ -37,14 +40,14 @@ LIBLIB		:=	$(LIBDIR)libft.a
 ####	defining OS name variable	####
 UNAME := $(shell uname)
 
-############## mlx library  for mac ##############
+#----------------- mlx library  for mac ---------------
 ifeq ($(UNAME), Darwin)
 	MLX		:= ./miniLibX/
 	MLX_LIB	:= $(addprefix $(MLX), libmlx.a	)
 	MLX_INC	:= -I ./miniLibX
 	MLX_LNK	:= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 endif
-############## mlx library  for linux ##############
+#----------------- mlx library  for linux ---------------
 ifeq ($(UNAME), Linux)
 	MLX		:= ./mlx_linux
 	MLX_LIB	:= $(addprefix $(MLX), mlx.a)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   auxiliar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 21:20:39 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 15:59:52 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	has_all_information(t_game *game)
 {
 	if (game->map.mtx == NULL)
 		return (0);
-	game->map.mtx[game->map.height] = NULL;
+	game->map.mtx[game->map.rows] = NULL;
 	if (!game->texture.north.ptr
 		|| !game->texture.south.ptr
 		|| !game->texture.west.ptr

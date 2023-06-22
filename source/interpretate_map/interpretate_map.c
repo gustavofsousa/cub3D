@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpretate_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 22:01:29 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/22 15:52:49 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	interpretate_line(t_game *game, char *line_pre)
 	else
 	{
 		update_matrix(&game->map.mtx, line);
-		game->map.height++;
+		game->map.rows++;
 	}
 	free(line);
 }
