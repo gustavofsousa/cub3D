@@ -33,7 +33,6 @@ int	loop_hook(t_game *game)
 	if (game->key.w_is_press || game->key.s_is_press
 		|| game->key.d_is_press || game->key.a_is_press)
 	{
-		// render_map3d(game);
 		if (game->key.w_is_press)
 			walk_forward (game);
 		if (game->key.s_is_press)
@@ -42,9 +41,10 @@ int	loop_hook(t_game *game)
 			walk_right (&game->player);
 		if (game->key.a_is_press)
 			walk_left (&game->player);
-		// render_map2d(game, 22);
-		render_player(&game->img, game->player, 12);
 	}
+	render_map3d(game);
+	//render_map2d(game, 22);
+	render_player(&game->img, game->player, 12);
 	mlx_put_image_to_window(game->img.ptr, game->img.win,
 		game->img.img, 0, 0);
 	return (0);
@@ -54,7 +54,7 @@ void	render_game(t_game *game)
 {
 	render_player(&game->img, game->player, 12);
 	print_mtx(game);
-	// render_map2d(game, 22);
+	//render_map2d(game, 22);
 	// render_map3d(game);
 	mlx_hook(game->img.win, 2, 1L << 0, handle_key_press, game);
 	mlx_hook(game->img.win, 3, 1L << 1, handle_key_release, game);

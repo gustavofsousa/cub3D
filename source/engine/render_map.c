@@ -12,7 +12,7 @@ void	render_map2d(t_game *game, int square_sz)
 		j = 0;
 		while (j < game->map.cols)
 		{
-			if (game->map.mtx[i][j] == 1)
+			if (game->map.mtx_int[i][j] == 1)
 				draw_square(&game->img, i * square_sz, j * square_sz,
 					0xFF0000);
 			else
