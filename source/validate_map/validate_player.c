@@ -43,6 +43,24 @@ int	is_valid_player(char map_cell)
 	return (0);
 }
 
+void	setup_camera_plane(t_game *game, char spawn_direction)
+{
+	if (spawn_direction == 'W' || spawn_direction == 'E')
+	{
+		game->player.cam_plane_dirX = 0;
+		game->player.cam_plane_dirY = 0.66;
+		if (spawn_direction == 'W')
+			game->player.cam_plane_dirY *= -1;
+	}
+	if (spawn_direction == 'N' || spawn_direction == 'S')
+	{
+		game->player.cam_plane_dirX = 0.66;
+		game->player.cam_plane_dirY = 0;
+		if (spawn_direction == 'S')
+			game->player.cam_plane_dirX *= -1;
+	}
+}
+
 void	validate_player(t_game *game)
 {
 	int	i;
@@ -62,6 +80,7 @@ void	validate_player(t_game *game)
 				game->player.y = i;
 				game->player.dirX = choose_direction_x(game->map.mtx[i][j]);
 				game->player.dirY = choose_direction_y(game->map.mtx[i][j]);
+				setup_camera_plane(game, game->map.mtx[i][j]);
 				qtd_player++;
 			}
 		}

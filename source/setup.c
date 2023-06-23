@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/23 13:32:06 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:49:35 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_var_raycasting(t_game *game)
 	game->player.x = 0;
 	game->player.y = 0;
 	game->player.cam_plane_dirX = 0;
-	game->player.cam_plane_dirY = 0.66;
+	game->player.cam_plane_dirY = 0;
 	game->player.dirX = 0;
 	game->player.dirY = 0;
 	game->player.speed = 0.005;
@@ -43,8 +43,6 @@ void	init_var_raycasting(t_game *game)
 	game->key.a_is_press = 0;
 	game->key.s_is_press = 0;
 	game->key.d_is_press = 0;
-	game->tex_height = 64;
-	game->tex_width = 64;
 }
 
 void	init_var_map(t_game *game)
