@@ -178,16 +178,16 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 void	raycast(t_game* game)
 {
 	int			x;
-	// int			line_height;
+	int			line_height;
 	t_ray_info	ray;
 
 	x = 0;
 	while (x < LENGHT)
 	{
-		// ray.dir = calc_ray_dir(x, game);
-		// calc_perp_wall_dist(game, &ray);
-		// line_height = (int)(HEIGHT / ray.perp_wall_dist);
-		// draw_x_line(game, &ray, line_height, x);
+		ray.dir = calc_ray_dir(x, game);
+		calc_perp_wall_dist(game, &ray);
+		line_height = (int)(HEIGHT / ray.perp_wall_dist);
+		draw_x_line(game, &ray, line_height, x);
 		x++;
 	}
 }

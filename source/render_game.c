@@ -43,7 +43,7 @@ int	loop_hook(t_game *game)
 			walk_left (&game->player);
 	}
 	render_map3d(game);
-	//render_map2d(game, 22);
+	// render_map2d(game, 22);
 	render_player(&game->img, game->player, 12);
 	mlx_put_image_to_window(game->img.ptr, game->img.win,
 		game->img.img, 0, 0);
@@ -54,8 +54,8 @@ void	render_game(t_game *game)
 {
 	render_player(&game->img, game->player, 12);
 	print_mtx(game);
-	//render_map2d(game, 22);
-	// render_map3d(game);
+	// render_map2d(game, 22);
+	render_map3d(game);
 	mlx_hook(game->img.win, 2, 1L << 0, handle_key_press, game);
 	mlx_hook(game->img.win, 3, 1L << 1, handle_key_release, game);
 	mlx_hook(game->img.win, 17, 0, close_window, game);
