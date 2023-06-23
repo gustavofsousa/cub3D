@@ -83,13 +83,13 @@ typedef struct	s_game
 {
 	t_img		img;
 	t_map		map;
-	t_ray_info		ray;
+	t_ray_info	ray;
 	t_player	player;
 	t_texture	texture;
-	t_key_state		key;
-	int	tex_width; //delete after using texture files
-	int	tex_height; //delete after using texture files
-	int				tex[8][TEXTURE_HEIGHT * TEXTURE_WIDTH]; //delete after using texture files
+	t_key_state	key;
+	int			tex_width; //delete after using texture files
+	int			tex_height; //delete after using texture files
+	int			tex[8][TEXTURE_HEIGHT * TEXTURE_WIDTH]; //delete after using texture files
 	// int				**map; //delete after using texture files
 
 }				t_game;

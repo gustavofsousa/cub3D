@@ -26,14 +26,7 @@ void	render_map2d(t_game *game, int square_sz)
 
 void	render_map3d(t_game *game)
 {
-	int		color_a;
-	int		color_b;
-
-	color_a = 0x777777;
-	color_b = 0xCCCCCC;
-	draw_background(*game, color_a, color_b);
-	color_a = 0x529e35;
-	color_b = 0x32aa6e;
+	draw_background(*game);
 	// load_textures(game);
 	raycast(game);
 }

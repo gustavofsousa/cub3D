@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 19:03:05 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:42:27 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	walk_left(t_player *player);
 
 //Draw
 void	draw_square(t_img *img, int x0, int y0, int color);
-void	draw_background(t_game game, int ceiling_color, int floor_color);
+void	draw_background(t_game game);
 void	pixel_put(t_img *data, int x, int y, int color);
 void	bresenham_x(t_img *img, int i[2], int f[2], int color);
 void	bresenham_y(t_img *img, int i[2], int f[2], int color);

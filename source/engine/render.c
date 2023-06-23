@@ -110,10 +110,10 @@ int	calc_tex_hit_x(t_game *game, t_ray_info *ray)
 	double tile_hit_X;
 
 	tile_hit_X = calc_tile_hit_x(game, ray);
-	tex_hit_X = tile_hit_X * (double)game->tex_width;
+	tex_hit_X = tile_hit_X * (double)game->texture.north.width;
 	if((ray->side_hit == 0 && ray->dir.x > 0) ||
 		(ray->side_hit == 1 && ray->dir.y < 0))
-		tex_hit_X = game->tex_width - tex_hit_X - 1;
+		tex_hit_X = game->texture.north.width - tex_hit_X - 1;
 	return (tex_hit_X);
 }
 
@@ -122,7 +122,7 @@ unsigned long	tex_color(t_game *game, int tex_pos, int tex_i, int tex_hit_x)
 	int texY;
 	int	*texture;
 
-	// check the orientation of the
+	// check the orientation of the wall
 	texture = (int *) game->texture.north.addr;
 	texY = (int)tex_pos & (game->texture.north.height - 1);
 	return (texture[game->texture.north.height * texY + tex_hit_x]);
@@ -140,7 +140,7 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 	tex_hit_x = calc_tex_hit_x(game, ray);
 	draw_limits[0] = calc_lowest_pixel(line_height);
 	draw_limits[1] = calc_highest_pixel(line_height);
-	stepTex = 1.0 * game->tex_height / line_height;
+	stepTex = 1.0 * game->texture.north.height / line_height;
 	tex_pos = (draw_limits[0] - HEIGHT / 2 + line_height / 2) * stepTex;
 	while (draw_limits[0] < draw_limits[1])
 	{
@@ -172,7 +172,7 @@ void	raycast(t_game* game)
 	}
 }
 
-void	draw_background(t_game game, int ceiling_color, int floor_color)
+void	draw_background(t_game game)
 {
 	int	x;
 	int	y;
@@ -182,11 +182,11 @@ void	draw_background(t_game game, int ceiling_color, int floor_color)
 	while (x < LENGHT)
 	{
 		y = 0;
-		color = ceiling_color;
+		color = game.texture.ceiling;
 		while (y < HEIGHT)
 		{
 			if (y == HEIGHT / 2)
-				color = floor_color;
+				color = game.texture.floor;
 			pixel_put(&game.img, x, y, color);
 			y++;
 		}
