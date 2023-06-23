@@ -1,29 +1,5 @@
 #include "../../include/cub3d.h"
 
-void	load_textures(t_game *game)
-{
-	game->tex_height = 64;
-	game->tex_width = 64;
-	for (int x = 0; x < (int) game->tex_width; x++)
-	{
-		for (int y = 0 ; y < (int) game->tex_height; y ++)
-		{
-			int xorcolor = (x * 256 / game->tex_width) ^ (y * 256 / game->tex_height);
-			//int xcolor = x * 256 / game->tex_width;
-			int ycolor = y * 256 / game->tex_height;
-			int xycolor = y * 128 / game->tex_height + x * 128 / game->tex_width;
-			game->tex[0][game->tex_width * y + x] = 65536 * 254 * (x != y && x != game->tex_width - y); //flat red tex with black cross
-			game->tex[1][game->tex_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-			game->tex[2][game->tex_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-			game->tex[3][game->tex_width * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-			game->tex[4][game->tex_width * y + x] = 256 * xorcolor; //xor green
-			game->tex[5][game->tex_width * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-			game->tex[6][game->tex_width * y + x] = 65536 * ycolor; //red gradient
-			game->tex[7][game->tex_width * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey tex
-		}
-	}
-}
-
 t_double_vector	calc_ray_dir(int x, t_game *game)
 {
 	t_double_vector ray_dir;
@@ -144,9 +120,12 @@ int	calc_tex_hit_x(t_game *game, t_ray_info *ray)
 unsigned long	tex_color(t_game *game, int tex_pos, int tex_i, int tex_hit_x)
 {
 	int texY;
+	int	*texture;
 
-	texY = (int)tex_pos & (game->tex_height - 1);
-	return (game->tex[tex_i][game->tex_height * texY + tex_hit_x]);
+	// check the orientation of the
+	texture = (int *) game->texture.north.addr;
+	texY = (int)tex_pos & (game->texture.north.height - 1);
+	return (texture[game->texture.north.height * texY + tex_hit_x]);
 }
 
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
