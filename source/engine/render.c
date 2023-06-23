@@ -163,15 +163,16 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 	draw_limits[1] = calc_highest_pixel(line_height);
 	stepTex = 1.0 * game->tex_height / line_height;
 	tex_pos = (draw_limits[0] - HEIGHT / 2 + line_height / 2) * stepTex;
-	for(int y = draw_limits[0]; y<draw_limits[1]; y++)
+	while (draw_limits[0] < draw_limits[1])
 	{
 		tex_pos += stepTex;
 		if (ray->side_hit == 1)
-			pixel_put(&game->img, x, y,
+			pixel_put(&game->img, x, draw_limits[0],
 			(tex_color(game, tex_pos, tex_i, tex_hit_x) >> 1) & 8355711);
 		else
-			pixel_put(&game->img, x, y,
+			pixel_put(&game->img, x, draw_limits[0],
 			tex_color(game, tex_pos, tex_i, tex_hit_x));
+		draw_limits[0]++;
 	}
 }
 
