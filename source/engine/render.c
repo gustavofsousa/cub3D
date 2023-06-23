@@ -14,8 +14,8 @@ t_double_vector	calc_ray_dir(int x, t_game *game)
 
 void	calc_ray_info(t_game *game, t_ray_info *ray)
 {
-	ray->map_hit.x = trunc(game->player.x); //current square of the ray->map_hit, the ray is in
-	ray->map_hit.y = trunc(game->player.y); //current square of the ray->map_hit, the ray is in
+	ray->map_hit.x = trunc(game->player.x);
+	ray->map_hit.y = trunc(game->player.y);
 	ray->delta.x = fabs(1.0 / ray->dir.x);
 	ray->delta.y = fabs(1.0 / ray->dir.y);
 	if (ray->dir.x < 0)
@@ -104,53 +104,68 @@ double	calc_tile_hit_x (t_game *game, t_ray_info *ray)
 		return (tile_hit_X);
 }
 
-int	calc_tex_hit_x(t_game *game, t_ray_info *ray)
+int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex)
 {
 	int tex_hit_X;
 	double tile_hit_X;
 
 	tile_hit_X = calc_tile_hit_x(game, ray);
-	tex_hit_X = tile_hit_X * (double)game->texture.north.width;
+	tex_hit_X = tile_hit_X * (double)tex.width;
 	if((ray->side_hit == 0 && ray->dir.x > 0) ||
 		(ray->side_hit == 1 && ray->dir.y < 0))
-		tex_hit_X = game->texture.north.width - tex_hit_X - 1;
+		tex_hit_X = tex.width - tex_hit_X - 1;
 	return (tex_hit_X);
 }
 
-unsigned long	tex_color(t_game *game, int tex_pos, int tex_i, int tex_hit_x)
+unsigned long	tex_color(t_game *game, t_img tex, int tex_pos, int tex_hit_x)
 {
 	int texY;
 	int	*texture;
 
-	// check the orientation of the wall
-	texture = (int *) game->texture.north.addr;
-	texY = (int)tex_pos & (game->texture.north.height - 1);
-	return (texture[game->texture.north.height * texY + tex_hit_x]);
+	texture = (int *) tex.addr;
+	texY = (int)tex_pos & (tex.height - 1);
+	return (texture[tex.height * texY + tex_hit_x]);
+}
+
+t_img	def_tex(t_game *game, t_ray_info *ray)
+{
+	if (ray->side_hit)
+	{
+		if (ray->dir.y < 0)
+			return (game->texture.north);
+		return (game->texture.south);
+	}
+	else
+	{
+		if (ray->dir.x > 0)
+			return (game->texture.east);
+		return (game->texture.west);
+	}
 }
 
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 {
-	int draw_limits[2];
-	double stepTex;
-	double tex_pos;
-	int tex_i;
-	int	tex_hit_x;
+	int		draw_limits[2];
+	double	stepTex;
+	double	tex_pos;
+	int		tex_hit_x;
+	t_img	tex;
 
-	tex_i = game->map.mtx_int[ray->map_hit.x][ray->map_hit.y] - 1;
-	tex_hit_x = calc_tex_hit_x(game, ray);
+	tex = def_tex(game, ray);
+	tex_hit_x = calc_tex_hit_x(game, ray, tex);
 	draw_limits[0] = calc_lowest_pixel(line_height);
 	draw_limits[1] = calc_highest_pixel(line_height);
-	stepTex = 1.0 * game->texture.north.height / line_height;
+	stepTex = 1.0 * tex.height / line_height;
 	tex_pos = (draw_limits[0] - HEIGHT / 2 + line_height / 2) * stepTex;
 	while (draw_limits[0] < draw_limits[1])
 	{
 		tex_pos += stepTex;
 		if (ray->side_hit == 1)
 			pixel_put(&game->img, x, draw_limits[0],
-			(tex_color(game, tex_pos, tex_i, tex_hit_x) >> 1) & 8355711);
+			(tex_color(game, tex, tex_pos, tex_hit_x) >> 1) & 8355711);
 		else
 			pixel_put(&game->img, x, draw_limits[0],
-			tex_color(game, tex_pos, tex_i, tex_hit_x));
+			tex_color(game, tex, tex_pos, tex_hit_x));
 		draw_limits[0]++;
 	}
 }

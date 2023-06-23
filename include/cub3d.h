@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/23 15:42:27 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:45:08 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		is_north(char *cardinal, t_game *game);
 int		is_south(char *cardinal, t_game *game);
 int		is_west(char *cardinal, t_game *game);
 int		is_east(char *cardinal, t_game *game);
-void	load_textures(t_game *game);
 
 // Color
 int		is_color(char *line);

@@ -14,7 +14,7 @@ typedef struct s_img
 	int		bpp; // bits_per_pixel
 	int		line_len; //line_length
 	int		endian;
-}			t_img;
+}	t_img;
 
 typedef struct s_map
 {
@@ -22,7 +22,7 @@ typedef struct s_map
 	int		cols; // = n_columns
 	char	**mtx;
 	int		**mtx_int;
-}			t_map;
+}	t_map;
 
 typedef struct s_player
 {
@@ -66,7 +66,7 @@ typedef struct	s_texture
 	t_img	west;
 	int		floor;
 	int		ceiling;
-}				t_texture;
+}	t_texture;
 
 typedef struct s_ray_info
 {
@@ -87,11 +87,6 @@ typedef struct	s_game
 	t_player	player;
 	t_texture	texture;
 	t_key_state	key;
-	int			tex_width; //delete after using texture files
-	int			tex_height; //delete after using texture files
-	int			tex[8][TEXTURE_HEIGHT * TEXTURE_WIDTH]; //delete after using texture files
-	// int				**map; //delete after using texture files
-
-}				t_game;
+}	t_game;
  
 #endif

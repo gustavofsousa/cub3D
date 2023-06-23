@@ -27,6 +27,5 @@ void	render_map2d(t_game *game, int square_sz)
 void	render_map3d(t_game *game)
 {
 	draw_background(*game);
-	// load_textures(game);
 	raycast(game);
 }
