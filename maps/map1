@@ -1,7 +1,7 @@
-NO textures/Ground_01.xpm
-SO textures/north_wall.xpm
-WE textures/north_wall.xpm
-EA textures/north_wall.xpm
+NO textures/north_rock.xpm
+SO textures/south_rock.xpm
+WE textures/west_rock.xpm
+EA textures/east_rock.xpm
 F 255,0,0
 C 0,0,255
 111111111
