@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 18:50:162 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:51:36 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	choose_direction_y(char c)
 		return (-1);
 	else if (c == 'S')
 		return (1);
-  return (0);
+	return (0);
 }
 
 int	choose_direction_x(char c)
@@ -35,7 +35,7 @@ int	choose_direction_x(char c)
 		return (0);
 	else if (c == 'S')
 		return (0);
-  return (0);
+	return (0);
 }
 
 int	is_valid_player(char map_cell)

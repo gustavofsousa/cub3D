@@ -81,10 +81,3 @@ void	get_color(t_game *game, char *line)
 		game->texture.floor = translate_rgb(arg, game);
 	free_matrix(line_mtx);
 }
-
-int	is_color(char *line)
-{
-	if (ft_count_words(line, ',') != 3)
-		return (0);
-	return (1);
-}

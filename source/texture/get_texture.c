@@ -6,13 +6,12 @@
 /*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 17:16:55 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/06/24 11:52:29 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// make img to texture
 t_img	get_argure(char *path, t_game *game)
 {
 	t_img	texture;
@@ -28,7 +27,6 @@ t_img	get_argure(char *path, t_game *game)
 			&texture.bpp,
 			&texture.line_len,
 			&texture.endian);
-	//texture.line_len /= 4;
 	return (texture);
 }
 

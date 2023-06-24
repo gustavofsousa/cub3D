@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/23 16:49:35 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:48:20 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,12 @@ void	init_var_raycasting(t_game *game)
 
 void	init_var_map(t_game *game)
 {
-// mlx
 	game->img.height = 0;
 	game->img.width = 0;
-// Map
 	game->map.rows = 0;
 	game->map.cols = 0;
 	game->map.mtx = NULL;
 	game->map.mtx_int = NULL;
-// texture
 	game->texture.north.ptr = NULL;
 	game->texture.south.ptr = NULL;
 	game->texture.west.ptr = NULL;
