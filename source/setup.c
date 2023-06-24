@@ -33,10 +33,10 @@ void	init_var_raycasting(t_game *game)
 {
 	game->player.x = 0;
 	game->player.y = 0;
-	game->player.cam_plane_dirX = 0;
-	game->player.cam_plane_dirY = 0;
-	game->player.dirX = 0;
-	game->player.dirY = 0;
+	game->player.cam_plane_dir_x = 0;
+	game->player.cam_plane_dir_y = 0;
+	game->player.dir_x = 0;
+	game->player.dir_y = 0;
 	game->player.speed = 0.005;
 	game->player.rot_speed = 0.003;
 	game->key.w_is_press = 0;

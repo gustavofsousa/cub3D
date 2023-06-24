@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/23 15:45:08 by fcaetano         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -17,15 +5,14 @@
 # include "structs.h"
 # include "constants.h"
 # include "../mlx_linux/mlx.h"
-//# include "../miniLibX/mlx.h"
 # include <fcntl.h> //open().
 # include <stdio.h> //printf
-#include <math.h>
+# include <math.h>
 
 void	setup(t_game *game);
 void	render_game(t_game *game);
 void	exit_game(char *message, t_game *game);
-int     close_window(t_game *game);
+int		close_window(t_game *game);
 
 // interpretate_map
 void	interpretate_map(t_game *game, char *path_name);
@@ -70,7 +57,7 @@ void	transform_map_int(t_game *game);
 
 // Ray casting
 void	render_map3d(t_game *game);
-void	raycast(t_game* game);
+void	raycast(t_game *game);
 
 // Map 2D
 void	render_map2d(t_game *game, int square_sz);

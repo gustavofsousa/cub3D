@@ -7,8 +7,8 @@ t_double_vector	calc_ray_dir(int x, t_game *game)
 	double cameraX;
 	cameraX = 2.0 * x / (double)LENGHT - 1.0;
 
-	ray_dir.x = game->player.dirX + game->player.cam_plane_dirX * cameraX;
-	ray_dir.y = game->player.dirY + game->player.cam_plane_dirY * cameraX;
+	ray_dir.x = game->player.dir_x + game->player.cam_plane_dir_x * cameraX;
+	ray_dir.y = game->player.dir_y + game->player.cam_plane_dir_y * cameraX;
 	return (ray_dir);
 }
 

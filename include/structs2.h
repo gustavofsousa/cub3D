@@ -19,10 +19,10 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
-	double	dirX;
-	double	dirY;
-	double	cam_plane_dirX;
-	double	cam_plane_dirY;
+	double	dir_x;
+	double	dir_y;
+	double	cam_plane_dir_x;
+	double	cam_plane_dir_y;
 	double	speed;
 	double	rot_speed;
 	int		dirx_pxl;
@@ -43,11 +43,6 @@ typedef struct s_data
 	t_player		player;
 	t_key_state		key;
 	int				**map;
-	// int				n_columns;
-	// int				n_rows;
-	// unsigned int	tex_width;
-	// unsigned int	tex_height;
-	// int				tex[8][TEXTURE_HEIGHT * TEXTURE_WIDTH];
 }	t_data;
 
 typedef struct s_int_vector
@@ -61,7 +56,5 @@ typedef struct s_double_vector
 	double	x;
 	double	y;
 }	t_double_vector;
-
-
 
 #endif
