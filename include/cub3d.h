@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 19:03:05 by fcaetano         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -17,15 +5,14 @@
 # include "structs.h"
 # include "constants.h"
 # include "../mlx_linux/mlx.h"
-//# include "../miniLibX/mlx.h"
 # include <fcntl.h> //open().
 # include <stdio.h> //printf
-#include <math.h>
+# include <math.h>
 
 void	setup(t_game *game);
 void	render_game(t_game *game);
 void	exit_game(char *message, t_game *game);
-int     close_window(t_game *game);
+int		close_window(t_game *game);
 
 // interpretate_map
 void	interpretate_map(t_game *game, char *path_name);
@@ -39,7 +26,6 @@ int		is_north(char *cardinal, t_game *game);
 int		is_south(char *cardinal, t_game *game);
 int		is_west(char *cardinal, t_game *game);
 int		is_east(char *cardinal, t_game *game);
-void	load_textures(t_game *game);
 
 // Color
 int		is_color(char *line);
@@ -71,7 +57,7 @@ void	transform_map_int(t_game *game);
 
 // Ray casting
 void	render_map3d(t_game *game);
-void	raycast(t_game* game);
+void	raycast(t_game *game);
 
 // Map 2D
 void	render_map2d(t_game *game, int square_sz);
@@ -83,12 +69,26 @@ void	walk_right(t_player *player);
 void	walk_forward(t_game *game);
 void	walk_left(t_player *player);
 
-//Draw
+// Draw
 void	draw_square(t_img *img, int x0, int y0, int color);
-void	draw_background(t_game game, int ceiling_color, int floor_color);
+void	draw_background(t_game game);
 void	pixel_put(t_img *data, int x, int y, int color);
 void	bresenham_x(t_img *img, int i[2], int f[2], int color);
 void	bresenham_y(t_img *img, int i[2], int f[2], int color);
+void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x);
+void	draw_background(t_game game);
+
+// Calculations
+t_double_vector	calc_ray_dir(int x, t_game *game);
+void	calc_ray_info(t_game *game, t_ray_info *ray);
+void	calc_wall_hit(t_game *game, t_ray_info *ray);
+void	calc_perp_wall_dist(t_game *game, t_ray_info *ray);
+int	calc_lowest_pixel(int line_height);
+int	calc_highest_pixel(int line_height);
+double	calc_tile_hit_x(t_game *game, t_ray_info *ray);
+int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex);
+unsigned long	tex_color(t_game *game, t_img tex, int tex_pos, int tex_hit_x);
+t_img	def_tex(t_game *game, t_ray_info *ray);
 
 // Utils
 void	print_mtx(t_game *game);

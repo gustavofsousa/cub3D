@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/23 13:32:06 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:48:20 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,26 @@ void	init_var_raycasting(t_game *game)
 {
 	game->player.x = 0;
 	game->player.y = 0;
-	game->player.cam_plane_dirX = 0;
-	game->player.cam_plane_dirY = 0.66;
-	game->player.dirX = 0;
-	game->player.dirY = 0;
+	game->player.cam_plane_dir_x = 0;
+	game->player.cam_plane_dir_y = 0;
+	game->player.dir_x = 0;
+	game->player.dir_y = 0;
 	game->player.speed = 0.005;
 	game->player.rot_speed = 0.003;
 	game->key.w_is_press = 0;
 	game->key.a_is_press = 0;
 	game->key.s_is_press = 0;
 	game->key.d_is_press = 0;
-	game->tex_height = 64;
-	game->tex_width = 64;
 }
 
 void	init_var_map(t_game *game)
 {
-// mlx
 	game->img.height = 0;
 	game->img.width = 0;
-// Map
 	game->map.rows = 0;
 	game->map.cols = 0;
 	game->map.mtx = NULL;
 	game->map.mtx_int = NULL;
-// texture
 	game->texture.north.ptr = NULL;
 	game->texture.south.ptr = NULL;
 	game->texture.west.ptr = NULL;

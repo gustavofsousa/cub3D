@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 18:50:162 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:03:57 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	choose_direction_y(char c)
 		return (-1);
 	else if (c == 'S')
 		return (1);
+	return (0);
 }
 
 int	choose_direction_x(char c)
@@ -34,6 +35,7 @@ int	choose_direction_x(char c)
 		return (0);
 	else if (c == 'S')
 		return (0);
+	return (0);
 }
 
 int	is_valid_player(char map_cell)
@@ -41,6 +43,24 @@ int	is_valid_player(char map_cell)
 	if (ft_strchr("NSEW", map_cell) != 0)
 		return (1);
 	return (0);
+}
+
+void	setup_camera_plane(t_game *game, char spawn_direction)
+{
+	if (spawn_direction == 'W' || spawn_direction == 'E')
+	{
+		game->player.cam_plane_dir_x = 0;
+		game->player.cam_plane_dir_y = 0.66;
+		if (spawn_direction == 'W')
+			game->player.cam_plane_dir_y *= -1;
+	}
+	if (spawn_direction == 'N' || spawn_direction == 'S')
+	{
+		game->player.cam_plane_dir_x = 0.66;
+		game->player.cam_plane_dir_y = 0;
+		if (spawn_direction == 'S')
+			game->player.cam_plane_dir_x *= -1;
+	}
 }
 
 void	validate_player(t_game *game)
@@ -58,10 +78,11 @@ void	validate_player(t_game *game)
 		{
 			if (is_valid_player(game->map.mtx[i][j]))
 			{
-				game->player.x = j;
-				game->player.y = i;
-				game->player.dirX = choose_direction_x(game->map.mtx[i][j]);
-				game->player.dirY = choose_direction_y(game->map.mtx[i][j]);
+				game->player.x = j + 0.2;
+				game->player.y = i + 0.2;
+				game->player.dir_x = choose_direction_x(game->map.mtx[i][j]);
+				game->player.dir_y = choose_direction_y(game->map.mtx[i][j]);
+				setup_camera_plane(game, game->map.mtx[i][j]);
 				qtd_player++;
 			}
 		}
