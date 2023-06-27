@@ -4,12 +4,19 @@ void	walk_forward(t_game *game)
 {
 	double	new_x;
 	double	new_y;
+	double	min_dist;
 
+	min_dist = 0.2;
 	new_x = game->player.x + game->player.dir_x * game->player.speed;
 	new_y = game->player.y + game->player.dir_y * game->player.speed;
-	if (game->map.mtx_int[(int)trunc(new_x)][(int)trunc(game->player.y)] == 0)
+	if (game->player.dir_x < 0)
+		min_dist *= -1;
+	if (game->map.mtx_int[(int)trunc(new_x + min_dist)][(int)trunc(game->player.y)] == 0)
 		game->player.x = new_x;
-	if (game->map.mtx_int[(int)trunc(game->player.x)][(int)trunc(new_y)] == 0)
+	min_dist = 0.2;
+	if (game->player.dir_y < 0)
+		min_dist *= -1;
+	if (game->map.mtx_int[(int)trunc(game->player.x)][(int)trunc(new_y + min_dist)] == 0)
 		game->player.y = new_y;
 }
 
@@ -17,12 +24,19 @@ void	walk_backward(t_game *game)
 {
 	double	new_x;
 	double	new_y;
+	double	min_dist;
 
+	min_dist = 0.2;
 	new_x = game->player.x - game->player.dir_x * game->player.speed;
 	new_y = game->player.y - game->player.dir_y * game->player.speed;
-	if (game->map.mtx_int[(int)trunc(new_x)][(int)trunc(game->player.y)] == 0)
+	if (game->player.dir_x < 0)
+		min_dist *= -1;
+	if (game->map.mtx_int[(int)trunc(new_x - min_dist)][(int)trunc(game->player.y)] == 0)
 		game->player.x = new_x;
-	if (game->map.mtx_int[(int)trunc(game->player.x)][(int)trunc(new_y)] == 0)
+	min_dist = 0.2;
+	if (game->player.dir_y < 0)
+		min_dist *= -1;
+	if (game->map.mtx_int[(int)trunc(game->player.x)][(int)trunc(new_y - min_dist)] == 0)
 		game->player.y = new_y;
 }
 
