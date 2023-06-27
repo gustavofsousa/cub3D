@@ -52,7 +52,7 @@ void	walk_backward(t_game *game)
 		game->player.y = new_y;
 }
 
-void	walk_left(t_player *player)
+void	turn_left(t_player *player)
 {
 	double	old_x;
 
@@ -68,7 +68,7 @@ void	walk_left(t_player *player)
 		+ player->cam_plane_dir_y * cos(-player->rot_speed);
 }
 
-void	walk_right(t_player *player)
+void	turn_right(t_player *player)
 {
 	double	old_x;
 

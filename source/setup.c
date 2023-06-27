@@ -40,9 +40,9 @@ void	init_var_raycasting(t_game *game)
 	game->player.speed = 0.005;
 	game->player.rot_speed = 0.003;
 	game->key.w_is_press = 0;
-	game->key.a_is_press = 0;
+	game->key.la_is_press = 0;
 	game->key.s_is_press = 0;
-	game->key.d_is_press = 0;
+	game->key.ra_is_press = 0;
 }
 
 void	init_var_map(t_game *game)

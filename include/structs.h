@@ -41,9 +41,9 @@ typedef struct s_player
 typedef struct s_key_state
 {
 	int	w_is_press;
-	int	a_is_press;
+	int	la_is_press;
 	int	s_is_press;
-	int	d_is_press;
+	int	ra_is_press;
 }	t_key_state;
 
 typedef struct s_int_vector

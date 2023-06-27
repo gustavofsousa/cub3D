@@ -21,7 +21,7 @@ TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
 						validate_up_down	validate_left_right	validate_middle
 ENGINE				:=	draw	draw_2	calculations	calculations_2	hooks	\
-						render_map	bresenham	render
+						render_map	bresenham	render	hooks2
 
 SRC		:=	$(MAIN)	\
 			$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\

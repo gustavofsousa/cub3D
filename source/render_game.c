@@ -14,14 +14,19 @@
 
 int	handle_key_press(int keycode, t_game *game)
 {
+	printf("%i\n", keycode);
 	if (keycode == 65362 || keycode == 119)
 		game->key.w_is_press = 1;
 	if (keycode == 65364 || keycode == 115)
 		game->key.s_is_press = 1;
-	if (keycode == 65363 || keycode == 100)
-		game->key.d_is_press = 1;
-	if (keycode == 65361 || keycode == 97)
-		game->key.a_is_press = 1;
+	if (keycode == 65363)
+		game->key.ra_is_press = 1;
+	if (keycode == 65361)
+		game->key.la_is_press = 1;
+	// if (keycode == 97)
+	// 	game->key.a_is_press = 1;
+	// if (keycode == 100)
+	// 	game->key.d_is_press = 1;
 	return (0);
 }
 
@@ -34,25 +39,25 @@ int	handle_key_release(int keycode, t_game *game)
 	if (keycode == 65364 || keycode == 115)
 		game->key.s_is_press = 0;
 	if (keycode == 65363 || keycode == 100)
-		game->key.d_is_press = 0;
+		game->key.ra_is_press = 0;
 	if (keycode == 65361 || keycode == 97)
-		game->key.a_is_press = 0;
+		game->key.la_is_press = 0;
 	return (0);
 }
 
 int	loop_hook(t_game *game)
 {
 	if (game->key.w_is_press || game->key.s_is_press
-		|| game->key.d_is_press || game->key.a_is_press)
+		|| game->key.ra_is_press || game->key.la_is_press)
 	{
 		if (game->key.w_is_press)
 			walk_forward (game);
 		if (game->key.s_is_press)
 			walk_backward (game);
-		if (game->key.d_is_press)
-			walk_right (&game->player);
-		if (game->key.a_is_press)
-			walk_left (&game->player);
+		if (game->key.ra_is_press)
+			turn_right (&game->player);
+		if (game->key.la_is_press)
+			turn_left (&game->player);
 	}
 	render_map3d(game);
 	mlx_put_image_to_window(game->img.ptr, game->img.win,
