@@ -14,7 +14,6 @@
 
 int	handle_key_press(int keycode, t_game *game)
 {
-	printf("%i\n", keycode);
 	if (keycode == 65362 || keycode == 119)
 		game->key.w_is_press = 1;
 	if (keycode == 65364 || keycode == 115)
@@ -23,10 +22,10 @@ int	handle_key_press(int keycode, t_game *game)
 		game->key.ra_is_press = 1;
 	if (keycode == 65361)
 		game->key.la_is_press = 1;
-	// if (keycode == 97)
-	// 	game->key.a_is_press = 1;
-	// if (keycode == 100)
-	// 	game->key.d_is_press = 1;
+	if (keycode == 97)
+		game->key.a_is_press = 1;
+	if (keycode == 100)
+		game->key.d_is_press = 1;
 	return (0);
 }
 
