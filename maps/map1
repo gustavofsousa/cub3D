@@ -4,8 +4,9 @@ WE textures/west_rock.xpm
 EA textures/east_rock.xpm
 F 255,0,0
 C 0,0,255
+
 111111111
-110E0111
+110N0111
 10001
 110101
 111 11
