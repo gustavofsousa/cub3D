@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/24 11:51:36 by gde-jesu         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:03:57 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	validate_player(t_game *game)
 		{
 			if (is_valid_player(game->map.mtx[i][j]))
 			{
-				game->player.x = j;
-				game->player.y = i;
+				game->player.x = j + 0.2;
+				game->player.y = i + 0.2;
 				game->player.dir_x = choose_direction_x(game->map.mtx[i][j]);
 				game->player.dir_y = choose_direction_y(game->map.mtx[i][j]);
 				setup_camera_plane(game, game->map.mtx[i][j]);
