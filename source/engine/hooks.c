@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 09:42:07 by fcaetano          #+#    #+#             */
+/*   Updated: 2023/06/27 09:47:00 by fcaetano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	walk_forward(t_game *game)
@@ -11,12 +23,12 @@ void	walk_forward(t_game *game)
 	new_y = game->player.y + game->player.dir_y * game->player.speed;
 	if (game->player.dir_x < 0)
 		min_dist *= -1;
-	if (game->map.mtx_int[(int)trunc(new_x + min_dist)][(int)trunc(game->player.y)] == 0)
+	if (game->map.mtx_int[(int)(new_x + min_dist)][(int)(game->player.y)] == 0)
 		game->player.x = new_x;
 	min_dist = 0.2;
 	if (game->player.dir_y < 0)
 		min_dist *= -1;
-	if (game->map.mtx_int[(int)trunc(game->player.x)][(int)trunc(new_y + min_dist)] == 0)
+	if (game->map.mtx_int[(int)(game->player.x)][(int)(new_y + min_dist)] == 0)
 		game->player.y = new_y;
 }
 
@@ -31,12 +43,12 @@ void	walk_backward(t_game *game)
 	new_y = game->player.y - game->player.dir_y * game->player.speed;
 	if (game->player.dir_x < 0)
 		min_dist *= -1;
-	if (game->map.mtx_int[(int)trunc(new_x - min_dist)][(int)trunc(game->player.y)] == 0)
+	if (game->map.mtx_int[(int)(new_x - min_dist)][(int)(game->player.y)] == 0)
 		game->player.x = new_x;
 	min_dist = 0.2;
 	if (game->player.dir_y < 0)
 		min_dist *= -1;
-	if (game->map.mtx_int[(int)trunc(game->player.x)][(int)trunc(new_y - min_dist)] == 0)
+	if (game->map.mtx_int[(int)(game->player.x)][(int)(new_y - min_dist)] == 0)
 		game->player.y = new_y;
 }
 
