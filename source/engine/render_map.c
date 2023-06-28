@@ -17,22 +17,19 @@ void	render_map2d(t_game *game, int square_sz)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < game->map.rows)
+	j = -1;
+	while (++j < game->map.cols)
 	{
-		j = 0;
-		while (j < game->map.cols)
+		i = -1;
+		while (++i < game->map.rows)
 		{
 			if (game->map.mtx_int[i][j] == 1)
-				draw_square(&game->img, i * square_sz, j * square_sz,
+				draw_square(&game->img, j * square_sz, i * square_sz,
 					0xFF0000);
 			else
-				draw_square(&game->img, i * square_sz, j * square_sz,
+				draw_square(&game->img, j * square_sz, i * square_sz,
 					0xFFF000);
-			j++;
 		}
-		i++;
 	}
 }
 

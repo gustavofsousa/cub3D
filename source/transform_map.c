@@ -44,13 +44,13 @@ void	transform_map_int(t_game *game)
 	int	j;
 
 	i = -1;
-	game->map.mtx_int = malloc_matrix(game->map.cols, game->map.rows);
+	game->map.mtx_int = malloc_matrix(game->map.rows, game->map.cols);
 	if (!game->map.mtx_int)
 		exit_game("error: malloc failed", game);
 	while (++i < game->map.rows)
 	{
 		j = -1;
 		while (++j < game->map.cols)
-			put_value(game, j, i);
+			put_value(game, i, j);
 	}
 }

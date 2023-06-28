@@ -70,7 +70,7 @@ int	loop_hook(t_game *game)
 
 void	render_game(t_game *game)
 {
-	print_mtx(game);
+	//print_mtx(game);
 	//render_map3d(game);
 
     render_map2d(game, 22);
