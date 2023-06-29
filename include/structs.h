@@ -46,6 +46,7 @@ typedef struct s_key_state
 	int	d_is_press;
 	int	la_is_press;
 	int	ra_is_press;
+	int m_is_press;
 }	t_key_state;
 
 typedef struct s_int_vector

@@ -49,7 +49,7 @@ void	draw_square(t_img *img, int x0, int y0, int color)
 	int	y;
 	int	size;
 
-	size = 22;
+	size = SIZE_MMAP;
 	x = x0;
 	while (x < x0 + size)
 	{
@@ -70,8 +70,8 @@ void	draw_player_square(t_img *img, t_player player, int l)
 	int	y_pxl;
 	int	x_pxl;
 
-	x_pxl = 22 * player.x;
-	y_pxl = 22 * player.y;
+	x_pxl = SIZE_MMAP * player.x;
+	y_pxl = SIZE_MMAP * player.y;
 	x = x_pxl - l / 2;
 	while (x < x_pxl + l / 2)
 	{
@@ -92,14 +92,14 @@ void	render_player(t_img *img, t_player player, int l)
 	int	plan_xp;
 	int	plan_yp;
 
-	plan_xn = (player.x + player.dir_x - player.cam_plane_dir_x) * 22;
-	plan_yn = (player.y + player.dir_y - player.cam_plane_dir_y) * 22;
-	plan_xp = (player.x + player.dir_x + player.cam_plane_dir_x) * 22;
-	plan_yp = (player.y + player.dir_y + player.cam_plane_dir_y) * 22;
+	plan_xn = (player.x + player.dir_x - player.cam_plane_dir_x) * SIZE_MMAP;
+	plan_yn = (player.y + player.dir_y - player.cam_plane_dir_y) * SIZE_MMAP;
+	plan_xp = (player.x + player.dir_x + player.cam_plane_dir_x) * SIZE_MMAP;
+	plan_yp = (player.y + player.dir_y + player.cam_plane_dir_y) * SIZE_MMAP;
 	draw_player_square(img, player, l);
-	player.dirx_pxl = (player.x + player.dir_x) * 22;
-	player.diry_pxl = (player.y + player.dir_y) * 22;
-	draw_line (img, (int [2]){player.x * 22, player.y * 22},
+	player.dirx_pxl = (player.x + player.dir_x) * SIZE_MMAP;
+	player.diry_pxl = (player.y + player.dir_y) * SIZE_MMAP;
+	draw_line (img, (int [2]){player.x * SIZE_MMAP, player.y * SIZE_MMAP},
 		(int [2]){player.dirx_pxl, player.diry_pxl}, 0x0000FF);
 	pixel_put(img, plan_xn, plan_yn, 0x0000FF);
 	pixel_put(img, plan_xp, plan_yp, 0x0000FF);

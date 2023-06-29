@@ -37,6 +37,4 @@ void	render_map3d(t_game *game)
 {
 	draw_background(*game);
 	raycast(game);
-    render_map2d(game, 22);
-    render_player(&game->img, game->player, 9);
 }

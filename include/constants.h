@@ -1,6 +1,7 @@
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
 
+# define SIZE_MMAP 20
 # define LENGHT 640
 # define HEIGHT 480
 # define TEXTURE_WIDTH 64

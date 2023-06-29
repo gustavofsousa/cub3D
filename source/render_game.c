@@ -26,6 +26,8 @@ int	handle_key_press(int keycode, t_game *game)
 		game->key.a_is_press = 1;
 	if (keycode == 100)
 		game->key.d_is_press = 1;
+	if (keycode == 109)
+		game->key.m_is_press = 1;
 	return (0);
 }
 
@@ -41,6 +43,8 @@ int	handle_key_release(int keycode, t_game *game)
 		game->key.ra_is_press = 0;
 	if (keycode == 65361 || keycode == 97)
 		game->key.la_is_press = 0;
+	if (keycode == 109)
+		game->key.m_is_press = 0;
 	return (0);
 }
 
@@ -58,23 +62,23 @@ int	loop_hook(t_game *game)
 		if (game->key.la_is_press)
 			turn_left (&game->player);
 	}
-	//render_map3d(game);
-
-    render_map2d(game, 22);
-    render_player(&game->img, game->player, 9);
-
+	render_map3d(game);
+	if (game->key.m_is_press)
+	{
+    	render_map2d(game, SIZE_MMAP);
+    	render_player(&game->img, game->player, 9);
+	}
 	mlx_put_image_to_window(game->img.ptr, game->img.win,
 		game->img.img, 0, 0);
+	//mlx_destroy_window (game->img.ptr, game->img.win);
 	return (0);
 }
 
 void	render_game(t_game *game)
 {
 	//print_mtx(game);
-	//render_map3d(game);
-
-    render_map2d(game, 22);
-    render_player(&game->img, game->player, 9);
+	mlx_clear_window(game->img.ptr, game->img.win);
+	render_map3d(game);
 	mlx_hook(game->img.win, 2, 1L << 0, handle_key_press, game);
 	mlx_hook(game->img.win, 3, 1L << 1, handle_key_release, game);
 	mlx_hook(game->img.win, 17, 0, close_window, game);
