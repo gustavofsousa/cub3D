@@ -6,7 +6,7 @@
 /*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:48:40 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/06/27 09:48:41 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/06/29 16:56:58 by fcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,4 @@ void	render_map3d(t_game *game)
 {
 	draw_background(*game);
 	raycast(game);
-    render_map2d(game, 22);
-    render_player(&game->img, game->player, 9);
 }
