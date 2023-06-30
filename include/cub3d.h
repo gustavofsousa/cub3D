@@ -89,7 +89,7 @@ int	calc_lowest_pixel(int line_height);
 int	calc_highest_pixel(int line_height);
 double	calc_tile_hit_x(t_game *game, t_ray_info *ray);
 int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex);
-unsigned long	tex_color(t_game *game, t_img tex, int tex_pos, int tex_hit_x);
+unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
 t_img	def_tex(t_game *game, t_ray_info *ray);
 
 // Utils

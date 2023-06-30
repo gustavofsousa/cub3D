@@ -16,21 +16,24 @@ void	render_map2d(t_game *game, int square_sz)
 {
 	int	i;
 	int	j;
-
+	
 	j = -1;
-	while (++j < game->map.cols)
+	while (++j < game->map.rows)
 	{
 		i = -1;
-		while (++i < game->map.rows)
+		while (++i < game->map.cols)
 		{
 			if (game->map.mtx_int[i][j] == 1)
-				draw_square(&game->img, j * square_sz, i * square_sz,
+				draw_square(&game->img, i * square_sz, j * square_sz,
 					0xFF0000);
 			else
-				draw_square(&game->img, j * square_sz, i * square_sz,
+				draw_square(&game->img, i * square_sz, j * square_sz,
 					0xFFF000);
+			printf("%d", game->map.mtx_int[j][i]);
 		}
+		printf("\n");
 	}
+	printf("\n\n");
 }
 
 void	render_map3d(t_game *game)

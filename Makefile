@@ -3,7 +3,7 @@ NAME		:=	cub3D
 
 ####	Compilers & flags	####
 CC		:=	cc
-CFLAGS	:=	-g #-Wextra -Wall -Werror
+CFLAGS	:=	-g -Wextra -Wall -Werror
 
 ####	Directories	####
 SRCDIR	:=	source/
