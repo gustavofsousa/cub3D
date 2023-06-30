@@ -74,10 +74,52 @@ int	loop_hook(t_game *game)
 	return (0);
 }
 
+int	**malloc_ma(int height, int width)
+{
+	int	**mtx;
+	int	i;
+
+	i = -1;
+	mtx = malloc(sizeof(int *) * height);
+	if (!mtx)
+		return (NULL);
+	while (++i < height)
+	{
+		mtx[i] = malloc(sizeof(int) * width);
+		if (!mtx[i])
+			return (NULL);
+	}
+	return (mtx);
+}
+
+void transposeMatrix(t_game *game) 
+{
+	int **mtx = malloc_ma(game->map.rows, game->map.cols);
+	int tmp;
+	int i;
+	int j;
+
+	i = -1;
+	tmp = game->map.rows;
+    while (++i < game->map.rows) 
+	{
+		j = -1;
+        while (++j < game->map.cols) 
+		{
+            mtx[j][i] = game->map.mtx_int[i][j];
+        }
+    }
+	free_matrix_int(game);
+	game->map.cols = game->map.rows;
+	game->map.rows = tmp;
+	game->map.mtx_int = mtx;
+
+}
+
 void	render_game(t_game *game)
 {
-	//print_mtx(game);
 	mlx_clear_window(game->img.ptr, game->img.win);
+	transposeMatrix(game);
 	render_map3d(game);
 	mlx_hook(game->img.win, 2, 1L << 0, handle_key_press, game);
 	mlx_hook(game->img.win, 3, 1L << 1, handle_key_release, game);

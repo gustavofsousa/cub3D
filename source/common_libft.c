@@ -25,6 +25,19 @@ void	free_matrix(char **matrix)
 	}
 }
 
+void	free_matrix_int(t_game *game)
+{
+	int	i;
+
+	if (game->map.mtx_int)
+	{
+		i = -1;
+		while (++i < game->map.rows)
+			free(game->map.mtx_int[i]);
+		free(game->map.mtx_int);
+	}
+}
+
 /* Receive a matrix
 ** Receive a line( non allocaded).
 ** If matrix is NULL, create a matrix the new_line.

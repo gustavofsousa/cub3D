@@ -35,6 +35,7 @@ int		is_floor(char *cardinal, t_game *game);
 
 // Common libft
 void	free_matrix(char **matrix);
+void	free_matrix_int(t_game *game);
 void	update_matrix(char ***matrix, char *new_line);
 int		ft_count_words(char const *s, char c);
 int		is_empty_line(char *line);
