@@ -12,7 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-unsigned long	tex_color(t_game *game, t_img tex, int tex_pos, int tex_hit_x)
+unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x)
 {
 	int	tex_y;
 	int	*texture;

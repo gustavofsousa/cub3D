@@ -45,6 +45,7 @@ void	init_var_raycasting(t_game *game)
 	game->key.d_is_press = 0;
 	game->key.la_is_press = 0;
 	game->key.ra_is_press = 0;
+	game->key.m_is_press = 0;
 }
 
 void	init_var_map(t_game *game)

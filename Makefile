@@ -3,7 +3,7 @@ NAME		:=	cub3D
 
 ####	Compilers & flags	####
 CC		:=	cc
-CFLAGS	:=	-g #-Wextra -Wall -Werror
+CFLAGS	:=	-g -Wextra -Wall -Werror
 
 ####	Directories	####
 SRCDIR	:=	source/
@@ -104,7 +104,7 @@ fclean:	clean
 re: fclean all
 
 val:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./${NAME}
 
 .PHONY: re, fclean, clean, all
 

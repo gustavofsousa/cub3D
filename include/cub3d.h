@@ -35,6 +35,7 @@ int		is_floor(char *cardinal, t_game *game);
 
 // Common libft
 void	free_matrix(char **matrix);
+void	free_matrix_int(t_game *game);
 void	update_matrix(char ***matrix, char *new_line);
 int		ft_count_words(char const *s, char c);
 int		is_empty_line(char *line);
@@ -89,7 +90,7 @@ int	calc_lowest_pixel(int line_height);
 int	calc_highest_pixel(int line_height);
 double	calc_tile_hit_x(t_game *game, t_ray_info *ray);
 int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex);
-unsigned long	tex_color(t_game *game, t_img tex, int tex_pos, int tex_hit_x);
+unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
 t_img	def_tex(t_game *game, t_ray_info *ray);
 
 // Utils

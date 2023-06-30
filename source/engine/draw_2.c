@@ -31,10 +31,10 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 		tex_pos += step_tex;
 		if (ray->side_hit == 1)
 			pixel_put(&game->img, x, draw_limits[0],
-				(tex_color(game, tex, tex_pos, tex_hit_x) >> 1) & 8355711);
+				(tex_color(tex, tex_pos, tex_hit_x) >> 1) & 8355711);
 		else
 			pixel_put(&game->img, x, draw_limits[0],
-				tex_color(game, tex, tex_pos, tex_hit_x));
+				tex_color(tex, tex_pos, tex_hit_x));
 		draw_limits[0]++;
 	}
 }
