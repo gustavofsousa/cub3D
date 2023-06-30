@@ -29,14 +29,8 @@ void	render_map2d(t_game *game, int square_sz)
 			else
 				draw_square(&game->img, i * square_sz, j * square_sz,
 					0xFFF000);
-			printf("%d", game->map.mtx_int[i][j]);
 		}
-		printf("\n");
 	}
-	printf("\n\n");
-
-
-
 }
 
 void	render_map3d(t_game *game)
