@@ -11,5 +11,6 @@
 # define COLOR_WALL_MMAP 0xff0000cc
 # define COLOR_PLAYER_MMP 0x00ff00b3
 
+# define MIN_DIST 0.2
 
 #endif

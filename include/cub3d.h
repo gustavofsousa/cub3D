@@ -63,10 +63,10 @@ void	render_map3d(t_game *game);
 void	raycast(t_game *game);
 
 // Movement
-void	walk_forward(t_game *game);
-void	walk_backward(t_game *game);
-void	walk_right(t_game *game);
-void	walk_left(t_game *game);
+void	walk_forward(t_player *player, t_map *map);
+void	walk_backward(t_player *player, t_map *map);
+void	walk_right(t_player *player, t_map *map);
+void	walk_left(t_player *player, t_map *map);
 void	turn_right(t_player *player);
 void	turn_left(t_player *player);
 

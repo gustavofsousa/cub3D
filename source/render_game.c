@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:37:54 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/03 15:30:54 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 15:43:32 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	render_map3d(t_game *game)
 void	move_player(t_game *game)
 {
 	if (game->key.w_is_press)
-		walk_forward(game);
+		walk_forward(&game->player, &game->map);
 	if (game->key.a_is_press)
-		walk_left(game);
+		walk_left(&game->player, &game->map);
 	if (game->key.s_is_press)
-		walk_backward(game);
+		walk_backward(&game->player, &game->map);
 	if (game->key.d_is_press)
-		walk_right(game);
+		walk_right(&game->player, &game->map);
 	if (game->key.ra_is_press)
 		turn_right(&game->player);
 	if (game->key.la_is_press)
