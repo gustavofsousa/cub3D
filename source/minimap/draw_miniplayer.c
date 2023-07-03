@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 14:59:09 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 15:07:31 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_player_square(t_img *img, t_player player, int l)
 		y = y_pxl - l / 2;
 		while (y < y_pxl + l / 2)
 		{
-			pixel_put(img, x, y, 0x0FF000);
+			pixel_put(img, x, y, COLOR_PLAYER_MMP);
 			y++;
 		}
 		x++;
@@ -59,10 +59,10 @@ void	draw_player_square(t_img *img, t_player player, int l)
 
 void	draw_miniplayer(t_img *img, t_player player, int l)
 {
-
 	draw_player_square(img, player, l);
 	player.dirx_pxl = (player.x + player.dir_x) * SIZE_MMAP;
 	player.diry_pxl = (player.y + player.dir_y) * SIZE_MMAP;
-	draw_line (img, (int [2]){player.x * SIZE_MMAP, player.y * SIZE_MMAP},
+	draw_line (img, 
+		(int [2]){player.x * SIZE_MMAP, player.y * SIZE_MMAP},
 		(int [2]){player.dirx_pxl, player.diry_pxl}, COLOR_PLAYER_MMP);
 }
