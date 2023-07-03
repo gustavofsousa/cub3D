@@ -73,7 +73,7 @@ void	turn_right(t_player *player);
 void	turn_left(t_player *player);
 
 // Ray casting
-void	raycast(t_game *game);
+void	paint_walls(t_game *game);
 void	draw_background(t_game game);
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x);
 
@@ -81,7 +81,7 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x);
 void	pixel_put(t_img *data, int x, int y, int color);
 
 // Calculations
-t_double_vector	calc_ray_dir(int x, t_game *game);
+t_double_vector	calc_ray_dir(int x, t_player *player);
 void	calc_perp_wall_dist(t_game *game, t_ray_info *ray);
 int     calc_lowest_pixel(int line_height);
 int     calc_highest_pixel(int line_height);

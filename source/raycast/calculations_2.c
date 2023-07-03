@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculations_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:55 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/06/27 09:39:56 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:57:59 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ int	calc_highest_pixel(int line_height)
 	if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
 	return (draw_end);
+}
+
+int	calc_lowest_pixel(int line_height)
+{
+	int	draw_start;
+
+	draw_start = -line_height / 2 + HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	return (draw_start);
 }
 
 double	calc_tile_hit_x(t_game *game, t_ray_info *ray)

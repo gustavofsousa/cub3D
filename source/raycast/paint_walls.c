@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   paint_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 09:40:09 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/03 16:36:36 by gusta            ###   ########.fr       */
+/*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
+/*   Updated: 2023/07/03 18:43:37 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 	}
 }
 
-void	raycast(t_game *game)
+void	paint_walls(t_game *game)
 {
 	int			x;
 	int			line_height;
@@ -74,7 +74,7 @@ void	raycast(t_game *game)
 	x = 0;
 	while (x < LENGHT)
 	{
-		ray.dir = calc_ray_dir(x, game);
+		ray.dir = calc_ray_dir(x, &game->player);
 		calc_perp_wall_dist(game, &ray);
 		line_height = (int)(HEIGHT / ray.perp_wall_dist);
 		draw_x_line(game, &ray, line_height, x);

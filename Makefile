@@ -10,17 +10,17 @@ SRCDIR	:=	source/
 OBJDIR	:=	obj/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
-LISTDIR 	:=	color texture game interpretate_map validate_map	engine	minimap	movements
+LISTDIR 	:=	color texture game interpretate_map validate_map	raycast	minimap	movements
 
 ####	Sources & objects	####
 
-MAIN				:=	main	setup	common_libft	render_game	transform_map	hooks_keyboard
+MAIN				:=	main	setup	common_libft	render_game	transform_map	hooks_keyboard	pixel_put
 INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
 						validate_up_down	validate_left_right	validate_middle
-ENGINE				:=	draw	draw_2	calculations	calculations_2		render	
+RAYCAST				:=	background	calculations	calculations_2		paint_walls	
 MINIMAP				:=	draw_map2d	draw_miniplayer	bresenham
 MOVEMENTS				:=	turn	walk
 
@@ -31,7 +31,7 @@ SRC		:=	$(MAIN)	\
 			$(addprefix color/, $(COLOR))	\
 			$(addprefix texture/, $(TEXTURE))	\
 			$(addprefix game/, $(GAME))			\
-			$(addprefix engine/, $(ENGINE))		\
+			$(addprefix raycast/, $(RAYCAST))		\
 			$(addprefix minimap/, $(MINIMAP))	\
 			$(addprefix movements/, $(MOVEMENTS))
 
