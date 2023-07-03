@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common_libft.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:35:50 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/07/03 10:38:40 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ void	free_matrix_int(t_game *game)
 	}
 }
 
-/* Receive a matrix
-** Receive a line( non allocaded).
-** If matrix is NULL, create a matrix the new_line.
-** If matrix already exist, realloc it + 1 size and add the new_line.
-*/
 void	update_matrix(char ***matrix, char *new_line)
 {
 	char	**new_matrix;
@@ -106,4 +101,48 @@ int	is_space(char c)
 	if (c == ' ' || c == '\t')
 		return (1);
 	return (0);
+}
+
+void	print_mtx(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < game->map.rows)
+	{
+		j = -1;
+		while (++j < game->map.cols)
+		{
+			printf("%d", game->map.mtx_int[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+void    ft_swap(int *a, int *b)
+{
+    int tmp;
+
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+int	**malloc_matrix_int(int height, int width)
+{
+	int	**mtx;
+	int	i;
+
+	i = -1;
+	mtx = malloc(sizeof(int *) * height);
+	if (!mtx)
+		return (NULL);
+	while (++i < height)
+	{
+		mtx[i] = malloc(sizeof(int) * width);
+		if (!mtx[i])
+			return (NULL);
+	}
+	return (mtx);
 }

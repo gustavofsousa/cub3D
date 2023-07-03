@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:37:54 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/06/29 17:16:07 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/07/03 10:46:34 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,48 +84,6 @@ int	loop_hook(t_game *game)
 		game->img.img, 0, 0);
 	//mlx_destroy_window (game->img.ptr, game->img.win);
 	return (0);
-}
-
-int	**malloc_ma(int height, int width)
-{
-	int	**mtx;
-	int	i;
-
-	i = -1;
-	mtx = malloc(sizeof(int *) * height);
-	if (!mtx)
-		return (NULL);
-	while (++i < height)
-	{
-		mtx[i] = malloc(sizeof(int) * width);
-		if (!mtx[i])
-			return (NULL);
-	}
-	return (mtx);
-}
-
-void transpose_matrix(t_game *game) 
-{
-	int **mtx = malloc_ma(game->map.rows, game->map.cols);
-	int tmp;
-	int i;
-	int j;
-
-	i = -1;
-	tmp = game->map.rows;
-    while (++i < game->map.rows) 
-	{
-		j = -1;
-        while (++j < game->map.cols) 
-		{
-            mtx[j][i] = game->map.mtx_int[i][j];
-        }
-    }
-	free_matrix_int(game);
-	game->map.cols = game->map.rows;
-	game->map.rows = tmp;
-	game->map.mtx_int = mtx;
-
 }
 
 void	render_game(t_game *game)

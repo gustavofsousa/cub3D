@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/24 11:47:09 by gde-jesu         ###   ########.fr       */
+/*   Updated: 2023/07/03 10:50:30 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ int	**malloc_matrix(int height, int width)
 			return (NULL);
 	}
 	return (mtx);
+}
+
+void transpose_matrix(t_game *game) 
+{
+	int **mtx = malloc_matrix(game->map.rows, game->map.cols);
+	int i;
+	int j;
+
+	i = -1;
+    while (++i < game->map.rows) 
+	{
+		j = -1;
+        while (++j < game->map.cols) 
+		{
+            mtx[j][i] = game->map.mtx_int[i][j];
+        }
+    }
+	free_matrix_int(game);
+	game->map.mtx_int = mtx;
+	ft_swap(&game->map.rows, &game->map.cols);
 }
 
 void	transform_map_int(t_game *game)

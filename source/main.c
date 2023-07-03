@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 19:23:43 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/07/03 10:30:36 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_map(t_game *game)
 {
 	if (game && game->map.mtx)
 		free_matrix(game->map.mtx);
+	if (game && game->map.mtx_int)
+		free_matrix_int(game);
 }
 
 void	exit_game(char *message, t_game *game)
@@ -25,25 +27,7 @@ void	exit_game(char *message, t_game *game)
 	free_map(game);
 	// free_texture(game);
 	// free_mlx(game);
-	// destroy mlx window and image ??
 	exit(0);
-}
-
-void	print_mtx(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < game->map.rows)
-	{
-		j = -1;
-		while (++j < game->map.cols)
-		{
-			printf("%d", game->map.mtx_int[i][j]);
-		}
-		printf("\n");
-	}
 }
 
 int	main(int argc, char **argv)

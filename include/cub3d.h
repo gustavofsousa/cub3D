@@ -40,6 +40,7 @@ void	update_matrix(char ***matrix, char *new_line);
 int		ft_count_words(char const *s, char c);
 int		is_empty_line(char *line);
 int		is_space(char c);
+void    ft_swap(int *a, int *b);
 
 // Validate_map
 void	validate_map(t_game *game);
@@ -55,6 +56,7 @@ int		is_valid_up_down(char *line_updown, int pos);
 
 // Transform_map
 void	transform_map_int(t_game *game);
+void    transpose_matrix(t_game *game);
 
 // Ray casting
 void	render_map3d(t_game *game);
