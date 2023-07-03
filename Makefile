@@ -14,7 +14,7 @@ LISTDIR 	:=	color texture game interpretate_map validate_map	engine
 
 ####	Sources & objects	####
 
-MAIN				:=	main	setup	common_libft	render_game	transform_map
+MAIN				:=	main	setup	common_libft	render_game	transform_map	hooks_keyboard
 INTERPRETATE_MAP	:=	interpretate_map		auxiliar
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points

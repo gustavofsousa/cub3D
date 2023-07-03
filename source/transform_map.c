@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 10:50:30 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 11:39:27 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ void	transform_map_int(t_game *game)
 		while (++j < game->map.cols)
 			put_value(game, i, j);
 	}
+	transpose_matrix(game);
 }

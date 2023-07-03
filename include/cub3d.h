@@ -95,6 +95,11 @@ int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex);
 unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
 t_img	def_tex(t_game *game, t_ray_info *ray);
 
+
+// Hoooks key
+void	prepare_hooks_keys(t_game *game);
+
+
 // Utils
 void	print_mtx(t_game *game);
 
