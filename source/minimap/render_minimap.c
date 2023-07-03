@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 12:14:24 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 12:17:36 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	render_minimap(t_game *game)
 {
 	if (game->key.m_is_press)
 	{
-    	draw_map2d(game, SIZE_MMAP);
-    	draw_miniplayer(&game->img, game->player, 9);
+		draw_map2d(game, SIZE_MMAP);
+		draw_miniplayer(&game->img, game->player, 9);
 	}
 }

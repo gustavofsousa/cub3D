@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 12:14:38 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 12:29:57 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_miniplayer(t_img *img, t_player player, int l)
 	player.dirx_pxl = (player.x + player.dir_x) * SIZE_MMAP;
 	player.diry_pxl = (player.y + player.dir_y) * SIZE_MMAP;
 	draw_line (img, (int [2]){player.x * SIZE_MMAP, player.y * SIZE_MMAP},
-		(int [2]){player.dirx_pxl, player.diry_pxl}, 0x0000FF);
-	pixel_put(img, plan_xn, plan_yn, 0x0000FF);
-	pixel_put(img, plan_xp, plan_yp, 0x0000FF);
+		(int [2]){player.dirx_pxl, player.diry_pxl}, COLOR_PLAYER_MMP);
+	pixel_put(img, plan_xn, plan_yn, COLOR_PLAYER_MMP);
+	pixel_put(img, plan_xp, plan_yp, COLOR_PLAYER_MMP);
 }
