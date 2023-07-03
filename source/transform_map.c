@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 17:53:13 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 18:04:16 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@ int	**malloc_matrix(int height, int width)
 	return (mtx);
 }
 
-void transpose_matrix(t_game *game) 
+void	transpose_matrix(t_game *game)
 {
-	int **mtx;
-	int i;
-	int j;
+	int	**mtx;
+	int	i;
+	int	j;
 
 	mtx = malloc_matrix(game->map.cols, game->map.rows);
 	i = -1;
-    while (++i < game->map.rows) 
+	while (++i < game->map.rows) 
 	{
 		j = -1;
-        while (++j < game->map.cols) 
+		while (++j < game->map.cols) 
 		{
-            mtx[j][i] = game->map.mtx_int[i][j];
-        }
-    }
+			mtx[j][i] = game->map.mtx_int[i][j];
+		}
+	}
 	free_matrix_int(game);
 	game->map.mtx_int = mtx;
 	ft_swap(&game->map.rows, &game->map.cols);
