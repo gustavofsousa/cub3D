@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 16:09:19 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 16:10:22 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	render_map3d(t_game *game)
 	raycast(game);
 }
 
-
 void	move_player(t_game *game)
 {
 	if (game->key.w_is_press)
@@ -44,7 +43,6 @@ void	move_player(t_game *game)
 		turn_left(&game->player);
 }
 
-
 int	playing_the_game(t_game *game)
 {
 	move_player(game);
@@ -52,7 +50,6 @@ int	playing_the_game(t_game *game)
 	render_minimap(game);
 	mlx_put_image_to_window(game->img.ptr, game->img.win,
 		game->img.img, 0, 0);
-	//mlx_destroy_window (game->img.ptr, game->img.win);
 	return (0);
 }
 
