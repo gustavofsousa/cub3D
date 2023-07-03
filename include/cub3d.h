@@ -58,9 +58,11 @@ int		is_valid_up_down(char *line_updown, int pos);
 void	transform_map_int(t_game *game);
 void    transpose_matrix(t_game *game);
 
-// Ray casting
-void	render_map3d(t_game *game);
-void	raycast(t_game *game);
+// Minimap
+void	draw_map2d(t_game *game, int square_sz);
+void	draw_miniplayer(t_img *img, t_player player, int l);
+void	bresenham_x(t_img *img, int i[2], int f[2], int color);
+void	bresenham_y(t_img *img, int i[2], int f[2], int color);
 
 // Movement
 void	walk_forward(t_player *player, t_map *map);
@@ -70,34 +72,26 @@ void	walk_left(t_player *player, t_map *map);
 void	turn_right(t_player *player);
 void	turn_left(t_player *player);
 
-// Draw
-void	draw_square(t_img *img, int x0, int y0, int color);
+// Ray casting
+void	raycast(t_game *game);
 void	draw_background(t_game game);
-void	pixel_put(t_img *data, int x, int y, int color);
-void	bresenham_x(t_img *img, int i[2], int f[2], int color);
-void	bresenham_y(t_img *img, int i[2], int f[2], int color);
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x);
-void	draw_background(t_game game);
+
+// Draw
+void	pixel_put(t_img *data, int x, int y, int color);
 
 // Calculations
 t_double_vector	calc_ray_dir(int x, t_game *game);
-void	calc_ray_info(t_game *game, t_ray_info *ray);
-void	calc_wall_hit(t_game *game, t_ray_info *ray);
 void	calc_perp_wall_dist(t_game *game, t_ray_info *ray);
-int	calc_lowest_pixel(int line_height);
-int	calc_highest_pixel(int line_height);
+int     calc_lowest_pixel(int line_height);
+int     calc_highest_pixel(int line_height);
 double	calc_tile_hit_x(t_game *game, t_ray_info *ray);
-int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex);
+int		calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex);
 unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
 t_img	def_tex(t_game *game, t_ray_info *ray);
 
 // Hoooks key
 void	prepare_hooks_keys(t_game *game);
-
-// Minimap
-void	render_minimap(t_game *game);
-void	draw_map2d(t_game *game, int square_sz);
-void	draw_miniplayer(t_img *img, t_player player, int l);
 
 
 // Utils
