@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:37:54 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/03 15:12:29 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 15:14:18 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	playing_the_game(t_game *game)
 
 void	render_game(t_game *game)
 {
-	mlx_clear_window(game->img.ptr, game->img.win);
-	render_map3d(game);
 	prepare_hooks_keys(game);
 	mlx_loop_hook(game->img.ptr, playing_the_game, game);
 	mlx_loop(game->img.ptr);
