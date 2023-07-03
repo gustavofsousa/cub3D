@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_miniplayer.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
+/*   Updated: 2023/07/03 12:14:38 by gusta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	draw_line(t_img *img, int i[2], int f[2], int color)
@@ -23,26 +35,6 @@ void	draw_line(t_img *img, int i[2], int f[2], int color)
 	}
 }
 
-void	draw_square(t_img *img, int x0, int y0, int color)
-{
-	int	x;
-	int	y;
-	int	size;
-
-	size = SIZE_MMAP;
-	x = x0;
-	while (x < x0 + size)
-	{
-		y = y0;
-		while (y < y0 + size)
-		{
-			pixel_put(img, x, y, color);
-			y++;
-		}
-		x++;
-	}
-}
-
 void	draw_player_square(t_img *img, t_player player, int l)
 {
 	int	x;
@@ -65,7 +57,7 @@ void	draw_player_square(t_img *img, t_player player, int l)
 	}
 }
 
-void	render_miniplayer(t_img *img, t_player player, int l)
+void	draw_miniplayer(t_img *img, t_player player, int l)
 {
 	int	plan_xn;
 	int	plan_yn;
@@ -83,34 +75,4 @@ void	render_miniplayer(t_img *img, t_player player, int l)
 		(int [2]){player.dirx_pxl, player.diry_pxl}, 0x0000FF);
 	pixel_put(img, plan_xn, plan_yn, 0x0000FF);
 	pixel_put(img, plan_xp, plan_yp, 0x0000FF);
-}
-
-void	render_map2d(t_game *game, int square_sz)
-{
-	int	i;
-	int	j;
-	
-	i = -1;
-	while (++i < game->map.rows)
-	{
-		j = -1;
-		while (++j < game->map.cols)
-		{
-			if (game->map.mtx_int[i][j] == 1)
-				draw_square(&game->img, i * square_sz, j * square_sz,
-					0xFF0000);
-			else
-				draw_square(&game->img, i * square_sz, j * square_sz,
-					0xFFF000);
-		}
-	}
-}
-
-void	render_minimap(t_game *game)
-{
-	if (game->key.m_is_press)
-	{
-    	render_map2d(game, SIZE_MMAP);
-    	render_miniplayer(&game->img, game->player, 9);
-	}
 }

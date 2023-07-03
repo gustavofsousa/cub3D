@@ -22,7 +22,7 @@ VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
 						validate_up_down	validate_left_right	validate_middle
 ENGINE				:=	draw	draw_2	calculations	calculations_2	hooks	\
 						render_map	bresenham	render	hooks2
-MINIMAP				:=	utils
+MINIMAP				:=	render_minimap	draw_map2d	draw_miniplayer
 
 SRC		:=	$(MAIN)	\
 			$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\
