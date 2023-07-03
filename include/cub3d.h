@@ -62,10 +62,6 @@ void    transpose_matrix(t_game *game);
 void	render_map3d(t_game *game);
 void	raycast(t_game *game);
 
-// Map 2D
-void	render_map2d(t_game *game, int square_sz);
-void	render_player(t_img *img, t_player player, int l);
-
 // Movement
 void	walk_backward(t_game *game);
 void	turn_right(t_player *player);
@@ -99,6 +95,8 @@ t_img	def_tex(t_game *game, t_ray_info *ray);
 // Hoooks key
 void	prepare_hooks_keys(t_game *game);
 
+// Minimap
+void	render_minimap(t_game *game);
 
 // Utils
 void	print_mtx(t_game *game);

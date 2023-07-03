@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:37:54 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/03 11:48:57 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 11:58:46 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ void	moviment_player(t_game *game)
 		turn_right(&game->player);
 	if (game->key.la_is_press)
 		turn_left(&game->player);
-}
-
-
-void	render_minimap(t_game *game)
-{
-	if (game->key.m_is_press)
-	{
-    	render_map2d(game, SIZE_MMAP);
-    	render_player(&game->img, game->player, 9);
-	}
 }
 
 int	playing_the_game(t_game *game)
