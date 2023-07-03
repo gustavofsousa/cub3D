@@ -10,7 +10,7 @@ SRCDIR	:=	source/
 OBJDIR	:=	obj/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
-LISTDIR 	:=	color texture game interpretate_map validate_map	engine	minimap
+LISTDIR 	:=	color texture game interpretate_map validate_map	engine	minimap	movements
 
 ####	Sources & objects	####
 
@@ -20,9 +20,10 @@ COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
 						validate_up_down	validate_left_right	validate_middle
-ENGINE				:=	draw	draw_2	calculations	calculations_2	hooks	\
-						render_map		render	hooks2
-MINIMAP				:=	render_minimap	draw_map2d	draw_miniplayer	bresenham
+ENGINE				:=	draw	draw_2	calculations	calculations_2		render	
+MINIMAP				:=	draw_map2d	draw_miniplayer	bresenham
+MOVEMENTS				:=	turn	walk
+
 
 SRC		:=	$(MAIN)	\
 			$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\
@@ -31,7 +32,9 @@ SRC		:=	$(MAIN)	\
 			$(addprefix texture/, $(TEXTURE))	\
 			$(addprefix game/, $(GAME))			\
 			$(addprefix engine/, $(ENGINE))		\
-			$(addprefix minimap/, $(MINIMAP))
+			$(addprefix minimap/, $(MINIMAP))	\
+			$(addprefix movements/, $(MOVEMENTS))
+
 
 SRCS	:=	$(addsuffix .c, $(SRC))
 OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))

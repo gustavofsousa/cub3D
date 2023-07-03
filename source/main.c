@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 10:30:36 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 15:24:51 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	exit_game(char *message, t_game *game)
 	free_map(game);
 	// free_texture(game);
 	// free_mlx(game);
+	exit(0);
+}
+
+int	close_window(t_game *game)
+{
+	if (game->img.win)
+		mlx_destroy_window(game->img.ptr, game->img.win);
 	exit(0);
 }
 

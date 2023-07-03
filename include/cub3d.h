@@ -63,12 +63,12 @@ void	render_map3d(t_game *game);
 void	raycast(t_game *game);
 
 // Movement
-void	walk_backward(t_game *game);
-void	turn_right(t_player *player);
 void	walk_forward(t_game *game);
-void	turn_left(t_player *player);
+void	walk_backward(t_game *game);
 void	walk_right(t_game *game);
 void	walk_left(t_game *game);
+void	turn_right(t_player *player);
+void	turn_left(t_player *player);
 
 // Draw
 void	draw_square(t_img *img, int x0, int y0, int color);

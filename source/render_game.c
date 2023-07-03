@@ -6,13 +6,29 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:37:54 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/03 15:14:18 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/03 15:30:54 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	moviment_player(t_game *game)
+void	render_minimap(t_game *game)
+{
+	if (game->key.m_is_press)
+	{
+		draw_map2d(game, SIZE_MMAP);
+		draw_miniplayer(&game->img, game->player, 9);
+	}
+}
+
+void	render_map3d(t_game *game)
+{
+	draw_background(*game);
+	raycast(game);
+}
+
+
+void	move_player(t_game *game)
 {
 	if (game->key.w_is_press)
 		walk_forward(game);
@@ -28,9 +44,10 @@ void	moviment_player(t_game *game)
 		turn_left(&game->player);
 }
 
+
 int	playing_the_game(t_game *game)
 {
-	moviment_player(game);
+	move_player(game);
 	render_map3d(game);
 	render_minimap(game);
 	mlx_put_image_to_window(game->img.ptr, game->img.win,
