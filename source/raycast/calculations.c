@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:38 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/04 16:15:25 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:23:59 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	calc_wall_hit(t_game *game, t_ray_info *ray)
 	}
 }
 
-/*
-* 1. Calculate the ray info
-* 2. Calculate the wall hit
-* 3. Calculate the perp wall dist
-*/
 void	calc_ray_info(t_game *game, t_ray_info *ray)
 {
 	ray->map_hit.x = trunc(game->player.x);
@@ -81,10 +76,8 @@ void	calc_ray_info(t_game *game, t_ray_info *ray)
 * 2. Calculate the wall hit
 * 3. Calculate the perp wall dist
 */
-void	calc_perp_wall_dist(t_game *game, t_ray_info *ray)
+void	calc_perp_wall_dist(t_ray_info *ray)
 {
-	calc_ray_info(game, ray);
-	calc_wall_hit(game, ray);
 	if (ray->side_hit == 0)
 		ray->perp_wall_dist = (ray->side.x - ray->delta.x);
 	else

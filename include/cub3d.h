@@ -87,7 +87,12 @@ void	pixel_put(t_img *data, int x, int y, int color);
 
 // Calculations
 t_double_vector	get_ray_direction(int x, t_player *player);
-void	calc_perp_wall_dist(t_game *game, t_ray_info *ray);
+void	calc_perp_wall_dist(t_ray_info *ray);
+void	calc_ray_info(t_game *game, t_ray_info *ray);
+void	calc_wall_hit(t_game *game, t_ray_info *ray);
+
+
+
 int     calc_lowest_pixel(int line_height);
 int     calc_highest_pixel(int line_height);
 double	calc_tile_hit_x(t_game *game, t_ray_info *ray);

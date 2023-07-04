@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/04 16:16:02 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:25:16 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,9 @@ void	paint_walls(t_game *game)
 	while (actual_ray < LENGHT)
 	{
 		ray.dir = get_ray_direction(actual_ray, &game->player);
-		calc_perp_wall_dist(game, &ray);
+		calc_ray_info(game, &ray);
+		calc_wall_hit(game, &ray);
+		calc_perp_wall_dist(&ray);
 		line_height = (int)(HEIGHT / ray.perp_wall_dist);
 		draw_x_line(game, &ray, line_height, actual_ray);
 		actual_ray++;
