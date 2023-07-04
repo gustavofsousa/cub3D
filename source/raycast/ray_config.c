@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/04 16:59:42 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 17:05:18 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	fix_fish_eye(t_ray_info *ray)
 {
 	if (ray->side_hit == 0)
-		ray->perp_wall_dist = (ray->side.x - ray->delta.x);
+		ray->dist_new_pov = (ray->side.x - ray->delta.x);
 	else
-		ray->perp_wall_dist = (ray->side.y - ray->delta.y);
+		ray->dist_new_pov = (ray->side.y - ray->delta.y);
 }
 
 void	mapping_wall_collision(t_game *game, t_ray_info *ray)
@@ -39,8 +39,7 @@ void	mapping_wall_collision(t_game *game, t_ray_info *ray)
 			ray->near_wall.y += ray->step.y;
 			ray->side_hit = 1;
 		}
-		if (game->map.mtx_int[ray->near_wall.x]
-							[ray->near_wall.y] > 0)
+		if (game->map.mtx_int[ray->near_wall.x][ray->near_wall.y] > 0)
 			hit = 1;
 	}
 }

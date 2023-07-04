@@ -79,7 +79,7 @@ typedef struct s_ray_info
 	t_int_vector	step;
 	t_int_vector	near_wall;
 	int				side_hit;
-	double			perp_wall_dist;
+	double			dist_new_pov;
 }	t_ray_info;
 
 typedef struct s_game

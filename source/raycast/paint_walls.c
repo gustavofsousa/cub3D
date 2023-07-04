@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/04 16:47:28 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 17:07:31 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_img	def_tex(t_game *game, t_ray_info *ray)
 * 4. Calculate the initial position in the texture
 * 5. Draw the pixels
 */
-void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
+void	draw_x_line(t_game *game, t_ray_info *ray, int actual_ray, int line_height)
 {
 	int		draw_limits[2];
 	double	step_tex;
@@ -71,10 +71,10 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 	{
 		tex_pos += step_tex;
 		if (ray->side_hit == 1)
-			pixel_put(&game->img, x, draw_limits[0],
+			pixel_put(&game->img, actual_ray, draw_limits[0],
 				(tex_color(tex, tex_pos, tex_hit_x) >> 1) & 8355711);
 		else
-			pixel_put(&game->img, x, draw_limits[0],
+			pixel_put(&game->img, actual_ray, draw_limits[0],
 				tex_color(tex, tex_pos, tex_hit_x));
 		draw_limits[0]++;
 	}
@@ -98,8 +98,8 @@ void	paint_walls(t_game *game)
 	while (actual_ray < LENGHT)
 	{
 		config_ray(game, &ray, actual_ray);
-		line_height = (int)(HEIGHT / ray.perp_wall_dist);
-		draw_x_line(game, &ray, line_height, actual_ray);
+		line_height = HEIGHT / ray.dist_new_pov;
+		draw_x_line(game, &ray, actual_ray, line_height);
 		actual_ray++;
 	}
 }

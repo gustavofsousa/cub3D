@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:55 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/04 16:03:17 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 17:05:18 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ double	calc_tile_hit_x(t_game *game, t_ray_info *ray)
 	double	tile_hit_x;
 
 	if (ray->side_hit == 0)
-		tile_hit_x = game->player.y + ray->perp_wall_dist * ray->dir.y;
+		tile_hit_x = game->player.y + ray->dist_new_pov * ray->dir.y;
 	else
-		tile_hit_x = game->player.x + ray->perp_wall_dist * ray->dir.x;
+		tile_hit_x = game->player.x + ray->dist_new_pov * ray->dir.x;
 	tile_hit_x -= floor((tile_hit_x));
 	return (tile_hit_x);
 }
