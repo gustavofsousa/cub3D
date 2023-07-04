@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:38 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/04 16:03:20 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:15:25 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ void	calc_perp_wall_dist(t_game *game, t_ray_info *ray)
 * 4. Calculate the wall hit
 * 5. Calculate the perp wall dist
 */
-t_double_vector	calc_ray_dir(int x, t_player *player)
+t_double_vector	get_ray_direction(int actual_ray, t_player *player)
 {
 	double			camera_x;
-	t_double_vector	ray_dir;
+	t_double_vector	direction;
 
-	camera_x = 2.0 * x / (double)LENGHT - 1.0;
-	ray_dir.x = player->dir_x + player->cam_plane_dir_x * camera_x;
-	ray_dir.y = player->dir_y + player->cam_plane_dir_y * camera_x;
-	return (ray_dir);
+	camera_x = 2.0 * actual_ray / (double)LENGHT - 1.0;
+	direction.x = player->dir_x + player->cam_plane_dir_x * camera_x;
+	direction.y = player->dir_y + player->cam_plane_dir_y * camera_x;
+	return (direction);
 }

@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/04 16:07:07 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:16:02 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,17 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 */
 void	paint_walls(t_game *game)
 {
-	int			x;
+	int			actual_ray;
 	int			line_height;
 	t_ray_info	ray;
 
-	x = 0;
-	while (x < LENGHT)
+	actual_ray = 0;
+	while (actual_ray < LENGHT)
 	{
-		ray.dir = calc_ray_dir(x, &game->player);
+		ray.dir = get_ray_direction(actual_ray, &game->player);
 		calc_perp_wall_dist(game, &ray);
 		line_height = (int)(HEIGHT / ray.perp_wall_dist);
-		draw_x_line(game, &ray, line_height, x);
-		x++;
+		draw_x_line(game, &ray, line_height, actual_ray);
+		actual_ray++;
 	}
 }
