@@ -6,100 +6,74 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/04 17:07:31 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 18:18:43 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x)
+int	get_highest_pixel(int line_height)
 {
-	int	tex_y;
-	int	*texture;
+	int	draw_end;
 
-	texture = (int *) tex.addr;
-	tex_y = (int)tex_pos & (tex.height - 1);
-	return (texture[tex.height * tex_y + tex_hit_x]);
+	draw_end = line_height / 2 + HEIGHT / 2;
+	if (draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
+	return (draw_end);
 }
 
-/*
-* 1. Calculate the lowest pixel to draw
-* 2. Calculate the highest pixel to draw
-* 3. Draw the pixels
-*/
-t_img	def_tex(t_game *game, t_ray_info *ray)
+int	get_lowest_pixel(int line_height)
 {
-	if (ray->side_hit)
-	{
-		if (looking_north(ray))
-			return (game->texture.north);
-		if (looking_south(ray))
-			return (game->texture.south);
-	}
-	else
-	{
-		if (looking_east(ray))
-			return (game->texture.east);
-		if (looking_west(ray))
-			return (game->texture.west);
-	}
-	return (game->texture.north);
+	int	draw_start;
+
+	draw_start = -line_height / 2 + HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	return (draw_start);
 }
 
-/*
-* 1. Calculate the lowest pixel to draw
-* 2. Calculate the highest pixel to draw
-* 3. Calculate the step to move in the texture
-* 4. Calculate the initial position in the texture
-* 5. Draw the pixels
-*/
-void	draw_x_line(t_game *game, t_ray_info *ray, int actual_ray, int line_height)
+void	paint_column(t_game *game, t_ray_info *ray, int actual_ray)
 {
+	int		line_height;
 	int		draw_limits[2];
 	double	step_tex;
-	double	tex_pos;
-	int		tex_hit_x;
+	double	tex_pos_x;
+	int		tex_pos_y;
 	t_img	tex;
 
-	tex = def_tex(game, ray);
-	tex_hit_x = calc_tex_hit_x(game, ray, tex);
-	draw_limits[0] = calc_lowest_pixel(line_height);
-	draw_limits[1] = calc_highest_pixel(line_height);
-	step_tex = 1.0 * tex.height / line_height;
-	tex_pos = (draw_limits[0] - HEIGHT / 2 + line_height / 2) * step_tex;
+	line_height = HEIGHT / ray->dist_new_pov;
+	draw_limits[0] = get_lowest_pixel(line_height);
+	draw_limits[1] = get_highest_pixel(line_height);
+
+	tex = choose_texture(game, ray);
+	step_tex = (1.0 * tex.height) / line_height;
+
+	tex_pos_x = get_pos_x(draw_limits[0], line_height, step_tex);
+	tex_pos_y = get_pos_y(game, ray, tex);
+	
 	while (draw_limits[0] <= draw_limits[1])
 	{
-		tex_pos += step_tex;
 		if (ray->side_hit == 1)
 			pixel_put(&game->img, actual_ray, draw_limits[0],
-				(tex_color(tex, tex_pos, tex_hit_x) >> 1) & 8355711);
+				(tex_color(tex, tex_pos_x, tex_pos_y) >> 1) & 8355711);
 		else
 			pixel_put(&game->img, actual_ray, draw_limits[0],
-				tex_color(tex, tex_pos, tex_hit_x));
+				tex_color(tex, tex_pos_x, tex_pos_y));
+		tex_pos_x += step_tex;
 		draw_limits[0]++;
 	}
 }
 
-/*
-* 1. Calculate the ray direction
-* 2. Calculate the distance to the wall
-* 3. Calculate the height of the wall
-* 4. Calculate the lowest and highest pixel to fill in current stripe
-* 5. Calculate the texture offset
-
-*/
 void	paint_walls(t_game *game)
 {
 	int			actual_ray;
-	int			line_height;
 	t_ray_info	ray;
 
 	actual_ray = 0;
 	while (actual_ray < LENGHT)
 	{
 		config_ray(game, &ray, actual_ray);
-		line_height = HEIGHT / ray.dist_new_pov;
-		draw_x_line(game, &ray, actual_ray, line_height);
+		paint_column(game, &ray, actual_ray);
 		actual_ray++;
 	}
 }

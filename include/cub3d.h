@@ -85,16 +85,15 @@ int     looking_east(t_ray_info *ray);
 // Draw
 void	pixel_put(t_img *data, int x, int y, int color);
 
-// Calculations
+// ray config
 void	config_ray(t_game *game, t_ray_info *ray, int actual_ray);
 
-
-int     calc_lowest_pixel(int line_height);
-int     calc_highest_pixel(int line_height);
-double	calc_tile_hit_x(t_game *game, t_ray_info *ray);
-int		calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex);
+// Texture configs
 unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
-t_img	def_tex(t_game *game, t_ray_info *ray);
+t_img	choose_texture(t_game *game, t_ray_info *ray);
+int		get_pos_y(t_game *game, t_ray_info *ray, t_img tex);
+double	get_pos_x(int begin, int line_height, double step_tex);
+
 
 // Hoooks key
 void	prepare_hooks_keys(t_game *game);
