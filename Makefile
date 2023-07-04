@@ -14,8 +14,8 @@ LISTDIR 	:=	color texture game interpretate_map validate_map	raycast	minimap	mov
 
 ####	Sources & objects	####
 
-MAIN				:=	main	setup	common_libft	render_game	transform_map	hooks_keyboard	pixel_put
-INTERPRETATE_MAP	:=	interpretate_map		auxiliar
+MAIN				:=	main	setup	common_libft	render_game		hooks_keyboard	pixel_put
+INTERPRETATE_MAP	:=	interpretate_map	auxiliar	transform_map
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
