@@ -76,6 +76,11 @@ void	turn_left(t_player *player);
 void	paint_walls(t_game *game);
 void	draw_background(t_game game);
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x);
+int     looking_north(t_ray_info *ray);
+int     looking_south(t_ray_info *ray);
+int     looking_west(t_ray_info *ray);
+int     looking_east(t_ray_info *ray);
+
 
 // Draw
 void	pixel_put(t_img *data, int x, int y, int color);

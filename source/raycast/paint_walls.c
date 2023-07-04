@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 18:43:37 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:07:07 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,37 @@ unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x)
 	return (texture[tex.height * tex_y + tex_hit_x]);
 }
 
+/*
+* 1. Calculate the lowest pixel to draw
+* 2. Calculate the highest pixel to draw
+* 3. Draw the pixels
+*/
 t_img	def_tex(t_game *game, t_ray_info *ray)
 {
 	if (ray->side_hit)
 	{
-		if (ray->dir.y < 0)
+		if (looking_north(ray))
 			return (game->texture.north);
-		return (game->texture.south);
+		if (looking_south(ray))
+			return (game->texture.south);
 	}
 	else
 	{
-		if (ray->dir.x > 0)
+		if (looking_east(ray))
 			return (game->texture.east);
-		return (game->texture.west);
+		if (looking_west(ray))
+			return (game->texture.west);
 	}
+	return (game->texture.north);
 }
 
+/*
+* 1. Calculate the lowest pixel to draw
+* 2. Calculate the highest pixel to draw
+* 3. Calculate the step to move in the texture
+* 4. Calculate the initial position in the texture
+* 5. Draw the pixels
+*/
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 {
 	int		draw_limits[2];
@@ -65,6 +80,14 @@ void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x)
 	}
 }
 
+/*
+* 1. Calculate the ray direction
+* 2. Calculate the distance to the wall
+* 3. Calculate the height of the wall
+* 4. Calculate the lowest and highest pixel to fill in current stripe
+* 5. Calculate the texture offset
+
+*/
 void	paint_walls(t_game *game)
 {
 	int			x;

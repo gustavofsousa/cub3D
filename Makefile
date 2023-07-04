@@ -20,7 +20,7 @@ COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
 VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
 						validate_up_down	validate_left_right	validate_middle
-RAYCAST				:=	background	calculations	calculations_2		paint_walls	
+RAYCAST				:=	background	calculations	calculations_2		paint_walls		utils
 MINIMAP				:=	draw_map2d	draw_miniplayer	bresenham
 MOVEMENTS				:=	turn	walk
 

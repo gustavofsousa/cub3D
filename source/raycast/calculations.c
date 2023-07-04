@@ -6,12 +6,19 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:38 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/03 16:58:02 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:03:20 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+/*
+* 1. Calculate the lowest pixel to draw
+* 2. Calculate the highest pixel to draw
+* 3. Calculate the step to move in the texture
+* 4. Calculate the initial position in the texture
+* 5. Draw the pixels
+*/
 void	calc_wall_hit(t_game *game, t_ray_info *ray)
 {
 	int	hit;
@@ -36,6 +43,11 @@ void	calc_wall_hit(t_game *game, t_ray_info *ray)
 	}
 }
 
+/*
+* 1. Calculate the ray info
+* 2. Calculate the wall hit
+* 3. Calculate the perp wall dist
+*/
 void	calc_ray_info(t_game *game, t_ray_info *ray)
 {
 	ray->map_hit.x = trunc(game->player.x);
@@ -52,7 +64,7 @@ void	calc_ray_info(t_game *game, t_ray_info *ray)
 		ray->step.x = 1;
 		ray->side.x = (ray->map_hit.x + 1.0 - game->player.x) * ray->delta.x;
 	}
-	if (ray->dir.y < 0)
+	if (looking_north(ray))
 	{
 		ray->step.y = -1;
 		ray->side.y = (game->player.y - ray->map_hit.y) * ray->delta.y;
@@ -64,6 +76,11 @@ void	calc_ray_info(t_game *game, t_ray_info *ray)
 	}
 }
 
+/*
+* 1. Calculate the ray info
+* 2. Calculate the wall hit
+* 3. Calculate the perp wall dist
+*/
 void	calc_perp_wall_dist(t_game *game, t_ray_info *ray)
 {
 	calc_ray_info(game, ray);
@@ -74,6 +91,13 @@ void	calc_perp_wall_dist(t_game *game, t_ray_info *ray)
 		ray->perp_wall_dist = (ray->side.y - ray->delta.y);
 }
 
+/*
+* 1. Calculate the ray direction
+* 2. Calculate the delta distance
+* 3. Calculate the step and the side
+* 4. Calculate the wall hit
+* 5. Calculate the perp wall dist
+*/
 t_double_vector	calc_ray_dir(int x, t_player *player)
 {
 	double			camera_x;

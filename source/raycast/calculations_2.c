@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:55 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/03 16:57:59 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:03:17 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int	calc_lowest_pixel(int line_height)
 	return (draw_start);
 }
 
+/*
+* 1. Calculate the step to move in the texture
+* 2. Calculate the initial position in the texture
+* 3. Draw the pixels
+*/
 double	calc_tile_hit_x(t_game *game, t_ray_info *ray)
 {
 	double	tile_hit_x;
@@ -44,6 +49,11 @@ double	calc_tile_hit_x(t_game *game, t_ray_info *ray)
 	return (tile_hit_x);
 }
 
+/*
+* 1. Calculate the texture hit x
+* 2. Calculate the texture hit y
+* 3. Draw the pixels
+*/
 int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex)
 {
 	int		tex_hit_x;
@@ -51,8 +61,8 @@ int	calc_tex_hit_x(t_game *game, t_ray_info *ray, t_img tex)
 
 	tile_hit_x = calc_tile_hit_x(game, ray);
 	tex_hit_x = tile_hit_x * (double)tex.width;
-	if ((ray->side_hit == 0 && ray->dir.x > 0)
-		|| (ray->side_hit == 1 && ray->dir.y < 0))
+	if ((ray->side_hit == 0 && looking_east(ray))
+		|| (ray->side_hit == 1 && looking_north(ray)))
 		tex_hit_x = tex.width - tex_hit_x - 1;
 	return (tex_hit_x);
 }
