@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:38 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/04 16:23:59 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:41:30 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,45 +29,45 @@ void	calc_wall_hit(t_game *game, t_ray_info *ray)
 		if (ray->side.x < ray->side.y)
 		{
 			ray->side.x += ray->delta.x;
-			ray->map_hit.x += ray->step.x;
+			ray->near_wall.x += ray->step.x;
 			ray->side_hit = 0;
 		}
 		else
 		{
 			ray->side.y += ray->delta.y;
-			ray->map_hit.y += ray->step.y;
+			ray->near_wall.y += ray->step.y;
 			ray->side_hit = 1;
 		}
-		if (game->map.mtx_int[ray->map_hit.x][ray->map_hit.y] > 0)
+		if (game->map.mtx_int[ray->near_wall.x][ray->near_wall.y] > 0)
 			hit = 1;
 	}
 }
 
 void	calc_ray_info(t_game *game, t_ray_info *ray)
 {
-	ray->map_hit.x = trunc(game->player.x);
-	ray->map_hit.y = trunc(game->player.y);
+	ray->near_wall.x = trunc(game->player.x);
+	ray->near_wall.y = trunc(game->player.y);
 	ray->delta.x = fabs(1.0 / ray->dir.x);
 	ray->delta.y = fabs(1.0 / ray->dir.y);
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -1;
-		ray->side.x = (game->player.x - ray->map_hit.x) * ray->delta.x;
+		ray->side.x = (game->player.x - ray->near_wall.x) * ray->delta.x;
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->side.x = (ray->map_hit.x + 1.0 - game->player.x) * ray->delta.x;
+		ray->side.x = (ray->near_wall.x + 1.0 - game->player.x) * ray->delta.x;
 	}
 	if (looking_north(ray))
 	{
 		ray->step.y = -1;
-		ray->side.y = (game->player.y - ray->map_hit.y) * ray->delta.y;
+		ray->side.y = (game->player.y - ray->near_wall.y) * ray->delta.y;
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->side.y = (ray->map_hit.y + 1.0 - game->player.y) * ray->delta.y;
+		ray->side.y = (ray->near_wall.y + 1.0 - game->player.y) * ray->delta.y;
 	}
 }
 

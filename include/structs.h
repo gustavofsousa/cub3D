@@ -77,7 +77,7 @@ typedef struct s_ray_info
 	t_double_vector	side;
 	t_double_vector	delta;
 	t_int_vector	step;
-	t_int_vector	map_hit;
+	t_int_vector	near_wall;
 	int				side_hit;
 	double			perp_wall_dist;
 }	t_ray_info;
