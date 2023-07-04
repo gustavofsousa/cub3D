@@ -86,11 +86,7 @@ int     looking_east(t_ray_info *ray);
 void	pixel_put(t_img *data, int x, int y, int color);
 
 // Calculations
-t_double_vector	get_ray_direction(int x, t_player *player);
-void	calc_perp_wall_dist(t_ray_info *ray);
-void	calc_ray_info(t_game *game, t_ray_info *ray);
-void	calc_wall_hit(t_game *game, t_ray_info *ray);
-
+void	config_ray(t_game *game, t_ray_info *ray, int actual_ray);
 
 
 int     calc_lowest_pixel(int line_height);

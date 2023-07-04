@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculations.c                                     :+:      :+:    :+:   */
+/*   ray_config.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:38 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/04 16:41:30 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/04 16:48:06 by gusta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,12 @@ t_double_vector	get_ray_direction(int actual_ray, t_player *player)
 	direction.x = player->dir_x + player->cam_plane_dir_x * camera_x;
 	direction.y = player->dir_y + player->cam_plane_dir_y * camera_x;
 	return (direction);
+}
+
+void	config_ray(t_game *game, t_ray_info *ray, int actual_ray)
+{
+	ray->dir = get_ray_direction(actual_ray, &game->player);
+	calc_ray_info(game, ray);
+	calc_wall_hit(game, ray);
+	calc_perp_wall_dist(ray);
 }
