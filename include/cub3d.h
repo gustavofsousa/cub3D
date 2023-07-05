@@ -83,8 +83,6 @@ void			turn_left(t_player *player);
 // Ray casting
 void			paint_walls(t_game *game);
 void			draw_background(t_game game);
-void			draw_x_line(t_game *game, t_ray_info *ray,
-					int line_height, int x);
 int				looking_north(t_ray_info *ray);
 int				looking_south(t_ray_info *ray);
 int				looking_west(t_ray_info *ray);
