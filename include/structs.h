@@ -6,7 +6,7 @@
 /*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:13:45 by gde-jesu          #+#    #+#             */
-/*   Updated: 2023/07/05 12:24:38 by gde-jesu         ###   ########.fr       */
+/*   Updated: 2023/07/05 14:54:44 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,5 @@ typedef struct s_ray_info
 	int				side_hit;
 	double			dist_new_pov;
 }	t_ray_info;
-
-typedef struct s_game
-{
-	t_img		img;
-	t_map		map;
-	t_player	player;
-	t_texture	texture;
-	t_key_state	key;
-}	t_game;
 
 #endif
