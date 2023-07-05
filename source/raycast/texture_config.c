@@ -48,7 +48,6 @@ double	calc_tile_hit_x(t_game *game, t_ray_info *ray)
 	double	tile_hit_x;
 
 	tile_hit_x = 0.0;
-// hor or vertcal
 	if (horizontal_wall(ray))
 		tile_hit_x = game->player.y + ray->dist_new_pov * ray->dir.y;
 	else if (vertical_wall(ray))
