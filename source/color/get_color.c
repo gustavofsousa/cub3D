@@ -33,8 +33,8 @@ int	is_valid_number(char **mtx, int r, int g, int b)
 		|| mtx [2][0] == '-')
 		return (0);
 	if (!check_ruchoa(mtx[0], r)
-		||	!check_ruchoa(mtx[1], g)
-		||	!check_ruchoa(mtx[2], b))
+		|| !check_ruchoa(mtx[1], g)
+		|| !check_ruchoa(mtx[2], b))
 		return (0);
 	return (1);
 }
