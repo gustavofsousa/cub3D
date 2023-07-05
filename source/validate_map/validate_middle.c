@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_middle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:45:31 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/07/05 12:09:17 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	validate_middle(t_game *game)
 		j = 0;
 		while (game->map.mtx[i][++j + 1])
 		{
-			if (is_space(game->map.mtx[i][j]))
+			if (ft_is_space(game->map.mtx[i][j]))
 				look_around(game, i, j);
 		}
 	}

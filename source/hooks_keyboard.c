@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks_keyboard.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 11:35:58 by gde-jesu          #+#    #+#             */
+/*   Updated: 2023/07/05 11:36:21 by gde-jesu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 int	handle_key_press(int keycode, t_game *game)
@@ -42,7 +54,6 @@ int	handle_key_release(int keycode, t_game *game)
 		game->key.la_is_press = 0;
 	return (0);
 }
-
 
 void	prepare_hooks_keys(t_game *game)
 {

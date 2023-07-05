@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 18:41:55 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/05 12:08:46 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_map(t_game *game)
 {
 	if (game && game->map.mtx)
-		free_matrix(game->map.mtx);
+		ft_free_matrix(game->map.mtx);
 	if (game && game->map.mtx_int)
 		free_matrix_int(game);
 }
@@ -25,8 +25,6 @@ void	exit_game(char *message, t_game *game)
 	if (message)
 		ft_putendl_fd(message, 2);
 	free_map(game);
-	// free_texture(game);
-	// free_mlx(game);
 	exit(0);
 }
 

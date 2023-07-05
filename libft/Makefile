@@ -23,6 +23,8 @@ SRC =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c		\
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c 			\
 		ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c					\
 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_abs.c					\
+		ft_count_words.c ft_is_empty_line.c ft_is_space.c ft_free_matrix.c		\
+		ft_swap.c																\
 		$(addprefix get_next_line/, $(GNL))
 
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
@@ -30,16 +32,18 @@ OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 ################## ft_printf		##################
 
 # Colors
-BLACK	=	\033[0;30m
-BLUE	=	\033[0;34m
-CYAN	=	\033[0;36m
-GREEN	=	\033[0;32m
-MAGENTA	=	\033[1;35m
-ORANGE	=	\033[1;38;5;214m
-RED		=	\033[0;31m
-RESET	=	\033[0m
-WHITE	=	\033[0;37m
-YELLOW	=	\033[0;33m
+BLACK		=	\033[0;30m
+BLUE		=	\033[0;34m
+CYAN		=	\033[0;36m
+GREEN		=	\033[0;32m
+MAGENTA		=	\033[1;35m
+ORANGE		=	\033[1;38;5;214m
+RED			=	\033[0;31m
+RESET		=	\033[0m
+WHITE		=	\033[0;37m
+YELLOW		=	\033[0;33m
+_SUCCESS	=	✅ $(GREEN)Successfully compiled$(RESET)
+_INFO		=	ℹ️ $(YELLOW)Info$(RESET)
 
 ##################	Commands	##################
 
@@ -48,15 +52,12 @@ all: $(OBJDIR) $(NAME)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(addprefix $(OBJDIR), get_next_line/)
-	@echo "directories for objects created"
 
 $(NAME): $(OBJ)
 	@ar -rcs $(NAME) $(OBJ)
-	@echo "$(YELLOW)lib created$(WHITE)"
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "objects created 😉 ->$(MAGENTA) $@$(WHITE)"
 
 clean:
 	$(RM) $(OBJDIR)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:58:26 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/07/05 12:08:52 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_valid_number(char **mtx, int r, int g, int b)
 
 void	invalid_rgb(char **mtx, t_game *game)
 {
-	free_matrix(mtx);
+	ft_free_matrix(mtx);
 	exit_game("Number rgb not valid", game);
 }
 
@@ -64,7 +64,7 @@ int	translate_rgb(char *rgb, t_game *game)
 	c = r;
 	c = (c << 8) | g;
 	c = (c << 8) | b;
-	free_matrix(lonely);
+	ft_free_matrix(lonely);
 	return (c);
 }
 
@@ -81,5 +81,5 @@ void	get_color(t_game *game, char *line)
 		game->texture.ceiling = translate_rgb(arg, game);
 	else if (is_floor(cardinal, game))
 		game->texture.floor = translate_rgb(arg, game);
-	free_matrix(line_mtx);
+	ft_free_matrix(line_mtx);
 }
