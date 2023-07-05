@@ -66,6 +66,12 @@ int				is_valid_up_down(char *line_updown, int pos);
 void			transform_map_int(t_game *game);
 void			transpose_matrix(t_game *game);
 
+// Minimap
+void			draw_map2d(t_game *game, int square_sz);
+void			draw_miniplayer(t_img *img, t_player player, int l);
+void			bresenham_x(t_img *img, int i[2], int f[2], int color);
+void			bresenham_y(t_img *img, int i[2], int f[2], int color);
+
 // Movement
 void			walk_forward(t_player *player, t_map *map);
 void			walk_backward(t_player *player, t_map *map);

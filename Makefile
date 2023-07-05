@@ -1,4 +1,5 @@
 NAME		:=	cub3D	
+NAME_BONUS	:=	cub3D_bonus	
 ##MAKEFLAGS	:= --silent
 
 ####	Compilers & flags	####
@@ -117,8 +118,11 @@ $(LIBLIB):
 $(MLX_LIB):
 	make -C $(MLX)
 
-bonus: obj $(MLX_LIB) $(LIBLIB) $(OBJ_BONUS) $(NAME)
-		@printf "$(_SUCCESS) bonus is ready.\n"
+$(NAME_BONUS): $(OBJ_BONUS)
+	@$(CC) $(OBJ_BONUS) $(MLX_LNK) $(LIBLIB) $(LINK) -o $@
+	@printf "$(_SUCCESS) bonus is ready.\n"
+
+bonus: obj $(MLX_LIB) $(LIBLIB) $(NAME_BONUS)
 
 
 
@@ -130,6 +134,7 @@ clean:
 
 fclean:	clean
 	@rm -rf $(NAME)
+	@rm -rf $(NAME_BONUS)
 	@make -C $(LIBDIR) fclean
 
 re: fclean all
