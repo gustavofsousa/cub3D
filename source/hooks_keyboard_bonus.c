@@ -59,5 +59,5 @@ void	prepare_hooks_keys(t_game *game)
 {
 	mlx_hook(game->img.win, 2, 1L << 0, handle_key_press, game);
 	mlx_hook(game->img.win, 3, 1L << 1, handle_key_release, game);
-	mlx_hook(game->img.win, 17, 0, close_window, game);
+	mlx_hook(game->img.win, 17, 0, exit_game, game);
 }

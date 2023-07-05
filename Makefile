@@ -15,7 +15,7 @@ LISTDIR 	:=	color texture game interpretate_map validate_map	raycast	minimap	mov
 
 ####	Sources & objects MANDATORY	####
 
-MAIN				:=	main	setup	common_libft	pixel_put
+MAIN				:=	main	setup	common_libft	pixel_put	exit
 MANDATORY			:=	render_game			hooks_keyboard
 BONUS				:=	render_game_bonus	hooks_keyboard_bonus
 
@@ -123,8 +123,6 @@ $(NAME_BONUS): $(OBJ_BONUS)
 	@printf "$(_SUCCESS) bonus is ready.\n"
 
 bonus: obj $(MLX_LIB) $(LIBLIB) $(NAME_BONUS)
-
-
 
 clean:
 	@rm -rf $(OBJDIR)
