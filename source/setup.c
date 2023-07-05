@@ -12,11 +12,8 @@
 
 #include "../include/cub3d.h"
 
-void	init_mlx(t_game *game)
+void	create_window_mlx(t_game *game)
 {
-	game->img.ptr = mlx_init();
-	if (game->img.ptr == NULL)
-		exit_game("error: mlx init failed", game);
 	game->img.win = mlx_new_window(game->img.ptr, LENGHT, HEIGHT, "cub3D");
 	if (game->img.win == NULL)
 		exit_game("error: mlx window failed", game);
@@ -27,6 +24,13 @@ void	init_mlx(t_game *game)
 			&game->img.line_len, &game->img.endian);
 	if (game->img.addr == NULL)
 		exit_game("error: mlx address failed", game);
+}
+
+void	init_mlx(t_game *game)
+{
+	game->img.ptr = mlx_init();
+	if (game->img.ptr == NULL)
+		exit_game("error: mlx init failed", game);
 }
 
 void	init_var_raycasting(t_game *game)

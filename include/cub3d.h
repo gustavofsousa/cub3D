@@ -98,6 +98,7 @@ double	get_scale_x(int begin, int line_height, double step_tex);
 
 
 // Hoooks key
+void	create_window_mlx(t_game *game);
 void	prepare_hooks_keys(t_game *game);
 
 

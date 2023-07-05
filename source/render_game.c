@@ -55,6 +55,7 @@ int	playing_the_game(t_game *game)
 
 void	render_game(t_game *game)
 {
+	create_window_mlx(game);
 	prepare_hooks_keys(game);
 	mlx_loop_hook(game->img.ptr, playing_the_game, game);
 	mlx_loop(game->img.ptr);
