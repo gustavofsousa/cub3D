@@ -72,6 +72,8 @@ RED		=	\033[0;31m
 RESET	=	\033[0m
 WHITE	=	\033[0;37m
 YELLOW	=	\033[0;33m
+_SUCCESS	=	✅ $(GREEN)Successfully compiled$(RESET)
+_INFO		=	ℹ️ $(YELLOW)Info$(RESET)
 
 ######	Commands	######
 
@@ -83,15 +85,14 @@ obj:
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
-	@echo "Take a look in the objects you conceived😉 ->$(MAGENTA) $@$(WHITE)"
 
 $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(MLX_LNK) $(LIBLIB) $(LINK) -o $@
-	@echo "Let's play it! piupiu 🤪"
+	@printf "$(_SUCCESS) cub3d is ready.\n"
 
 $(LIBLIB):
 	@make -C $(LIBDIR) all
-	@echo "libf lib created🙃"
+	@printf "$(_SUCCESS) libft is ready.\n"
 
 $(MLX_LIB):
 	make -C $(MLX)
@@ -99,12 +100,12 @@ $(MLX_LIB):
 clean:
 	@rm -rf $(OBJDIR)
 	@make -C $(LIBDIR) clean
-	@echo "I deleted everything, sir 🪖👮🏻‍♂️"
+	@printf "$(_INFO) libft removed.\n"
+	@printf "$(_INFO) cub3d removed.\n"
 
 fclean:	clean
 	@rm -rf $(NAME)
 	@make -C $(LIBDIR) fclean
-	@echo "I deleted even the deletion, sir 🪖👮🏻‍♂️"
 
 re: fclean all
 
@@ -112,9 +113,3 @@ val:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./${NAME}
 
 .PHONY: re, fclean, clean, all
-
-#$(shell echo '$@ <- Nome da regra.')
-#$(shell echo '$< <- Nome da primeira dependência.')
-#$(shell echo '$^ <- Lista de dependências.')
-#$(shell echo '$? <- Lista de dependências mais recentes que a regra.')
-#$(shell echo '$* <- Nome do arquivo sem sufixo.')
