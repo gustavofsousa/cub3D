@@ -12,17 +12,29 @@
 
 #include "../../include/cub3d.h"
 
+int	check_ruchoa(char *str1, int nbr)
+{
+	char	*color_str;
+
+	color_str = ft_itoa(nbr);
+	if (ft_strncmp(str1, color_str, ft_strlen(str1)))
+	{
+		free(color_str);
+		return (0);
+	}
+	free(color_str);
+	return (1);
+}
+
 int	is_valid_number(char **mtx, int r, int g, int b)
 {
 	if (mtx[0][0] == '-'
 		|| mtx[1][0] == '-'
 		|| mtx [2][0] == '-')
 		return (0);
-	if (ft_strncmp(mtx[0], ft_itoa(r), ft_strlen(mtx[0])))
-		return (0);
-	if (ft_strncmp(mtx[1], ft_itoa(g), ft_strlen(mtx[1])))
-		return (0);
-	if (ft_strncmp(mtx[2], ft_itoa(b), ft_strlen(mtx[2])))
+	if (!check_ruchoa(mtx[0], r)
+		||	!check_ruchoa(mtx[1], g)
+		||	!check_ruchoa(mtx[2], b))
 		return (0);
 	return (1);
 }
@@ -31,16 +43,6 @@ void	invalid_rgb(char **mtx, t_game *game)
 {
 	free_matrix(mtx);
 	exit_game("Number rgb not valid", game);
-}
-
-int	ft_count_line(char **mtx)
-{
-	int	i;
-
-	i = 0;
-	while (mtx[i])
-		i++;
-	return (i);
 }
 
 int	translate_rgb(char *rgb, t_game *game)
