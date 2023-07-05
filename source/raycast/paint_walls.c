@@ -48,6 +48,7 @@ void	paint_column(t_game *game, t_ray_info *ray, int actual_ray)
 	tex = choose_texture(game, ray);
 	step_tex = (1.0 * tex.height) / line_height;
 
+	// Cada x da tela está relacionado a um x da textura.
 	tex_pos_x = get_pos_x(draw_limits[0], line_height, step_tex);
 	tex_pos_y = get_pos_y(game, ray, tex);
 	

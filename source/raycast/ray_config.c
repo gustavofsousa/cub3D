@@ -15,9 +15,9 @@
 void	fix_fish_eye(t_ray_info *ray)
 {
 	if (ray->side_hit == 0)
-		ray->dist_new_pov = (ray->side.x - ray->delta.x);
+		ray->dist_new_pov = (ray->dist_edge.x - ray->step.x);
 	else
-		ray->dist_new_pov = (ray->side.y - ray->delta.y);
+		ray->dist_new_pov = (ray->dist_edge.y - ray->step.y);
 }
 
 void	mapping_wall_collision(t_game *game, t_ray_info *ray)
@@ -27,59 +27,62 @@ void	mapping_wall_collision(t_game *game, t_ray_info *ray)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (ray->side.x < ray->side.y)
+		if (ray->dist_edge.x < ray->dist_edge.y)
 		{
-			ray->side.x += ray->delta.x;
-			ray->near_wall.x += ray->step.x;
+			// Estou andnado no X.
+			ray->dist_edge.x += ray->step.x;
+			ray->nearest_edge.x += ray->step_square.x;
+			// 0 é horizontal da parede.
 			ray->side_hit = 0;
 		}
 		else
 		{
-			ray->side.y += ray->delta.y;
-			ray->near_wall.y += ray->step.y;
+			ray->dist_edge.y += ray->step.y;
+			ray->nearest_edge.y += ray->step_square.y;
+			// 1 é vertical a parede,
 			ray->side_hit = 1;
 		}
-		if (game->map.mtx_int[ray->near_wall.x][ray->near_wall.y] > 0)
+		if (game->map.mtx_int[ray->nearest_edge.x][ray->nearest_edge.y] > 0)
 			hit = 1;
 	}
 }
 
 void	get_basic_info(t_game *game, t_ray_info *ray)
 {
-	ray->near_wall.x = trunc(game->player.x);
-	ray->near_wall.y = trunc(game->player.y);
-	ray->delta.x = fabs(1.0 / ray->dir.x);
-	ray->delta.y = fabs(1.0 / ray->dir.y);
+	ray->nearest_edge.x = trunc(game->player.x);
+	ray->nearest_edge.y = trunc(game->player.y);
+	ray->step.x = fabs(1.0 / ray->dir.x);
+	ray->step.y = fabs(1.0 / ray->dir.y);
 	if (looking_west(ray))
 	{
-		ray->step.x = -1;
-		ray->side.x = (game->player.x - ray->near_wall.x) * ray->delta.x;
+		ray->step_square.x = -1;
+		ray->dist_edge.x = (game->player.x - ray->nearest_edge.x) * ray->step.x;
 	}
 	else if (looking_east(ray))
 	{
-		ray->step.x = 1;
-		ray->side.x = (ray->near_wall.x + 1.0 - game->player.x) * ray->delta.x;
+		ray->step_square.x = 1;
+		ray->dist_edge.x = (ray->nearest_edge.x + 1.0 - game->player.x) * ray->step.x;
 	}
 	if (looking_north(ray))
 	{
-		ray->step.y = -1;
-		ray->side.y = (game->player.y - ray->near_wall.y) * ray->delta.y;
+		ray->step_square.y = -1;
+		ray->dist_edge.y = (game->player.y - ray->nearest_edge.y) * ray->step.y;
 	}
 	else if (looking_south(ray))
 	{
-		ray->step.y = 1;
-		ray->side.y = (ray->near_wall.y + 1.0 - game->player.y) * ray->delta.y;
+		ray->step_square.y = 1;
+		ray->dist_edge.y = (ray->nearest_edge.y + 1.0 - game->player.y) * ray->step.y;
 	}
 }
 
 t_double_vector	get_ray_direction(int actual_ray, t_player *player)
 {
-	double			camera_x;
+	double			point_x;
 	t_double_vector	direction;
 
-	camera_x = 2.0 * actual_ray / (double)LENGHT - 1.0;
-	direction.x = player->dir_x + player->cam_plane_dir_x * camera_x;
-	direction.y = player->dir_y + player->cam_plane_dir_y * camera_x;
+	point_x = 2.0 * actual_ray / (double)LENGHT - 1.0;
+	direction.x = player->dir_x + player->cam_plane_dir_x * point_x;
+	direction.y = player->dir_y + player->cam_plane_dir_y * point_x;
 	return (direction);
 }
 
