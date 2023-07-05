@@ -14,8 +14,8 @@
 # define CONSTANTS_H
 
 # define SIZE_MMAP 11
-# define LENGHT 640
-# define HEIGHT 480
+# define LENGHT 1280
+# define HEIGHT 960
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 

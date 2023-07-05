@@ -78,8 +78,8 @@ void	validate_player(t_game *game)
 		{
 			if (is_valid_player(game->map.mtx[i][j]))
 			{
-				game->player.x = i + 0.2;
-				game->player.y = j + 0.2;
+				game->player.x = j + 0.2;
+				game->player.y = i + 0.2;
 				game->player.dir_x = choose_direction_x(game->map.mtx[i][j]);
 				game->player.dir_y = choose_direction_y(game->map.mtx[i][j]);
 				setup_camera_plane(game, game->map.mtx[i][j]);

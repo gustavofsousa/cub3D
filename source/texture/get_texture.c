@@ -16,7 +16,7 @@ t_img	get_argure(char *path, t_game *game)
 {
 	t_img	texture;
 
-	texture.ptr = mlx_init();
+	texture.ptr = game->img.ptr;
 	texture.img = mlx_xpm_file_to_image(texture.ptr,
 			path,
 			&texture.width,

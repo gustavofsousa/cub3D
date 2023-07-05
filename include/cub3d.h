@@ -84,24 +84,28 @@ void	turn_left(t_player *player);
 void	paint_walls(t_game *game);
 void	draw_background(t_game game);
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x);
-int		looking_north(t_ray_info *ray);
-int		looking_south(t_ray_info *ray);
-int		looking_west(t_ray_info *ray);
-int		looking_east(t_ray_info *ray);
+int     looking_north(t_ray_info *ray);
+int     looking_south(t_ray_info *ray);
+int     looking_west(t_ray_info *ray);
+int     looking_east(t_ray_info *ray);
+void	config_step(t_ray_info *ray);
 
 // Draw
 void	pixel_put(t_img *data, int x, int y, int color);
 
 // ray config
 void	config_ray(t_game *game, t_ray_info *ray, int actual_ray);
+int     vertical_wall(t_ray_info *ray);
+int     horizontal_wall(t_ray_info *ray);
 
 // Texture configs
 t_img	choose_texture(t_game *game, t_ray_info *ray);
-int		get_pos_y(t_game *game, t_ray_info *ray, t_img tex);
-double	get_pos_x(int begin, int line_height, double step_tex);
-long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
+unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
+int		get_scale_y(t_game *game, t_ray_info *ray, t_img tex);
+double	get_scale_x(int begin, int line_height, double step_tex);
 
 // Hoooks key
+void	create_window_mlx(t_game *game);
 void	prepare_hooks_keys(t_game *game);
 
 // Utils

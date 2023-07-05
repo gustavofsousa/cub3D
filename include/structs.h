@@ -95,12 +95,21 @@ typedef struct s_game
 typedef struct s_ray_info
 {
 	t_double_vector	dir;
-	t_double_vector	side;
-	t_double_vector	delta;
-	t_int_vector	step;
-	t_int_vector	near_wall;
+	t_double_vector	dist_edge;
+	t_double_vector	step;
+	t_int_vector	step_square;
+	t_int_vector	nearest_edge;
 	int				side_hit;
 	double			dist_new_pov;
 }	t_ray_info;
+
+typedef struct s_game
+{
+	t_img		img;
+	t_map		map;
+	t_player	player;
+	t_texture	texture;
+	t_key_state	key;
+}	t_game;
 
 #endif

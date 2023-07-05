@@ -12,11 +12,8 @@
 
 #include "../include/cub3d.h"
 
-void	init_mlx(t_game *game)
+void	create_window_mlx(t_game *game)
 {
-	game->img.ptr = mlx_init();
-	if (game->img.ptr == NULL)
-		exit_game("error: mlx init failed", game);
 	game->img.win = mlx_new_window(game->img.ptr, LENGHT, HEIGHT, "cub3D");
 	if (game->img.win == NULL)
 		exit_game("error: mlx window failed", game);
@@ -29,6 +26,13 @@ void	init_mlx(t_game *game)
 		exit_game("error: mlx address failed", game);
 }
 
+void	init_mlx(t_game *game)
+{
+	game->img.ptr = mlx_init();
+	if (game->img.ptr == NULL)
+		exit_game("error: mlx init failed", game);
+}
+
 void	init_var_raycasting(t_game *game)
 {
 	game->player.x = 0;
@@ -37,8 +41,8 @@ void	init_var_raycasting(t_game *game)
 	game->player.cam_plane_dir_y = 0;
 	game->player.dir_x = 0;
 	game->player.dir_y = 0;
-	game->player.speed = 0.005;
-	game->player.rot_speed = 0.003;
+	game->player.speed = 0.05;
+	game->player.rot_speed = 0.019;
 	game->key.w_is_press = 0;
 	game->key.a_is_press = 0;
 	game->key.s_is_press = 0;
