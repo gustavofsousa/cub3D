@@ -48,8 +48,7 @@ void	get_basic_info(t_game *game, t_ray_info *ray)
 {
 	ray->nearest_edge.x = trunc(game->player.x);
 	ray->nearest_edge.y = trunc(game->player.y);
-	ray->step.x = fabs(1.0 / ray->dir.x);
-	ray->step.y = fabs(1.0 / ray->dir.y);
+	config_step(ray);
 	if (looking_west(ray))
 	{
 		ray->step_square.x = -1;
@@ -58,7 +57,8 @@ void	get_basic_info(t_game *game, t_ray_info *ray)
 	else if (looking_east(ray))
 	{
 		ray->step_square.x = 1;
-		ray->dist_edge.x = (ray->nearest_edge.x + 1.0 - game->player.x) * ray->step.x;
+		ray->dist_edge.x = (ray->nearest_edge.x + 1.0 - game->player.x)
+			* ray->step.x;
 	}
 	if (looking_north(ray))
 	{
@@ -68,7 +68,8 @@ void	get_basic_info(t_game *game, t_ray_info *ray)
 	else if (looking_south(ray))
 	{
 		ray->step_square.y = 1;
-		ray->dist_edge.y = (ray->nearest_edge.y + 1.0 - game->player.y) * ray->step.y;
+		ray->dist_edge.y = (ray->nearest_edge.y + 1.0 - game->player.y)
+			* ray->step.y;
 	}
 }
 

@@ -80,6 +80,7 @@ int     looking_north(t_ray_info *ray);
 int     looking_south(t_ray_info *ray);
 int     looking_west(t_ray_info *ray);
 int     looking_east(t_ray_info *ray);
+void	config_step(t_ray_info *ray);
 
 // Draw
 void	pixel_put(t_img *data, int x, int y, int color);

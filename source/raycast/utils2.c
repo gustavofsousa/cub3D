@@ -12,22 +12,18 @@
 
 #include "../../include/cub3d.h"
 
-int	looking_north(t_ray_info *ray)
+int	horizontal_wall(t_ray_info *ray)
 {
-	return (ray->dir.y < 0);
+	return (ray->side_hit == 0);
 }
 
-int	looking_south(t_ray_info *ray)
+int	vertical_wall(t_ray_info *ray)
 {
-	return (ray->dir.y > 0);
+	return (ray->side_hit == 1);
 }
 
-int	looking_east(t_ray_info *ray)
+void	config_step(t_ray_info *ray)
 {
-	return (ray->dir.x > 0);
-}
-
-int	looking_west(t_ray_info *ray)
-{
-	return (ray->dir.x < 0);
+	ray->step.x = fabs(1.0 / ray->dir.x);
+	ray->step.y = fabs(1.0 / ray->dir.y);
 }

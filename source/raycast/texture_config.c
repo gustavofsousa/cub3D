@@ -32,7 +32,6 @@ t_img	choose_texture(t_game *game, t_ray_info *ray)
 			return (game->texture.south);
 	}
 	else if (horizontal_wall(ray))
-
 	{
 		if (looking_east(ray))
 			return (game->texture.east);
@@ -41,8 +40,7 @@ t_img	choose_texture(t_game *game, t_ray_info *ray)
 	}
 	return (game->texture.north);
 }
-// Em cada quadrado eu renderizo uma textura
-// Preciso saber em que altura eu estou.
+
 double	calc_scale_tile(t_game *game, t_ray_info *ray)
 {
 	double	scale_tile;
@@ -62,17 +60,12 @@ int	get_scale_y(t_game *game, t_ray_info *ray, t_img tex)
 	double	scale_tile;
 
 	scale_tile = calc_scale_tile(game, ray);
-	// Em que altura da textura está.
 	tex_scale_tile = scale_tile * (double)tex.width;
-	// Inverte a textura para quando estou olhando para uma mesma textura.
 	if ((horizontal_wall(ray) && looking_east(ray))
 		|| (vertical_wall(ray) && looking_north(ray)))
 		tex_scale_tile = tex.width - tex_scale_tile - 1;
 	return (tex_scale_tile);
 }
-
-
-
 
 double	get_scale_x(int begin, int line_height, double step_tex)
 {
