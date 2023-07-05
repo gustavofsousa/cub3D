@@ -12,32 +12,52 @@ INCDIR	:=	include/
 LIBDIR	:=	libft/
 LISTDIR 	:=	color texture game interpretate_map validate_map	raycast	minimap	movements
 
-####	Sources & objects	####
+####	Sources & objects MANDATORY	####
 
-MAIN				:=	main	setup	common_libft	render_game		hooks_keyboard	pixel_put
+MAIN				:=	main	setup	common_libft	pixel_put
+MANDATORY			:=	render_game			hooks_keyboard
+BONUS				:=	render_game_bonus	hooks_keyboard_bonus
+
 INTERPRETATE_MAP	:=	interpretate_map	auxiliar	transform_map
 COLOR				:=	get_color	checkers
 TEXTURE				:=	get_texture	cardinal_points
-VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char	\
+VALIDATE_MAP		:=	validate_map	validate_player	validate_border	validate_char			\
 						validate_up_down	validate_left_right	validate_middle
 RAYCAST				:=	background	ray_config	texture_config	paint_walls		utils	utils2
-MINIMAP				:=	draw_map2d	draw_miniplayer	bresenham
-MOVEMENTS				:=	turn	walk
+MOVEMENTS			:=	turn	walk
 
+MINIMAP				:=	draw_map2d_bonus	draw_miniplayer_bonus	bresenham_bonus
 
-SRC		:=	$(MAIN)	\
+SRC		:=	$(MAIN)												\
+			$(MANDATORY)										\
 			$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\
-			$(addprefix validate_map/, $(VALIDATE_MAP))	\
-			$(addprefix color/, $(COLOR))	\
-			$(addprefix texture/, $(TEXTURE))	\
-			$(addprefix game/, $(GAME))			\
-			$(addprefix raycast/, $(RAYCAST))		\
-			$(addprefix minimap/, $(MINIMAP))	\
+			$(addprefix validate_map/, $(VALIDATE_MAP))			\
+			$(addprefix color/, $(COLOR))						\
+			$(addprefix texture/, $(TEXTURE))					\
+			$(addprefix game/, $(GAME))							\
+			$(addprefix raycast/, $(RAYCAST))					\
 			$(addprefix movements/, $(MOVEMENTS))
-
 
 SRCS	:=	$(addsuffix .c, $(SRC))
 OBJ		:=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
+
+
+####	Sources & objects	 BONUS  ####
+
+SRC_BONUS	:=	$(MAIN)												\
+				$(BONUS)											\
+				$(addprefix interpretate_map/, $(INTERPRETATE_MAP))	\
+				$(addprefix validate_map/, $(VALIDATE_MAP))			\
+				$(addprefix color/, $(COLOR))						\
+				$(addprefix texture/, $(TEXTURE))					\
+				$(addprefix game/, $(GAME))							\
+				$(addprefix raycast/, $(RAYCAST))					\
+				$(addprefix movements/, $(MOVEMENTS))				\
+				$(addprefix minimap/, $(MINIMAP))
+
+SRCS_BONUS	:=	$(addsuffix .c, $(SRC_BONUS))
+OBJ_BONUS		:=	$(addprefix $(OBJDIR), $(SRCS_BONUS:.c=.o))
+
 
 ####	Libft		####
 LIBLIB		:=	$(LIBDIR)libft.a
@@ -96,6 +116,11 @@ $(LIBLIB):
 
 $(MLX_LIB):
 	make -C $(MLX)
+
+bonus: obj $(MLX_LIB) $(LIBLIB) $(OBJ_BONUS) $(NAME)
+		@printf "$(_SUCCESS) bonus is ready.\n"
+
+
 
 clean:
 	@rm -rf $(OBJDIR)

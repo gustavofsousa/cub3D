@@ -12,6 +12,15 @@
 
 #include "../include/cub3d.h"
 
+void	render_minimap(t_game *game)
+{
+	if (game->key.m_is_press)
+	{
+		draw_map2d(game, SIZE_MMAP);
+		draw_miniplayer(&game->img, game->player, 9);
+	}
+}
+
 void	raycast(t_game *game)
 {
 	draw_background(*game);
@@ -38,6 +47,7 @@ int	playing_the_game(t_game *game)
 {
 	move_player(game);
 	raycast(game);
+	render_minimap(game);
 	mlx_put_image_to_window(game->img.ptr, game->img.win,
 		game->img.img, 0, 0);
 	return (0);
