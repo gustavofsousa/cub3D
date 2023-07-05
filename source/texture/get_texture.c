@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/24 11:52:29 by gde-jesu         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:08:57 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int	get_texture(t_game *game, char *line)
 		game->texture.east = get_argure(arg, game);
 	else
 	{
-		free_matrix(line_mtx);
+		ft_free_matrix(line_mtx);
 		return (0);
 	}
-	free_matrix(line_mtx);
+	ft_free_matrix(line_mtx);
 	return (1);
 }
 

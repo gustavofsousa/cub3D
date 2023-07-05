@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 17:19:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 17:17:45 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/07/05 12:07:22 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
+int			ft_count_words(char const *s, char sep);
+int			ft_is_empty_line(char *line);
+void		ft_swap(int *a, int *b);
+int			ft_is_space(char c);
+void		ft_free_matrix(char **matrix);
+
 /** Bonuses **/
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new_node);
@@ -71,11 +77,11 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
 #  define BUFFER_SIZE 42
 # endif
 
-char	*get_nl(int fd);
-void	move_remains(char *str, int pos);
-int		ft_strlen_gnl(char *str, int *end_flag);
-char	*ft_calloc_gnl(size_t n_elements, size_t size);
-char	*ft_strdup_gnl(char *src, int len_stash);
-void	ft_strlcpy_gnl(char *dst, char *src, int size);
+char		*get_nl(int fd);
+void		move_remains(char *str, int pos);
+int			ft_strlen_gnl(char *str, int *end_flag);
+char		*ft_strdup_gnl(char *src, int len_stash);
+void		ft_strlcpy_gnl(char *dst, char *src, int size);
+char		*ft_calloc_gnl(size_t n_elements, size_t size);
 
 #endif

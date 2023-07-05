@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/03 18:04:16 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/05 11:40:30 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	transpose_matrix(t_game *game)
 
 	mtx = malloc_matrix(game->map.cols, game->map.rows);
 	i = -1;
-	while (++i < game->map.rows) 
+	while (++i < game->map.rows)
 	{
 		j = -1;
-		while (++j < game->map.cols) 
+		while (++j < game->map.cols)
 		{
 			mtx[j][i] = game->map.mtx_int[i][j];
 		}
