@@ -24,14 +24,15 @@ unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x)
 
 t_img	choose_texture(t_game *game, t_ray_info *ray)
 {
-	if (ray->side_hit)
+	if (vertical_wall(ray))
 	{
 		if (looking_north(ray))
 			return (game->texture.north);
 		if (looking_south(ray))
 			return (game->texture.south);
 	}
-	else
+	else if (horizontal_wall(ray))
+
 	{
 		if (looking_east(ray))
 			return (game->texture.east);
@@ -40,17 +41,21 @@ t_img	choose_texture(t_game *game, t_ray_info *ray)
 	}
 	return (game->texture.north);
 }
-
+// Em cada quadrado eu renderizo uma textura
+// Preciso saber em que altura eu estou.
 double	calc_tile_hit_x(t_game *game, t_ray_info *ray)
 {
 	double	tile_hit_x;
 
-	if (ray->side_hit == 0)
+	tile_hit_x = 0.0;
+// hor or vertcal
+	if (horizontal_wall(ray))
 		tile_hit_x = game->player.y + ray->dist_new_pov * ray->dir.y;
-	else
+	else if (vertical_wall(ray))
 		tile_hit_x = game->player.x + ray->dist_new_pov * ray->dir.x;
 	tile_hit_x -= floor((tile_hit_x));
 	return (tile_hit_x);
+	// Retorna numero entre 0 e 1.
 }
 
 int	get_pos_y(t_game *game, t_ray_info *ray, t_img tex)
@@ -59,12 +64,17 @@ int	get_pos_y(t_game *game, t_ray_info *ray, t_img tex)
 	double	tile_hit_x;
 
 	tile_hit_x = calc_tile_hit_x(game, ray);
+	// Em que altura da textura está.
 	tex_hit_x = tile_hit_x * (double)tex.width;
-	if ((ray->side_hit == 0 && looking_east(ray))
-		|| (ray->side_hit == 1 && looking_north(ray)))
+	// Inverte a textura para quando estou olhando para uma mesma textura.
+	if ((horizontal_wall(ray) && looking_east(ray))
+		|| (vertical_wall(ray) && looking_north(ray)))
 		tex_hit_x = tex.width - tex_hit_x - 1;
 	return (tex_hit_x);
 }
+
+
+
 
 double	get_pos_x(int begin, int line_height, double step_tex)
 {

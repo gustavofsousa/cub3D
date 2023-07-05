@@ -14,9 +14,9 @@
 
 void	fix_fish_eye(t_ray_info *ray)
 {
-	if (ray->side_hit == 0)
+	if (horizontal_wall(ray))
 		ray->dist_new_pov = (ray->dist_edge.x - ray->step.x);
-	else
+	else if (vertical_wall(ray))
 		ray->dist_new_pov = (ray->dist_edge.y - ray->step.y);
 }
 
@@ -29,17 +29,14 @@ void	mapping_wall_collision(t_game *game, t_ray_info *ray)
 	{
 		if (ray->dist_edge.x < ray->dist_edge.y)
 		{
-			// Estou andnado no X.
 			ray->dist_edge.x += ray->step.x;
 			ray->nearest_edge.x += ray->step_square.x;
-			// 0 é horizontal da parede.
 			ray->side_hit = 0;
 		}
 		else
 		{
 			ray->dist_edge.y += ray->step.y;
 			ray->nearest_edge.y += ray->step_square.y;
-			// 1 é vertical a parede,
 			ray->side_hit = 1;
 		}
 		if (game->map.mtx_int[ray->nearest_edge.x][ray->nearest_edge.y] > 0)

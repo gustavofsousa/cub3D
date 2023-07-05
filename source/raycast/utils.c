@@ -31,3 +31,13 @@ int	looking_west(t_ray_info *ray)
 {
 	return (ray->dir.x < 0);
 }
+
+int	horizontal_wall(t_ray_info *ray)
+{
+	return (ray->side_hit == 0);
+}
+
+int	vertical_wall(t_ray_info *ray)
+{
+	return (ray->side_hit == 1);
+}

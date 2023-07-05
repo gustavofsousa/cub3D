@@ -87,6 +87,9 @@ void	pixel_put(t_img *data, int x, int y, int color);
 
 // ray config
 void	config_ray(t_game *game, t_ray_info *ray, int actual_ray);
+int     vertical_wall(t_ray_info *ray);
+int     horizontal_wall(t_ray_info *ray);
+
 
 // Texture configs
 unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
