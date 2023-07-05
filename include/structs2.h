@@ -1,5 +1,17 @@
-#ifndef STRUCT_H
-# define STRUCT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs2.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 11:13:57 by gde-jesu          #+#    #+#             */
+/*   Updated: 2023/07/05 11:25:00 by gde-jesu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTS2_H
+# define STRUCTS2_H
 
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_left_right.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gustavosousa <gustavosousa@student.42.f    +#+  +:+       +#+        */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/07 12:44:16 by gustavosous      ###   ########.fr       */
+/*   Updated: 2023/07/05 12:09:13 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	find_init_line(char *line)
 	int	i;
 
 	i = 0;
-	while (is_space(line[i]))
+	while (ft_is_space(line[i]))
 		i++;
 	return (i);
 }

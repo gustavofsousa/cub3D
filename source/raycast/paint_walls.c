@@ -6,7 +6,7 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/07/04 18:18:43 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/05 11:38:32 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,10 @@ void	paint_column(t_game *game, t_ray_info *ray, int actual_ray)
 	line_height = HEIGHT / ray->dist_new_pov;
 	draw_limits[0] = get_lowest_pixel(line_height);
 	draw_limits[1] = get_highest_pixel(line_height);
-
 	tex = choose_texture(game, ray);
 	step_tex = (1.0 * tex.height) / line_height;
-
 	tex_pos_x = get_pos_x(draw_limits[0], line_height, step_tex);
 	tex_pos_y = get_pos_y(game, ray, tex);
-	
 	while (draw_limits[0] <= draw_limits[1])
 	{
 		if (ray->side_hit == 1)

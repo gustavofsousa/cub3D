@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpretate_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaetano <fcaetano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:45:32 by gusousa           #+#    #+#             */
-/*   Updated: 2023/06/22 19:16:01 by fcaetano         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:02:42 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	interpretate_map(t_game *game, char *file_path)
 	line = get_nl(fd);
 	while (line)
 	{
-		if (!is_empty_line(line))
+		if (!ft_is_empty_line(line))
 			interpretate_line(game, line);
 		else if (game->map.mtx)
 		{

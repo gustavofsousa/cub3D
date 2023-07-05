@@ -6,13 +6,13 @@
 /*   By: gusta <gusta@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 09:39:55 by fcaetano          #+#    #+#             */
-/*   Updated: 2023/07/04 18:26:01 by gusta            ###   ########.fr       */
+/*   Updated: 2023/07/05 11:09:09 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x)
+long	tex_color(t_img tex, int tex_pos, int tex_hit_x)
 {
 	int	tex_y;
 	int	*texture;

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   ft_free_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 11:14:12 by gde-jesu          #+#    #+#             */
-/*   Updated: 2023/07/05 11:14:13 by gde-jesu         ###   ########.fr       */
+/*   Created: 2023/07/05 12:06:09 by gde-jesu          #+#    #+#             */
+/*   Updated: 2023/07/05 12:20:19 by gde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#include "libft.h"
 
-# define SIZE_MMAP 11
-# define LENGHT 640
-# define HEIGHT 480
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
+void	ft_free_matrix(char **matrix)
+{
+	int	i;
 
-# define COLOR_FLOOR_MMAP 0x00ff0080
-# define COLOR_WALL_MMAP 0xff0000cc
-# define COLOR_PLAYER_MMP 0x00ff00b3
-
-# define MIN_DIST 0.2
-
-#endif
+	if (matrix)
+	{
+		i = -1;
+		while (matrix[++i])
+			free(matrix[i]);
+		free(matrix);
+	}
+}

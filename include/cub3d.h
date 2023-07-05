@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gde-jesu <gde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 11:12:10 by gde-jesu          #+#    #+#             */
+/*   Updated: 2023/07/05 12:07:49 by gde-jesu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -19,7 +31,7 @@ void	interpretate_map(t_game *game, char *path_name);
 int		has_all_information(t_game *game);
 int		open_file(char *file_path);
 
-//Texture
+// Texture
 int		is_xpm(char *line);
 int		get_texture(t_game *game, char *line);
 int		is_north(char *cardinal, t_game *game);
@@ -34,13 +46,9 @@ int		is_ceiling(char *cardinal, t_game *game);
 int		is_floor(char *cardinal, t_game *game);
 
 // Common libft
-void	free_matrix(char **matrix);
 void	free_matrix_int(t_game *game);
 void	update_matrix(char ***matrix, char *new_line);
 int		ft_count_words(char const *s, char c);
-int		is_empty_line(char *line);
-int		is_space(char c);
-void    ft_swap(int *a, int *b);
 
 // Validate_map
 void	validate_map(t_game *game);
@@ -56,7 +64,7 @@ int		is_valid_up_down(char *line_updown, int pos);
 
 // Transform_map
 void	transform_map_int(t_game *game);
-void    transpose_matrix(t_game *game);
+void	transpose_matrix(t_game *game);
 
 // Minimap
 void	draw_map2d(t_game *game, int square_sz);
@@ -76,11 +84,10 @@ void	turn_left(t_player *player);
 void	paint_walls(t_game *game);
 void	draw_background(t_game game);
 void	draw_x_line(t_game *game, t_ray_info *ray, int line_height, int x);
-int     looking_north(t_ray_info *ray);
-int     looking_south(t_ray_info *ray);
-int     looking_west(t_ray_info *ray);
-int     looking_east(t_ray_info *ray);
-
+int		looking_north(t_ray_info *ray);
+int		looking_south(t_ray_info *ray);
+int		looking_west(t_ray_info *ray);
+int		looking_east(t_ray_info *ray);
 
 // Draw
 void	pixel_put(t_img *data, int x, int y, int color);
@@ -89,15 +96,13 @@ void	pixel_put(t_img *data, int x, int y, int color);
 void	config_ray(t_game *game, t_ray_info *ray, int actual_ray);
 
 // Texture configs
-unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
 t_img	choose_texture(t_game *game, t_ray_info *ray);
 int		get_pos_y(t_game *game, t_ray_info *ray, t_img tex);
 double	get_pos_x(int begin, int line_height, double step_tex);
-
+long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
 
 // Hoooks key
 void	prepare_hooks_keys(t_game *game);
-
 
 // Utils
 void	print_mtx(t_game *game);
