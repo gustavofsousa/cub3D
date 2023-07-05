@@ -81,7 +81,6 @@ int     looking_south(t_ray_info *ray);
 int     looking_west(t_ray_info *ray);
 int     looking_east(t_ray_info *ray);
 
-
 // Draw
 void	pixel_put(t_img *data, int x, int y, int color);
 
@@ -90,12 +89,11 @@ void	config_ray(t_game *game, t_ray_info *ray, int actual_ray);
 int     vertical_wall(t_ray_info *ray);
 int     horizontal_wall(t_ray_info *ray);
 
-
 // Texture configs
 unsigned long	tex_color(t_img tex, int tex_pos, int tex_hit_x);
 t_img	choose_texture(t_game *game, t_ray_info *ray);
-int		get_pos_y(t_game *game, t_ray_info *ray, t_img tex);
-double	get_pos_x(int begin, int line_height, double step_tex);
+int		get_scale_y(t_game *game, t_ray_info *ray, t_img tex);
+double	get_scale_x(int begin, int line_height, double step_tex);
 
 
 // Hoooks key

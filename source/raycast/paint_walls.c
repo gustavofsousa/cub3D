@@ -37,30 +37,26 @@ void	paint_column(t_game *game, t_ray_info *ray, int actual_ray)
 	int		line_height;
 	int		draw_limits[2];
 	double	step_tex;
-	double	tex_pos_x;
-	int		tex_pos_y;
+	double	tex_scale_x;
+	int		tex_scale_y;
 	t_img	tex;
 
 	line_height = HEIGHT / ray->dist_new_pov;
 	draw_limits[0] = get_lowest_pixel(line_height);
 	draw_limits[1] = get_highest_pixel(line_height);
-
 	tex = choose_texture(game, ray);
 	step_tex = (1.0 * tex.height) / line_height;
-
-	// Cada x da tela está relacionado a um x da textura.
-	tex_pos_x = get_pos_x(draw_limits[0], line_height, step_tex);
-	tex_pos_y = get_pos_y(game, ray, tex);
-	
+	tex_scale_x = get_scale_x(draw_limits[0], line_height, step_tex);
+	tex_scale_y = get_scale_y(game, ray, tex);
 	while (draw_limits[0] <= draw_limits[1])
 	{
 		if (ray->side_hit == 1)
 			pixel_put(&game->img, actual_ray, draw_limits[0],
-				(tex_color(tex, tex_pos_x, tex_pos_y) >> 1) & 8355711);
+				(tex_color(tex, tex_scale_x, tex_scale_y) >> 1) & 8355711);
 		else
 			pixel_put(&game->img, actual_ray, draw_limits[0],
-				tex_color(tex, tex_pos_x, tex_pos_y));
-		tex_pos_x += step_tex;
+				tex_color(tex, tex_scale_x, tex_scale_y));
+		tex_scale_x += step_tex;
 		draw_limits[0]++;
 	}
 }
