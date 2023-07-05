@@ -24,6 +24,7 @@
 void			setup(t_game *game);
 void			render_game(t_game *game);
 void			exit_game(char *message, t_game *game);
+int				close_window(t_game *game);
 
 // interpretate_map
 void			interpretate_map(t_game *game, char *path_name);

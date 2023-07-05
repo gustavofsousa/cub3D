@@ -20,26 +20,25 @@ void	free_map(t_game *game)
 		free_matrix_int(game);
 }
 
-void free_texture(t_texture texture)
+void	free_texture(t_texture texture)
 {
-    mlx_destroy_image(texture.north.ptr, texture.north.img);
-    mlx_destroy_image(texture.south.ptr, texture.south.img);
-    mlx_destroy_image(texture.east.ptr, texture.east.img);
-    mlx_destroy_image(texture.west.ptr, texture.west.img);
+	mlx_destroy_image(texture.north.ptr, texture.north.img);
+	mlx_destroy_image(texture.south.ptr, texture.south.img);
+	mlx_destroy_image(texture.east.ptr, texture.east.img);
+	mlx_destroy_image(texture.west.ptr, texture.west.img);
 }
 
-int    close_window(t_game *game)
+int	close_window(t_game *game)
 {
-    free_map(game);
-    free_texture(game->texture);
-    if (game->img.win)
-        mlx_destroy_window(game->img.ptr, game->img.win);
-    if (game->img.img)
-        mlx_destroy_image(game->img.ptr, game->img.img);
-
-    mlx_destroy_display(game->img.ptr);
-    free(game->img.ptr);
-    exit(0);
+	free_map(game);
+	free_texture(game->texture);
+	if (game->img.win)
+		mlx_destroy_window(game->img.ptr, game->img.win);
+	if (game->img.img)
+		mlx_destroy_image(game->img.ptr, game->img.img);
+	mlx_destroy_display(game->img.ptr);
+	free(game->img.ptr);
+	exit(0);
 }
 
 void	exit_game(char *message, t_game *game)
