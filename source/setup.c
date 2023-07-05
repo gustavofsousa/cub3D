@@ -42,7 +42,7 @@ void	init_var_raycasting(t_game *game)
 	game->player.dir_x = 0;
 	game->player.dir_y = 0;
 	game->player.speed = 0.05;
-	game->player.rot_speed = 0.019;
+	game->player.rot_speed = 0.025;
 	game->key.w_is_press = 0;
 	game->key.a_is_press = 0;
 	game->key.s_is_press = 0;
