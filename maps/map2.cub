@@ -1,10 +1,10 @@
-NO textures/painting_north.xpm
-SO textures/painting_south.xpm
-WE textures/painting_west.xpm
-EA textures/painting_east.xpm
+NO textures/wall1.xpm
+SO textures/wall2.xpm
+WE textures/wall3.xpm
+EA textures/wall4.xpm
 
 F 184,113,39
-C 51,198,227
+C 163,208,230
 
 111111111111111111111111111111
 100000000011000000000000000011
