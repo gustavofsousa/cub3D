@@ -27,10 +27,24 @@ int	has_all_information(t_game *game)
 	return (1);
 }
 
+int check_extension(char *str)
+{
+    char *tmp;
+
+    tmp = ft_strnstr(str, ".cub", ft_strlen(str));
+    if (tmp && *(tmp + 4) == '\0')
+        return (1);
+    return (0);
+}
+
 int	open_file(char *file_path)
 {
 	int	fd;
 
+    if (!check_extension(file_path))
+    {
+        exit_game("missing extension of map", NULL);
+    }
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 		exit_game("File non-existed or non-permission granted", NULL);
