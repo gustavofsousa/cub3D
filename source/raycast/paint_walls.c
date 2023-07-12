@@ -48,10 +48,6 @@ void	paint_column(t_game *game, t_ray_info *ray, int a_ray, int line_height)
 	tex_scale_y = get_scale_y(game, ray, tex);
 	while (draw_limits[0] <= draw_limits[1])
 	{
-		if (ray->side_hit == 1)
-			pixel_put(&game->img, a_ray, draw_limits[0],
-				(tex_color(tex, tex_scale_x, tex_scale_y) >> 1) & 8355711);
-		else
 			pixel_put(&game->img, a_ray, draw_limits[0],
 				tex_color(tex, tex_scale_x, tex_scale_y));
 		tex_scale_x += step_tex;
