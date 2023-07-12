@@ -127,6 +127,7 @@ bonus: obj $(MLX_LIB) $(LIBLIB) $(NAME_BONUS)
 clean:
 	@rm -rf $(OBJDIR)
 	@make -C $(LIBDIR) clean
+	@make -C $(MLX) clean
 	@printf "$(_INFO) libft removed.\n"
 	@printf "$(_INFO) cub3d removed.\n"
 
