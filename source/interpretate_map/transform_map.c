@@ -14,10 +14,13 @@
 
 void	put_value(t_game *game, int i, int j)
 {
-	if (ft_strchr(" 1", game->map.mtx[i][j]))
-		game->map.mtx_int[i][j] = 1;
-	else if (ft_strchr("0NSEW", game->map.mtx[i][j]))
-		game->map.mtx_int[i][j] = 0;
+    if ((size_t)j < ft_strlen(game->map.mtx[i]))
+    {
+        if (ft_strchr(" 1", game->map.mtx[i][j]))
+            game->map.mtx_int[i][j] = 1;
+        else if (ft_strchr("0NSEW", game->map.mtx[i][j]))
+            game->map.mtx_int[i][j] = 0;
+    }
 }
 
 int	**malloc_matrix(int height, int width)
